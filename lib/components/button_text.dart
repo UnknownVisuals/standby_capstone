@@ -25,14 +25,11 @@ class _ButtonTextState extends State<ButtonText> {
 
   @override
   Widget build(BuildContext context) {
-    Offset offset = isPressed ? const Offset(-4, -4) : const Offset(4, 4);
+    Offset offset = const Offset(4, 4);
     double blurRadius = 8.0;
 
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isPressed = !isPressed;
-        });
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -40,21 +37,20 @@ class _ButtonTextState extends State<ButtonText> {
           ),
         );
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
+      child: Container(
         height: 48.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           color: kGray,
           boxShadow: [
             BoxShadow(
-              color: isPressed ? kDebossShadowWhite : kEmbossShadowBlack,
+              color: kEmbossShadowBlack,
               offset: offset,
               blurRadius: blurRadius,
               inset: isPressed,
             ),
             BoxShadow(
-              color: isPressed ? kDebossShadowBlack : kEmbossShadowWhite,
+              color: kEmbossShadowWhite,
               offset: -offset,
               blurRadius: blurRadius,
               inset: isPressed,
