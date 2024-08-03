@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(36, 72, 36, 36),
+                  padding: const EdgeInsets.fromLTRB(36, 72, 36, 36),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 16),
                       const InputText(hintText: 'password'),
                       const SizedBox(height: 16),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           'Lupa password?',

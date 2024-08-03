@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/screens/monitoring_page.dart';
 
 class ButtonText extends StatefulWidget {
   final String text;
@@ -32,10 +33,15 @@ class _ButtonTextState extends State<ButtonText> {
         setState(() {
           isPressed = !isPressed;
         });
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MonitoringPage(),
+          ),
+        );
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         height: 48.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
