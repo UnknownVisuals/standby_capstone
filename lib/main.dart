@@ -12,7 +12,7 @@ class StandBy extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StandBy',
-      theme: ThemeData(),
+      theme: ThemeData.light(),
       home: const SplashScreen(),
     );
   }

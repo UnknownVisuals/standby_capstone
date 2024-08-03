@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/components/input_text.dart';
+import 'package:standby_capstone/components/button_text.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,19 +28,21 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Selamat datang!',
-                        style: TextStyle(
-                            color: kWhite,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
+                        style: GoogleFonts.poppins(
+                          color: kWhite,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      const Text(
+                      Text(
                         'Silahkan masuk untuk melanjutkan',
-                        style: TextStyle(
-                            color: kWhite,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal),
+                        style: GoogleFonts.poppins(
+                          color: kWhite,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                       const SizedBox(height: 16),
                       Expanded(
@@ -54,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                  color: kWhite,
+                  color: kGray,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(36.0),
                     topRight: Radius.circular(36.0),
@@ -65,38 +70,24 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'username',
-                        ),
-                      ),
+                      const InputText(hintText: 'username'),
                       const SizedBox(height: 16),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'password',
-                        ),
-                      ),
+                      const InputText(hintText: 'password'),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Lupa password?',
-                        style: TextStyle(
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          'Lupa password?',
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.poppins(
                             color: kPrimary,
                             fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 32),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('Masuk'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kGray,
-                          minimumSize: Size(double.infinity, 48.0),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                      const SizedBox(height: 32),
+                      const ButtonText(text: 'Masuk'),
                     ],
                   ),
                 ),
