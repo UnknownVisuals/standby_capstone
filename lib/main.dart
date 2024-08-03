@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/splash_page.dart';
+import 'package:standby_capstone/screens/splash_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const StandBy());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StandBy extends StatelessWidget {
+  const StandBy({super.key});
 
   @override
   Widget build(BuildContext context) {
