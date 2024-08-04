@@ -20,6 +20,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           children: [
             Expanded(
+              flex: 2,
               child: Container(
                 color: kPrimary,
                 child: Padding(
@@ -46,7 +47,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Expanded(
                         child: Center(
                           child: Image.asset(
-                              'assets/images/splash_illustration.png'),
+                              'assets/images/forgotpass_illustration.png'),
                         ),
                       ),
                     ],

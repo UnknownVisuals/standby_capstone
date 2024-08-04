@@ -18,13 +18,13 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 128,
+      padding: const EdgeInsets.all(12),
       decoration: kEmbossDecoration,
       child: Row(
         children: [
           Expanded(
             child: Container(
               alignment: Alignment.topLeft,
-              padding: const EdgeInsets.all(12),
               height: 128,
               child: Icon(
                 icon,
@@ -38,7 +38,6 @@ class InfoCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(12),
                     width: double.infinity,
                     child: Text(
                       title,
@@ -54,12 +53,14 @@ class InfoCard extends StatelessWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.all(12),
                     width: double.infinity,
                     child: Text(
                       subtitle,
                       textAlign: TextAlign.right,
-                      style: GoogleFonts.poppins(fontSize: 16, color: kBlack),
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        color: kBlack,
+                      ),
                     ),
                   ),
                 ),

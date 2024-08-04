@@ -43,7 +43,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
           height: MediaQuery.of(context).size.height,
           color: kGray,
           child: const Padding(
-            padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
+            padding: EdgeInsets.all(24),
             child: Column(
               children: [
                 InfoCard(
@@ -60,14 +60,14 @@ class _MonitoringPageState extends State<MonitoringPage> {
                 SizedBox(height: 24),
                 InfoCard(
                   icon: Icons.child_care,
-                  title: '33°C',
+                  title: '36°C',
                   subtitle: 'Suhu\nKulit Bayi',
                 ),
                 SizedBox(height: 24),
                 InfoCard(
                   icon: Icons.heat_pump,
                   title: 'OFF',
-                  subtitle: 'Suhu\nKulit Bayi',
+                  subtitle: 'Kipas\nPpendingin',
                 ),
               ],
             ),
