@@ -2,18 +2,17 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/screens/monitoring_page.dart';
 
 class ButtonText extends StatefulWidget {
   final String text;
-  final double fontSize;
-  final FontWeight fontWeight;
+  final Widget nextPage;
+  final bool isPush;
 
   const ButtonText({
     super.key,
     required this.text,
-    this.fontSize = 16.0,
-    this.fontWeight = FontWeight.bold,
+    required this.nextPage,
+    this.isPush = true,
   });
 
   @override
@@ -21,8 +20,6 @@ class ButtonText extends StatefulWidget {
 }
 
 class _ButtonTextState extends State<ButtonText> {
-  bool isPressed = false;
-
   @override
   Widget build(BuildContext context) {
     Offset offset = const Offset(4, 4);
@@ -30,12 +27,16 @@ class _ButtonTextState extends State<ButtonText> {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MonitoringPage(),
-          ),
-        );
+        if (widget.isPush) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => widget.nextPage,
+            ),
+          );
+        } else {
+          Navigator.pop(context);
+        }
       },
       child: Container(
         height: 48.0,
@@ -47,13 +48,11 @@ class _ButtonTextState extends State<ButtonText> {
               color: kEmbossShadowBlack,
               offset: offset,
               blurRadius: blurRadius,
-              inset: isPressed,
             ),
             BoxShadow(
               color: kEmbossShadowWhite,
               offset: -offset,
               blurRadius: blurRadius,
-              inset: isPressed,
             ),
           ],
         ),
@@ -61,8 +60,8 @@ class _ButtonTextState extends State<ButtonText> {
           child: Text(
             widget.text,
             style: GoogleFonts.poppins(
-              fontSize: widget.fontSize,
-              fontWeight: widget.fontWeight,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

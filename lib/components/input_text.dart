@@ -59,7 +59,8 @@ class _InputTextState extends State<InputText> {
               fontSize: widget.fontSize,
               fontWeight: widget.fontWeight,
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           ),
           style: GoogleFonts.poppins(
             fontSize: widget.fontSize,

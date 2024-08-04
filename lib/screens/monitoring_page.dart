@@ -20,7 +20,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
       appBar: AppBar(
         backgroundColor: kGray,
         leading: Padding(
-          padding: EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 8.0),
           child: Image.asset('assets/images/logo_appbar.png'),
         ),
         title: Text(
@@ -33,7 +33,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
           )
         ],
         centerTitle: true,
@@ -77,26 +77,26 @@ class _MonitoringPageState extends State<MonitoringPage> {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: kGray,
         color: kWhite,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         items: <Widget>[
           Icon(
             Icons.home,
-            size: 30,
+            size: 32,
             color: _currentIndex == 0 ? kPrimary : kDarkGray,
           ),
           Icon(
             Icons.document_scanner,
-            size: 30,
+            size: 32,
             color: _currentIndex == 1 ? kPrimary : kDarkGray,
           ),
           Icon(
             Icons.bar_chart_rounded,
-            size: 30,
+            size: 32,
             color: _currentIndex == 2 ? kPrimary : kDarkGray,
           ),
           Icon(
             Icons.person,
-            size: 30,
+            size: 32,
             color: _currentIndex == 3 ? kPrimary : kDarkGray,
           ),
         ],
