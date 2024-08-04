@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
 
@@ -22,9 +21,6 @@ class ButtonText extends StatefulWidget {
 class _ButtonTextState extends State<ButtonText> {
   @override
   Widget build(BuildContext context) {
-    Offset offset = const Offset(4, 4);
-    double blurRadius = 8.0;
-
     return GestureDetector(
       onTap: () {
         if (widget.isPush) {
@@ -40,22 +36,7 @@ class _ButtonTextState extends State<ButtonText> {
       },
       child: Container(
         height: 48.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          color: kGray,
-          boxShadow: [
-            BoxShadow(
-              color: kEmbossShadowBlack,
-              offset: offset,
-              blurRadius: blurRadius,
-            ),
-            BoxShadow(
-              color: kEmbossShadowWhite,
-              offset: -offset,
-              blurRadius: blurRadius,
-            ),
-          ],
-        ),
+        decoration: kEmbossDecoration,
         child: Center(
           child: Text(
             widget.text,

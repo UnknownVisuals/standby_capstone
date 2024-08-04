@@ -16,26 +16,9 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Offset offset = const Offset(4, 4);
-    double blurRadius = 8.0;
     return Container(
       height: 128,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-        color: kGray,
-        boxShadow: [
-          BoxShadow(
-            color: kEmbossShadowBlack,
-            offset: offset,
-            blurRadius: blurRadius,
-          ),
-          BoxShadow(
-            color: kEmbossShadowWhite,
-            offset: -offset,
-            blurRadius: blurRadius,
-          ),
-        ],
-      ),
+      decoration: kEmbossDecoration,
       child: Row(
         children: [
           Expanded(
