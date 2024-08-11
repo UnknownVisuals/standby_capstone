@@ -4,7 +4,7 @@ import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/components/input_text.dart';
 import 'package:standby_capstone/components/button_text.dart';
 import 'package:standby_capstone/screens/forgotpass_page.dart';
-import 'package:standby_capstone/screens/monitoring_page.dart';
+import 'package:standby_capstone/screens/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 32),
                       const ButtonText(
                         text: 'Masuk',
-                        nextPage: MonitoringPage(),
+                        nextPage: MainPage(),
                       ),
                     ],
                   ),
