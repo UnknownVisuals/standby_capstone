@@ -67,7 +67,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
                 InfoCard(
                   icon: Icons.heat_pump,
                   title: 'OFF',
-                  subtitle: 'Kipas\nPpendingin',
+                  subtitle: 'Kipas\nPendingin',
                 ),
               ],
             ),

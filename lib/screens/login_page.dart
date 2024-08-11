@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(
                         child: Center(
                           child: Image.asset(
-                              'assets/images/splash_illustration.png'),
+                              'assets/images/illustration_login.png'),
                         ),
                       ),
                     ],
