@@ -37,7 +37,7 @@ class InfoCard extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: Text(
                       title,

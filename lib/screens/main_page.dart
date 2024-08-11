@@ -52,8 +52,9 @@ class MainPageState extends State<MainPage> {
         ],
         centerTitle: true,
       ),
-      body: Container(
-        child: _screenList[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screenList,
       ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: kGray,
