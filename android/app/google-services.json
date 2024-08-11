@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "627233552935",
+    "firebase_url": "https://standby-c50ba-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "standby-c50ba",
+    "storage_bucket": "standby-c50ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627233552935:android:373882a6c82614a43bac02",
+        "android_client_info": {
+          "package_name": "com.example.standby_capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627233552935-rprpgr3le3ic4tushqm5q5tr7qooa1oh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2_bnE8k4YvfPhScMXclOOdwqjya4lc34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627233552935-rprpgr3le3ic4tushqm5q5tr7qooa1oh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
