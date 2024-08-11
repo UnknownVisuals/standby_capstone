@@ -1,3 +1,34 @@
-# StandBy
+<div align="center">
+    <img src="assets/logo/logo_horizontal.png" alt="Neural Network" width="360" align="center">
+</div>
 
-Mobile Application made with Flutter for one of the Capstone Project components with the working title "StandBy: Implementasi Artificial Intelligence of Things (AIoT) untuk Sistem Manajemen Standardisasi Inkubator Bayi"
+## 🏃 - How to run the app
+
+1. clone this repository
+
+   ```bash
+   git clone https://github.com/UnknownVisuals/standby_capstone.git
+   ```
+
+2. get the dependencies
+
+   ```bash
+   flutter pub get
+   ```
+
+3. setup firebase
+
+   ```bash
+   flutterfire configure
+   ```
+
+4. clone this repository
+
+   ```bash
+   flutter run -d DEVICENAME
+   ```
+
+   **NOTE**
+
+   - make sure [**flutter**](https://docs.flutter.dev/get-started/install) is configured.
+   - make sure [**firebase**](https://firebase.google.com/docs/flutter/setup?platform=android) for **flutter** is configured.
