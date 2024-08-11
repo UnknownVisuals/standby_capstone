@@ -20,9 +20,8 @@ class _MonitoringPageState extends State<MonitoringPage> {
       appBar: AppBar(
         backgroundColor: kGray,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Image.asset('assets/images/logo_appbar.png'),
-        ),
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Image.asset('assets/logo/logo_icon.png')),
         title: Text(
           'Monitoring',
           style: GoogleFonts.poppins(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/screens/splash_page.dart';
+import 'package:standby_capstone/screens/login_page.dart';
 
 void main() {
   runApp(const StandBy());
@@ -13,7 +13,7 @@ class StandBy extends StatelessWidget {
     return MaterialApp(
       title: 'StandBy',
       theme: ThemeData.light(),
-      home: const SplashScreen(),
+      home: const LoginPage(),
     );
   }
 }
