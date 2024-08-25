@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/screens/monitoring_page.dart';
 import 'package:standby_capstone/screens/document_page.dart';
-import 'package:standby_capstone/screens/history_page.dart';
+import 'package:standby_capstone/screens/panduan_page.dart';
 import 'package:standby_capstone/screens/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,15 +17,15 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   final List<String> _appBarTitles = const [
-    'Monitoring',
-    'Document',
-    'History',
+    'Dashboard',
+    'Input',
+    'Panduan',
     'Profile',
   ];
   final List<Widget> _screenList = const [
     MonitoringPage(),
     DocumentPage(),
-    HistoryPage(),
+    PanduanPage(),
     ProfilePage(),
   ];
 
@@ -62,22 +62,22 @@ class MainPageState extends State<MainPage> {
         animationDuration: const Duration(milliseconds: 300),
         items: <Widget>[
           Icon(
-            Icons.home,
+            Icons.dashboard,
             size: 32,
             color: _currentIndex == 0 ? kPrimary : kDarkGray,
           ),
           Icon(
-            Icons.document_scanner,
+            Icons.edit_document,
             size: 32,
             color: _currentIndex == 1 ? kPrimary : kDarkGray,
           ),
           Icon(
-            Icons.bar_chart_rounded,
+            Icons.description,
             size: 32,
             color: _currentIndex == 2 ? kPrimary : kDarkGray,
           ),
           Icon(
-            Icons.person,
+            Icons.manage_accounts,
             size: 32,
             color: _currentIndex == 3 ? kPrimary : kDarkGray,
           ),

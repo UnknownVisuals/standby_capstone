@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const kWhite = Color(0xFFEEEEEE);
 const kGray = Color(0xFFDDDDDD);
@@ -47,4 +48,16 @@ final BoxDecoration kDebossDecoration = BoxDecoration(
       inset: true,
     ),
   ],
+);
+
+final TextStyle kTextTitleBlack = GoogleFonts.poppins(
+  color: kBlack,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
+final TextStyle kTextBodyBlack = GoogleFonts.poppins(
+  color: kBlack,
+  fontSize: 14,
+  fontWeight: FontWeight.normal,
 );
