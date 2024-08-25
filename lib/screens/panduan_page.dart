@@ -58,11 +58,11 @@ class _PanduanPageState extends State<PanduanPage> {
         child: ExpansionTile(
           iconColor: kPrimary,
           collapsedIconColor: kPrimary,
-          title: Text(title, style: kTextTitleBlack),
+          title: Text(title, style: kTextPanduanTitleBlack),
           children: [
             ListTile(
               dense: true,
-              title: Text(_loremIpsumText, style: kTextBodyBlack),
+              title: Text(_loremIpsumText, style: kTextPanduanBodyBlack),
             ),
           ],
         ),
