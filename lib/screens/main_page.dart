@@ -2,8 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/screens/monitoring_page.dart';
-import 'package:standby_capstone/screens/document_page.dart';
+import 'package:standby_capstone/screens/dashboard_page.dart';
+import 'package:standby_capstone/screens/input_page.dart';
 import 'package:standby_capstone/screens/panduan_page.dart';
 import 'package:standby_capstone/screens/profile_page.dart';
 
@@ -23,8 +23,8 @@ class MainPageState extends State<MainPage> {
     'Profile',
   ];
   final List<Widget> _screenList = const [
-    MonitoringPage(),
-    DocumentPage(),
+    DashboardPage(),
+    InputPage(),
     PanduanPage(),
     ProfilePage(),
   ];

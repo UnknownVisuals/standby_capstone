@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
 
-class DocumentPage extends StatefulWidget {
-  const DocumentPage({super.key});
+class InputPage extends StatefulWidget {
+  const InputPage({super.key});
 
   @override
-  State<DocumentPage> createState() => _DocumentPageState();
+  State<InputPage> createState() => _InputPageState();
 }
 
-class _DocumentPageState extends State<DocumentPage> {
+class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: kGray,
         child: const Center(
-          child: Text("Document Page"),
+          child: Text("Input Page"),
         ),
       ),
     );

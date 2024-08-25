@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/components/card_info.dart';
 
-class MonitoringPage extends StatefulWidget {
-  const MonitoringPage({super.key});
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
 
   @override
-  State<MonitoringPage> createState() => _MonitoringPageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _MonitoringPageState extends State<MonitoringPage> {
+class _DashboardPageState extends State<DashboardPage> {
   String _currentIncubatorTemp = '0';
   String _currentIncubatorHumi = '0';
   String _currentSkinTemp = '0';
