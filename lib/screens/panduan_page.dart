@@ -55,16 +55,19 @@ class _PanduanPageState extends State<PanduanPage> {
       return Container(
         margin: const EdgeInsets.only(bottom: 24),
         decoration: kEmbossDecoration,
-        child: ExpansionTile(
-          iconColor: kPrimary,
-          collapsedIconColor: kPrimary,
-          title: Text(title, style: kTextPanduanTitleBlack),
-          children: [
-            ListTile(
-              dense: true,
-              title: Text(_loremIpsumText, style: kTextPanduanBodyBlack),
-            ),
-          ],
+        child: Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            iconColor: kPrimary,
+            collapsedIconColor: kPrimary,
+            title: Text(title, style: kTextHeadingBlack),
+            children: [
+              ListTile(
+                dense: true,
+                title: Text(_loremIpsumText, style: kTextNormal),
+              ),
+            ],
+          ),
         ),
       );
     }).toList();

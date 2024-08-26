@@ -50,25 +50,25 @@ final BoxDecoration kDebossDecoration = BoxDecoration(
   ],
 );
 
-final TextStyle kTextPanduanTitleBlack = GoogleFonts.poppins(
+final TextStyle kTextAppbar = GoogleFonts.poppins(
   color: kBlack,
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: FontWeight.bold,
 );
 
-final TextStyle kTextPanduanBodyBlack = GoogleFonts.poppins(
-  color: kBlack,
-  fontSize: 14,
-  fontWeight: FontWeight.normal,
-);
-
-final TextStyle kTextTableTitleRed = GoogleFonts.poppins(
+final TextStyle kTextHeadingRed = GoogleFonts.poppins(
   color: kPrimary,
   fontSize: 14,
   fontWeight: FontWeight.bold,
 );
 
-final TextStyle kTextTableBodyBlack = GoogleFonts.poppins(
+final TextStyle kTextHeadingBlack = GoogleFonts.poppins(
+  color: kBlack,
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
+
+final TextStyle kTextNormal = GoogleFonts.poppins(
   color: kBlack,
   fontSize: 14,
   fontWeight: FontWeight.normal,

@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/screens/dashboard_page.dart';
 import 'package:standby_capstone/screens/input_page.dart';
+import 'package:standby_capstone/screens/notification_page.dart';
 import 'package:standby_capstone/screens/panduan_page.dart';
 import 'package:standby_capstone/screens/profile_page.dart';
 
@@ -35,18 +35,23 @@ class MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: kGray,
         leading: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/logo/logo_icon.png')),
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Image.asset('assets/logo/logo_icon.png'),
+        ),
         title: Text(
           _appBarTitles[_currentIndex],
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kTextAppbar,
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationPage(),
+                ),
+              );
+            },
             icon: const Icon(Icons.notifications),
           )
         ],

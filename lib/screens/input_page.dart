@@ -27,29 +27,29 @@ class _InputPageState extends State<InputPage> {
                 child: DataTable(
                   columns: [
                     DataColumn(
-                      label: Text('Klausal', style: kTextTableTitleRed),
+                      label: Text('Klausal', style: kTextHeadingRed),
                     ),
                     DataColumn(
-                      label: Text('Judul Klausal', style: kTextTableTitleRed),
+                      label: Text('Judul Klausal', style: kTextHeadingRed),
                     ),
                     DataColumn(
-                      label: Text('Dok Ref', style: kTextTableTitleRed),
+                      label: Text('Dok Ref', style: kTextHeadingRed),
                     ),
                     DataColumn(
-                      label: Text('Ada/tidak', style: kTextTableTitleRed),
+                      label: Text('Ada/tidak', style: kTextHeadingRed),
                     ),
                     DataColumn(
-                      label: Text('Keputusan', style: kTextTableTitleRed),
+                      label: Text('Keputusan', style: kTextHeadingRed),
                     ),
                   ],
                   rows: List.generate(20, (index) {
                     return DataRow(
                       cells: [
                         DataCell(
-                          Text('${index + 1000}', style: kTextTableBodyBlack),
+                          Text('${index + 1000}', style: kTextNormal),
                         ),
                         DataCell(Text('Judul Klausal ${index + 1}',
-                            style: kTextTableBodyBlack)),
+                            style: kTextNormal)),
                         const DataCell(
                           InputText(hintText: 'referensi'),
                         ),
@@ -63,8 +63,7 @@ class _InputPageState extends State<InputPage> {
                           },
                         )),
                         DataCell(
-                          Text('LULUS ${index + 1}',
-                              style: kTextTableBodyBlack),
+                          Text('LULUS ${index + 1}', style: kTextNormal),
                         ),
                       ],
                     );
