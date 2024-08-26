@@ -34,6 +34,8 @@ class MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kGray,
+        surfaceTintColor: kGray,
+        elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: Image.asset('assets/logo/logo_icon.png'),
