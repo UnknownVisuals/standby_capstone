@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/components/button_icon_text.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/screens/about_standby.dart';
+import 'package:standby_capstone/screens/about_us.dart';
+import 'package:standby_capstone/screens/add_remove_staff.dart';
 import 'package:standby_capstone/screens/login_page.dart';
 import 'package:standby_capstone/screens/main_page.dart';
 
@@ -59,19 +62,19 @@ class _ProfilePageState extends State<ProfilePage> {
               const ButtonIconText(
                 icon: Icons.person_add_alt_rounded,
                 text: 'Add/Remove Staff',
-                nextPage: MainPage(),
+                nextPage: AddRemoveStaff(),
               ),
               const SizedBox(height: 24),
               const ButtonIconText(
                 icon: Icons.info_rounded,
                 text: 'About StandBy',
-                nextPage: MainPage(),
+                nextPage: AboutStandby(),
               ),
               const SizedBox(height: 24),
               const ButtonIconText(
                 icon: Icons.groups_rounded,
                 text: 'About Us',
-                nextPage: MainPage(),
+                nextPage: AboutUs(),
               ),
               const Spacer(),
               const ButtonIconText(
