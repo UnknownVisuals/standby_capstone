@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:standby_capstone/constants.dart';
 
 class AboutStandby extends StatefulWidget {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/components/input_text.dart';
-import 'package:standby_capstone/components/button_text.dart';
+import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/screens/forgotpass_page.dart';
 import 'package:standby_capstone/screens/main_page.dart';
 
@@ -14,6 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,10 +73,41 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const InputText(hintText: 'username'),
-                      const SizedBox(height: 16),
-                      const InputText(hintText: 'password'),
-                      const SizedBox(height: 16),
+                      Container(
+                        decoration: kDebossDecoration,
+                        padding: const EdgeInsets.only(left: 8),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.email_rounded,
+                                color: kDarkGray),
+                            hintText: 'email',
+                            hintStyle: GoogleFonts.poppins(fontSize: 16),
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                          style: GoogleFonts.poppins(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Container(
+                        decoration: kDebossDecoration,
+                        padding: const EdgeInsets.only(left: 8),
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.lock_rounded,
+                                color: kDarkGray),
+                            hintText: 'password',
+                            hintStyle: GoogleFonts.poppins(fontSize: 16),
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                          style: GoogleFonts.poppins(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -100,10 +133,21 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 32),
-                      const ButtonText(
-                        text: 'Masuk',
-                        nextPage: MainPage(),
+                      const SizedBox(height: 48),
+                      ElevatedButton(
+                        onPressed: () async {
+                          await supabase.auth.signInWithPassword(
+                            password: passwordController.text,
+                            email: emailController.text,
+                          );
+                          if (!mounted) return;
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainPage()),
+                          );
+                        },
+                        child: const Text('Masuk'),
                       ),
                     ],
                   ),

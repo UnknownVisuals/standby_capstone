@@ -5,7 +5,6 @@ import 'package:standby_capstone/screens/about_standby.dart';
 import 'package:standby_capstone/screens/about_us.dart';
 import 'package:standby_capstone/screens/add_remove_staff.dart';
 import 'package:standby_capstone/screens/login_page.dart';
-import 'package:standby_capstone/screens/main_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

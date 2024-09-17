@@ -11,8 +11,8 @@ const kBlack = Color(0xFF222222);
 
 const kEmbossShadowBlack = Color(0x44000000);
 const kEmbossShadowWhite = Color(0xDDFFFFFF);
-const kDebossShadowBlack = Color(0x66000000);
-const kDebossShadowWhite = Color(0xBBFFFFFF);
+const kDebossShadowBlack = Color(0x88000000);
+const kDebossShadowWhite = Color(0xFFFFFFFF);
 
 final BoxDecoration kEmbossDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(16.0),
