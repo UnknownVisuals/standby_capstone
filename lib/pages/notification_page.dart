@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
+import 'package:standby_capstone/components/navigations/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -15,23 +16,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kGray,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Image.asset('assets/logo/logo_icon.png'),
-        ),
-        title: Text('Notification', style: kTextAppbar),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.close),
-          )
-        ],
-        centerTitle: true,
-      ),
+      appBar: const DeepMenuAppbar(title: 'Notifications'),
       body: Container(
         color: kGray,
         height: double.infinity,
@@ -69,15 +54,15 @@ class _NotificationPageState extends State<NotificationPage> {
             collapsedIconColor: kPrimary,
             title: Row(
               children: [
-                Text(data['title']!, style: kTextHeadingRed),
+                Text(data['title']!, style: kTextHeading_Red),
                 const Spacer(),
-                Text(data['date']!, style: kTextNormal),
+                Text(data['date']!, style: kTextNormal_Black),
               ],
             ),
             children: [
               ListTile(
                 dense: true,
-                title: Text(_loremIpsumFull, style: kTextNormal),
+                title: Text(_loremIpsumFull, style: kTextNormal_Black),
               ),
             ],
           ),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/components/button_text.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/screens/login_page.dart';
+import 'package:standby_capstone/pages/login_page.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -30,24 +29,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     children: [
                       Text(
                         'Lupa password?',
-                        style: GoogleFonts.poppins(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: kWhite,
-                        ),
+                        style: kAuthTitleLarge,
                       ),
                       Text(
                         'Silahkan hubungi Admin untuk mengganti password',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          color: kWhite,
-                        ),
+                        style: kTextNormal_White,
                       ),
                       const SizedBox(height: 16),
                       Expanded(
                         child: Center(
                           child: Image.asset(
-                              'assets/images/illustration_forgotpass.png'),
+                            'assets/images/illustration_forgotpass.png',
+                            height: 256,
+                          ),
                         ),
                       ),
                     ],

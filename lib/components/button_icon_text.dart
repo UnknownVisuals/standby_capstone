@@ -47,7 +47,7 @@ class _ButtonIconTextState extends State<ButtonIconText> {
                 size: 24,
               ),
               const SizedBox(width: 24),
-              Text(widget.text, style: kTextHeadingBlack),
+              Text(widget.text, style: kTextHeading_Black),
             ],
           ),
         ),

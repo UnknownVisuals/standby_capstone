@@ -27,29 +27,31 @@ class _InputPageState extends State<InputPage> {
                 child: DataTable(
                   columns: [
                     DataColumn(
-                      label: Text('Klausal', style: kTextHeadingRed),
+                      label: Text('Klausal', style: kTextHeading_Red),
                     ),
                     DataColumn(
-                      label: Text('Judul Klausal', style: kTextHeadingRed),
+                      label: Text('Judul Klausal', style: kTextHeading_Red),
                     ),
                     DataColumn(
-                      label: Text('Dok Ref', style: kTextHeadingRed),
+                      label: Text('Dok Ref', style: kTextHeading_Red),
                     ),
                     DataColumn(
-                      label: Text('Ada/tidak', style: kTextHeadingRed),
+                      label: Text('Ada/tidak', style: kTextHeading_Red),
                     ),
                     DataColumn(
-                      label: Text('Keputusan', style: kTextHeadingRed),
+                      label: Text('Keputusan', style: kTextHeading_Red),
                     ),
                   ],
                   rows: List.generate(20, (index) {
                     return DataRow(
                       cells: [
                         DataCell(
-                          Text('${index + 1000}', style: kTextNormal),
+                          Text('${index + 1000}', style: kTextNormal_Black),
                         ),
-                        DataCell(Text('Judul Klausal ${index + 1}',
-                            style: kTextNormal)),
+                        DataCell(
+                          Text('Judul Klausal ${index + 1}',
+                              style: kTextNormal_Black),
+                        ),
                         const DataCell(
                           InputText(hintText: 'referensi'),
                         ),
@@ -63,7 +65,10 @@ class _InputPageState extends State<InputPage> {
                           },
                         )),
                         DataCell(
-                          Text('LULUS ${index + 1}', style: kTextNormal),
+                          Text(
+                            'LULUS ${index + 1}',
+                            style: kTextNormal_Black,
+                          ),
                         ),
                       ],
                     );

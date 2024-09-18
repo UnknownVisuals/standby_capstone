@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:standby_capstone/components/navigations/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 
 class AboutUs extends StatefulWidget {
@@ -12,6 +13,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const DeepMenuAppbar(title: 'About Us'),
       body: Container(
         color: kGray,
         child: const Center(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/components/button_icon_text.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/screens/about_standby.dart';
-import 'package:standby_capstone/screens/about_us.dart';
-import 'package:standby_capstone/screens/add_remove_staff.dart';
-import 'package:standby_capstone/screens/login_page.dart';
+import 'package:standby_capstone/main.dart';
+import 'package:standby_capstone/pages/profile/about_standby.dart';
+import 'package:standby_capstone/pages/profile/about_us.dart';
+import 'package:standby_capstone/pages/profile/manage_staff.dart';
+import 'package:standby_capstone/pages/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,6 +15,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Future<void> signOut() async {
+    await supabase.auth.signOut();
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +39,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: double.infinity,
                 height: 64,
                 margin: const EdgeInsets.only(bottom: 24),
-                // decoration: kEmbossDecoration,
                 child: Row(
                   children: [
                     const CircleAvatar(
@@ -42,15 +53,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(
                           'Reynaldhi Tryana Graha',
-                          style: kTextHeadingRed,
+                          style: kTextHeading_Red,
                         ),
                         Text(
                           'reynaldhi0@gmail.com',
-                          style: kTextNormal,
+                          style: kTextNormal_Black,
                         ),
                         Text(
                           'Admin',
-                          style: kTextHeadingBlack,
+                          style: kTextHeading_Black,
                         ),
                       ],
                     ),
@@ -60,8 +71,8 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 12),
               const ButtonIconText(
                 icon: Icons.person_add_alt_rounded,
-                text: 'Add/Remove Staff',
-                nextPage: AddRemoveStaff(),
+                text: 'Manage Staff',
+                nextPage: ManageStaff(),
               ),
               const SizedBox(height: 24),
               const ButtonIconText(
@@ -76,10 +87,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 nextPage: AboutUs(),
               ),
               const Spacer(),
-              const ButtonIconText(
-                icon: Icons.exit_to_app_rounded,
-                text: 'Sign Out',
-                nextPage: LoginPage(),
+              Container(
+                height: 48,
+                width: double.infinity,
+                decoration: kEmbossDecorationGrad,
+                child: TextButton(
+                  onPressed: () {
+                    signOut();
+                  },
+                  child: Center(
+                    child: Text(
+                      'keluar',
+                      style: kButtonTitle_White,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

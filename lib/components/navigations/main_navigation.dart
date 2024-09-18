@@ -1,20 +1,20 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/screens/dashboard_page.dart';
-import 'package:standby_capstone/screens/input_page.dart';
-import 'package:standby_capstone/screens/notification_page.dart';
-import 'package:standby_capstone/screens/panduan_page.dart';
-import 'package:standby_capstone/screens/profile_page.dart';
+import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
+import 'package:standby_capstone/pages/input/input_page.dart';
+import 'package:standby_capstone/pages/notification_page.dart';
+import 'package:standby_capstone/pages/panduan/panduan_page.dart';
+import 'package:standby_capstone/pages/profile/profile_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class MainNavigation extends StatefulWidget {
+  const MainNavigation({super.key});
 
   @override
-  State<MainPage> createState() => MainPageState();
+  State<MainNavigation> createState() => MainNavigationState();
 }
 
-class MainPageState extends State<MainPage> {
+class MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
   final List<String> _appBarTitles = const [
     'Dashboard',
@@ -42,7 +42,7 @@ class MainPageState extends State<MainPage> {
         ),
         title: Text(
           _appBarTitles[_currentIndex],
-          style: kTextAppbar,
+          style: kAppbarTitle,
         ),
         actions: [
           IconButton(
