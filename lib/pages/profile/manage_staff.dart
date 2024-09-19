@@ -14,12 +14,15 @@ class ManageStaff extends StatefulWidget {
   State<ManageStaff> createState() => _ManageStaffState();
 }
 
+enum Roles { staff, admin }
+
 class _ManageStaffState extends State<ManageStaff> {
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final roleController = TextEditingController();
+
+  Roles? _role = Roles.staff;
 
   final staffStream = supabase.from('profiles').stream(primaryKey: ['id']);
 
@@ -33,13 +36,9 @@ class _ManageStaffState extends State<ManageStaff> {
         return;
       }
       final AuthResponse authResponse = await supabase.auth.signUp(
-        password: passwordController.text,
-        email: emailController.text,
-        data: {
-          'full_name': fullNameController.text,
-          'role': roleController.text,
-        },
-      );
+          password: passwordController.text,
+          email: emailController.text,
+          data: {'full_name': fullNameController.text});
       if (!mounted) return;
       showTopSnackBar(
         Overlay.of(context),
@@ -88,8 +87,21 @@ class _ManageStaffState extends State<ManageStaff> {
                         padding: const EdgeInsets.only(left: 12),
                         child: ListTile(
                           title: Text(
-                            staff['full_name'],
+                            staff['full_name'] ?? 'Full name not found',
                             style: kTextHeading_Red,
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                staff['email'] ?? 'EEmail not found',
+                                style: kTextNormal_Black,
+                              ),
+                              Text(
+                                'Role: ${staff['role'] ?? 'Not set'}',
+                                style: kTextHeading_Black,
+                              ),
+                            ],
                           ),
                         ),
                       );
@@ -125,15 +137,45 @@ class _ManageStaffState extends State<ManageStaff> {
               icon: Icons.lock_rounded,
               obscureText: true,
             ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 12),
+                Text('Account Role:', style: kTextHeading_Red),
+                const SizedBox(width: 24),
+                Radio<Roles>(
+                  activeColor: kPrimary,
+                  value: Roles.staff,
+                  groupValue: _role,
+                  onChanged: (Roles? value) {
+                    setState(() {
+                      _role = value;
+                    });
+                  },
+                ),
+                Text('Staff', style: kTextHeading_Black),
+                Radio<Roles>(
+                  activeColor: kPrimary,
+                  value: Roles.admin,
+                  groupValue: _role,
+                  onChanged: (Roles? value) {
+                    setState(() {
+                      _role = value;
+                    });
+                  },
+                ),
+                Text('Admin', style: kTextHeading_Black),
+                const SizedBox(width: 12),
+              ],
+            ),
             const SizedBox(height: 36),
             Container(
               height: 48,
               width: double.infinity,
               decoration: kEmbossDecorationGrad,
               child: TextButton(
-                onPressed: () {
-                  signUp();
-                },
+                onPressed: signUp,
                 child: Center(
                   child: Text(
                     'add staff',

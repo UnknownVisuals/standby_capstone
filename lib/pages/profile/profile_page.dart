@@ -6,6 +6,7 @@ import 'package:standby_capstone/pages/profile/about_standby.dart';
 import 'package:standby_capstone/pages/profile/about_us.dart';
 import 'package:standby_capstone/pages/profile/manage_staff.dart';
 import 'package:standby_capstone/pages/login_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,6 +16,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final User? user = supabase.auth.currentUser;
+  Map<String, dynamic>? userProfiles;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserProfile();
+  }
+
+  Future<void> fetchUserProfile() async {
+    final response = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', user?.id as Object)
+        .single();
+    setState(() {
+      userProfiles = response;
+    });
+  }
+
   Future<void> signOut() async {
     await supabase.auth.signOut();
     if (!mounted) return;
@@ -52,15 +73,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Reynaldhi Tryana Graha',
+                          userProfiles?['full_name']?.toString() ??
+                              'Full name not found',
                           style: kTextHeading_Red,
                         ),
                         Text(
-                          'reynaldhi0@gmail.com',
+                          user?.email ?? 'Email not found',
                           style: kTextNormal_Black,
                         ),
                         Text(
-                          'Admin',
+                          'Role: Not set',
                           style: kTextHeading_Black,
                         ),
                       ],
@@ -92,9 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: double.infinity,
                 decoration: kEmbossDecorationGrad,
                 child: TextButton(
-                  onPressed: () {
-                    signOut();
-                  },
+                  onPressed: signOut,
                   child: Center(
                     child: Text(
                       'keluar',

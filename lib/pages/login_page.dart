@@ -140,9 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: double.infinity,
                           decoration: kEmbossDecorationGrad,
                           child: TextButton(
-                            onPressed: () {
-                              signIn();
-                            },
+                            onPressed: signIn,
                             child: Center(
                               child: Text(
                                 'masuk',
