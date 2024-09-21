@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: kTextNormal_Black,
                         ),
                         Text(
-                          'Role: Not set',
+                          userProfiles?['is_admin'] ? 'Admin' : 'Staff',
                           style: kTextHeading_Black,
                         ),
                       ],

@@ -4,7 +4,7 @@ import 'package:standby_capstone/components/auth_input_field.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/forgotpass_page.dart';
-import 'package:standby_capstone/components/navigations/main_navigation.dart';
+import 'package:standby_capstone/pages/main_navigation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';

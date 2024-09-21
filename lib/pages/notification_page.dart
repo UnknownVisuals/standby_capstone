@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
-import 'package:standby_capstone/components/navigations/deep_menu_navigation.dart';
+import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 
 class NotificationPage extends StatefulWidget {

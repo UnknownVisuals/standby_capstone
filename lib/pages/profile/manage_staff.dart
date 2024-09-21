@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/components/auth_input_field.dart';
-import 'package:standby_capstone/components/navigations/deep_menu_navigation.dart';
+import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,15 +14,13 @@ class ManageStaff extends StatefulWidget {
   State<ManageStaff> createState() => _ManageStaffState();
 }
 
-enum Roles { staff, admin }
-
 class _ManageStaffState extends State<ManageStaff> {
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  Roles? _role = Roles.staff;
+  bool isAdmin = false;
 
   final staffStream = supabase.from('profiles').stream(primaryKey: ['id']);
 
@@ -35,11 +33,18 @@ class _ManageStaffState extends State<ManageStaff> {
         );
         return;
       }
+
       final AuthResponse authResponse = await supabase.auth.signUp(
-          password: passwordController.text,
-          email: emailController.text,
-          data: {'full_name': fullNameController.text});
+        password: passwordController.text,
+        email: emailController.text,
+        data: {
+          'full_name': fullNameController.text,
+          'is_admin': isAdmin,
+        },
+      );
+
       if (!mounted) return;
+
       showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.success(
@@ -74,7 +79,7 @@ class _ManageStaffState extends State<ManageStaff> {
                   return const Text('No staff data available.');
                 }
 
-                final staffs = snapshot.data as List<dynamic>;
+                final staffs = snapshot.data as List<Map<String, dynamic>>;
 
                 return Expanded(
                   child: ListView.builder(
@@ -94,11 +99,11 @@ class _ManageStaffState extends State<ManageStaff> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                staff['email'] ?? 'EEmail not found',
+                                staff['email'] ?? 'Email not found',
                                 style: kTextNormal_Black,
                               ),
                               Text(
-                                'Role: ${staff['role'] ?? 'Not set'}',
+                                staff['is_admin'] ? 'Admin' : 'Staff',
                                 style: kTextHeading_Black,
                               ),
                             ],
@@ -111,62 +116,62 @@ class _ManageStaffState extends State<ManageStaff> {
               },
             ),
             AuthInputField(
-              hintText: 'full name',
+              hintText: 'Full Name',
               controller: fullNameController,
               icon: Icons.person_rounded,
               obscureText: false,
             ),
             const SizedBox(height: 24),
             AuthInputField(
-              hintText: 'email',
+              hintText: 'Email',
               controller: emailController,
               icon: Icons.mail_rounded,
               obscureText: false,
             ),
             const SizedBox(height: 24),
             AuthInputField(
-              hintText: 'password',
+              hintText: 'Password',
               controller: passwordController,
               icon: Icons.lock_rounded,
               obscureText: true,
             ),
             const SizedBox(height: 24),
             AuthInputField(
-              hintText: 'confirm password',
+              hintText: 'Confirm Password',
               controller: confirmPasswordController,
               icon: Icons.lock_rounded,
               obscureText: true,
             ),
             const SizedBox(height: 24),
+            Text('Account Role:', style: kTextHeading_Red),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(width: 12),
-                Text('Account Role:', style: kTextHeading_Red),
-                const SizedBox(width: 24),
-                Radio<Roles>(
-                  activeColor: kPrimary,
-                  value: Roles.staff,
-                  groupValue: _role,
-                  onChanged: (Roles? value) {
-                    setState(() {
-                      _role = value;
-                    });
-                  },
+                Expanded(
+                  child: RadioListTile<bool>(
+                    title: Text('Staff', style: kTextHeading_Black),
+                    activeColor: kPrimary,
+                    value: false,
+                    groupValue: isAdmin,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isAdmin = value ?? false;
+                      });
+                    },
+                  ),
                 ),
-                Text('Staff', style: kTextHeading_Black),
-                Radio<Roles>(
-                  activeColor: kPrimary,
-                  value: Roles.admin,
-                  groupValue: _role,
-                  onChanged: (Roles? value) {
-                    setState(() {
-                      _role = value;
-                    });
-                  },
+                Expanded(
+                  child: RadioListTile<bool>(
+                    title: Text('Admin', style: kTextHeading_Black),
+                    activeColor: kPrimary,
+                    value: true,
+                    groupValue: isAdmin,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isAdmin = value ?? false;
+                      });
+                    },
+                  ),
                 ),
-                Text('Admin', style: kTextHeading_Black),
-                const SizedBox(width: 12),
               ],
             ),
             const SizedBox(height: 36),
