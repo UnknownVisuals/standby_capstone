@@ -92,87 +92,85 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: kGray,
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: _loading
-              ? const Center(child: CircularProgressIndicator())
-              : Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 64,
-                      margin: const EdgeInsets.only(bottom: 24),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 32,
-                            foregroundImage: _avatarUrl != null &&
-                                    _avatarUrl!.isNotEmpty
-                                ? NetworkImage(_avatarUrl!)
-                                : const AssetImage(
-                                        'assets/images/illustration_forgotpass.png')
-                                    as ImageProvider,
-                            backgroundColor: kPrimary,
-                          ),
-                          const SizedBox(width: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _fullName,
-                                style: kTextHeading_Red,
-                              ),
-                              Text(
-                                _email,
-                                style: kTextNormal_Black,
-                              ),
-                              Text(
-                                _isAdmin ? 'Admin' : 'Staff',
-                                style: kTextHeading_Black,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+      backgroundColor: kGray,
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: _loading
+            ? const Center(child: CircularProgressIndicator())
+            : Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 64,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          maxRadius: 32,
+                          foregroundImage: _avatarUrl != null &&
+                                  _avatarUrl!.isNotEmpty
+                              ? NetworkImage(_avatarUrl!)
+                              : const AssetImage(
+                                      'assets/images/illustration_forgotpass.png')
+                                  as ImageProvider,
+                          backgroundColor: kPrimary,
+                        ),
+                        const SizedBox(width: 24),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _fullName,
+                              style: kTextHeading_Red,
+                            ),
+                            Text(
+                              _email,
+                              style: kTextNormal_Black,
+                            ),
+                            Text(
+                              _isAdmin ? 'Admin' : 'Staff',
+                              style: kTextHeading_Black,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    const ButtonIconText(
-                      icon: Icons.person_add_alt_rounded,
-                      text: 'Manage Staff',
-                      nextPage: ManageStaff(),
-                    ),
-                    const SizedBox(height: 24),
-                    const ButtonIconText(
-                      icon: Icons.info_rounded,
-                      text: 'About StandBy',
-                      nextPage: AboutStandby(),
-                    ),
-                    const SizedBox(height: 24),
-                    const ButtonIconText(
-                      icon: Icons.groups_rounded,
-                      text: 'About Us',
-                      nextPage: AboutUs(),
-                    ),
-                    const Spacer(),
-                    Container(
-                      height: 48,
-                      width: double.infinity,
-                      decoration: kEmbossDecorationGrad,
-                      child: TextButton(
-                        onPressed: _signOut,
-                        child: Center(
-                          child: Text(
-                            'keluar',
-                            style: kButtonTitle_White,
-                          ),
+                  ),
+                  const SizedBox(height: 12),
+                  const ButtonIconText(
+                    icon: Icons.person_add_alt_rounded,
+                    text: 'Manage Staff',
+                    nextPage: ManageStaff(),
+                  ),
+                  const SizedBox(height: 24),
+                  const ButtonIconText(
+                    icon: Icons.info_rounded,
+                    text: 'About StandBy',
+                    nextPage: AboutStandby(),
+                  ),
+                  const SizedBox(height: 24),
+                  const ButtonIconText(
+                    icon: Icons.groups_rounded,
+                    text: 'About Us',
+                    nextPage: AboutUs(),
+                  ),
+                  const Spacer(),
+                  Container(
+                    height: 48,
+                    width: double.infinity,
+                    decoration: kEmbossDecorationGrad,
+                    child: TextButton(
+                      onPressed: _signOut,
+                      child: Center(
+                        child: Text(
+                          'keluar',
+                          style: kButtonTitle_White,
                         ),
                       ),
                     ),
-                  ],
-                ),
-        ),
+                  ),
+                ],
+              ),
       ),
     );
   }
