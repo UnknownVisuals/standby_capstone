@@ -81,13 +81,15 @@ class _ManageStaffState extends State<ManageStaff> {
               stream: staffStream,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(kPrimary),
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(kPrimary),
+                    ),
                   );
                 } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
+                  return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Text('No staff data available.');
+                  return const Center(child: Text('No staffs data available.'));
                 }
 
                 final staffs = snapshot.data as List<Map<String, dynamic>>;
