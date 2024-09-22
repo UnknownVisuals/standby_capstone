@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 const kWhite = Color(0xFFEEEEEE);
 const kGray = Color(0xFFDDDDDD);
-const kSecondary = Color(0xFFD77374);
 const kPrimary = Color(0xFFE3383A);
 const kPrimaryGrad = Color(0xFFD3321D);
 const kDarkGray = Color(0xFF444444);
@@ -80,6 +79,15 @@ final TextStyle kAppbarTitle = GoogleFonts.poppins(
   color: kBlack,
   fontSize: 16,
   fontWeight: FontWeight.bold,
+);
+
+final TextStyle kForgotPassword = GoogleFonts.poppins(
+  color: kPrimary,
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.underline,
+  decorationColor: kPrimary,
+  decorationThickness: 2,
 );
 
 final TextStyle kButtonTitle_White = GoogleFonts.poppins(

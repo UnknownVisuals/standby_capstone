@@ -13,6 +13,7 @@ class DeepMenuAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: kGray,
+      surfaceTintColor: kGray,
       leading: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Image.asset(

@@ -61,7 +61,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 child: const Center(
                   child: ButtonText(
-                    text: 'Kembali',
+                    text: 'Back',
                     nextPage: LoginPage(),
                     isPush: false,
                   ),

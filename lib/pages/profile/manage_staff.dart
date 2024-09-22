@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/components/auth_input_field.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
+import 'package:standby_capstone/pages/profile/add_staff.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -15,53 +15,62 @@ class ManageStaff extends StatefulWidget {
 }
 
 class _ManageStaffState extends State<ManageStaff> {
-  final fullNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
-  bool isAdmin = false;
-
   final staffStream = supabase.from('profiles').stream(primaryKey: ['id']);
+  final User? user = supabase.auth.currentUser;
+  Map<String, dynamic>? userProfiles;
 
-  Future<void> signUp() async {
+  Future<void> _fetchUserProfiles() async {
+    final response = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', user?.id as Object)
+        .single();
+    setState(() {
+      userProfiles = response;
+    });
+  }
+
+  bool _isAdmin = false;
+
+  Future<void> _getProfile() async {
     try {
-      if (passwordController.text != confirmPasswordController.text) {
-        showTopSnackBar(
-          Overlay.of(context),
-          const CustomSnackBar.error(message: "Passwords do not match!"),
-        );
-        return;
-      }
-
-      final AuthResponse authResponse = await supabase.auth.signUp(
-        password: passwordController.text,
-        email: emailController.text,
-        data: {
-          'full_name': fullNameController.text,
-          'is_admin': isAdmin,
-        },
-      );
-
+      final userId = supabase.auth.currentSession?.user.id;
+      if (userId == null) return;
+      final data =
+          await supabase.from('profiles').select().eq('id', userId).single();
       if (!mounted) return;
-
-      showTopSnackBar(
-        Overlay.of(context),
-        CustomSnackBar.success(
-            message:
-                "Account ${authResponse.user?.email} succesfully created!"),
-      );
-    } on AuthException catch (e) {
+      setState(() {
+        _isAdmin = data['is_admin'] ?? false;
+      });
+    } on PostgrestException catch (e) {
       showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.error(message: e.message.toString()),
+      );
+    } catch (e) {
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.error(message: 'Unexpected error occurred'),
       );
     }
   }
 
   @override
+  void initState() {
+    super.initState();
+    _fetchUserProfiles();
+    _getProfile();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGray,
       appBar: const DeepMenuAppbar(title: 'Manage Staff'),
       body: Container(
         color: kGray,
@@ -72,7 +81,9 @@ class _ManageStaffState extends State<ManageStaff> {
               stream: staffStream,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(kPrimary),
+                  );
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -86,11 +97,21 @@ class _ManageStaffState extends State<ManageStaff> {
                     itemCount: staffs.length,
                     itemBuilder: (context, index) {
                       final staff = staffs[index];
+                      final avatarUrl = staff['avatar_url'] ?? '';
+
                       return Container(
                         decoration: kEmbossDecoration,
                         margin: const EdgeInsets.only(bottom: 24),
-                        padding: const EdgeInsets.only(left: 12),
                         child: ListTile(
+                          leading: CircleAvatar(
+                            maxRadius: 32,
+                            foregroundImage: avatarUrl.isNotEmpty
+                                ? NetworkImage(avatarUrl)
+                                : const AssetImage(
+                                        'assets/images/illustration_forgotpass.png')
+                                    as ImageProvider,
+                            backgroundColor: kPrimary,
+                          ),
                           title: Text(
                             staff['full_name'] ?? 'Full name not found',
                             style: kTextHeading_Red,
@@ -115,83 +136,27 @@ class _ManageStaffState extends State<ManageStaff> {
                 );
               },
             ),
-            AuthInputField(
-              hintText: 'Full Name',
-              controller: fullNameController,
-              icon: Icons.person_rounded,
-              obscureText: false,
-            ),
-            const SizedBox(height: 24),
-            AuthInputField(
-              hintText: 'Email',
-              controller: emailController,
-              icon: Icons.mail_rounded,
-              obscureText: false,
-            ),
-            const SizedBox(height: 24),
-            AuthInputField(
-              hintText: 'Password',
-              controller: passwordController,
-              icon: Icons.lock_rounded,
-              obscureText: true,
-            ),
-            const SizedBox(height: 24),
-            AuthInputField(
-              hintText: 'Confirm Password',
-              controller: confirmPasswordController,
-              icon: Icons.lock_rounded,
-              obscureText: true,
-            ),
-            const SizedBox(height: 24),
-            Text('Account Role:', style: kTextHeading_Red),
-            Row(
-              children: [
-                Expanded(
-                  child: RadioListTile<bool>(
-                    title: Text('Staff', style: kTextHeading_Black),
-                    activeColor: kPrimary,
-                    value: false,
-                    groupValue: isAdmin,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        isAdmin = value ?? false;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: RadioListTile<bool>(
-                    title: Text('Admin', style: kTextHeading_Black),
-                    activeColor: kPrimary,
-                    value: true,
-                    groupValue: isAdmin,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        isAdmin = value ?? false;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 36),
-            Container(
-              height: 48,
-              width: double.infinity,
-              decoration: kEmbossDecorationGrad,
-              child: TextButton(
-                onPressed: signUp,
-                child: Center(
-                  child: Text(
-                    'add staff',
-                    style: kButtonTitle_White,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
+      floatingActionButton: _isAdmin
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddStaff(),
+                  ),
+                );
+              },
+              backgroundColor: kPrimary,
+              shape: const CircleBorder(),
+              child: const Icon(
+                Icons.add_rounded,
+                color: kWhite,
+              ),
+            )
+          : null,
     );
   }
 }
