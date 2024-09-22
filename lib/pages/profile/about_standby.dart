@@ -14,10 +14,24 @@ class _AboutStandbyState extends State<AboutStandby> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DeepMenuAppbar(title: 'About StandBy'),
-      body: Container(
-        color: kGray,
-        child: const Center(
-          child: Text('About StandBy'),
+      backgroundColor: kGray,
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(child: Image.asset('assets/logo/logo.png', height: 96)),
+            const SizedBox(height: 36),
+            Text(
+              'StandBy adalah sebuah sistem untuk mempermudah proses standardisasi inkubator bayi. Aplikasi mobile ini merupakan salah satu bagian dari sistem StandBy.',
+              style: kTextNormal_Black,
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Developed by REY\n© 2024 StandBy Incubator',
+              style: kTextHeading_Red,
+            ),
+          ],
         ),
       ),
     );
