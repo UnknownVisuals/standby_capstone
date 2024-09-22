@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="assets/logo/logo_horizontal.png" alt="Neural Network" width="360" align="center">
+    <img src="assets/logo/logo.png" alt="Logo StandBy" width="360" align="center">
 </div>
 
 ## 🏃 - How to run the app
