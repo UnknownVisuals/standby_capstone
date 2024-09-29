@@ -37,11 +37,13 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   firebase_core: ^3.3.0
   firebase_database: ^11.0.4
+  fl_chart: ^0.69.0
   flutter_dotenv: ^5.1.0
   flutter_inset_box_shadow: ^1.0.8
   flutter_native_splash: ^2.4.1
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
+  intl: ^0.19.0
   lorem_ipsum: ^0.0.3
   supabase_flutter: ^2.0.0
   top_snackbar_flutter: ^3.1.0

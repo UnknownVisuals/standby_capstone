@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/components/card_info.dart';
 import 'package:standby_capstone/main.dart';
+import 'package:standby_capstone/pages/dashboard/sensors_data.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -37,6 +39,11 @@ class _DashboardPageState extends State<DashboardPage> {
 
               final latestSensorData = snapshot.data?.last;
 
+              final formattedDate = (latestSensorData?['created_at'] != null)
+                  ? DateFormat.yMMMMEEEEd().add_jms().format(
+                      DateTime.parse(latestSensorData!['created_at']).toLocal())
+                  : 'Invalid timestamp';
+
               final double currentIncubatorTemp =
                   (latestSensorData?['dht22_temp'] ?? 0.0).toDouble();
               final double currentIncubatorHumi =
@@ -48,6 +55,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
               return Column(
                 children: [
+                  Text('Date retrieved:', style: kTextHeading_Black),
+                  Text(formattedDate, style: kTextHeading_Red),
+                  const SizedBox(height: 24),
                   InfoCard(
                     icon: Icons.device_thermostat,
                     title: '$currentIncubatorTemp°C',
@@ -71,10 +81,27 @@ class _DashboardPageState extends State<DashboardPage> {
                     title: currentFanStatus,
                     subtitle: 'Kipas\nPendingin',
                   ),
+                  const SizedBox(height: 64),
                 ],
               );
             },
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SensorsData(),
+            ),
+          );
+        },
+        backgroundColor: kPrimary,
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.ssid_chart_rounded,
+          color: kWhite,
         ),
       ),
     );

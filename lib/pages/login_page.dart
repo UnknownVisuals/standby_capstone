@@ -69,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
         if (_redirecting) return;
         final session = data.session;
         if (session != null) {
+          if (!mounted) return;
           _redirecting = true;
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const MainNavigation()),
@@ -76,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       onError: (error) {
+        if (!mounted) return;
         if (error is AuthException) {
           showTopSnackBar(
             Overlay.of(context),

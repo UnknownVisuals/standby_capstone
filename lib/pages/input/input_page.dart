@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/components/input_text.dart';
 import 'package:standby_capstone/constants.dart';
 
 class InputPage extends StatefulWidget {
@@ -10,7 +9,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  final List<bool> _checkboxValues = List.generate(20, (index) => false);
+  bool _isRisk = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,55 +23,66 @@ class _InputPageState extends State<InputPage> {
             child: DataTable(
               columns: [
                 DataColumn(
-                  label: Text('Klausal', style: kTextHeading_Red),
+                  label: Text('Klausul', style: kTextHeading_Red),
                 ),
                 DataColumn(
-                  label: Text('Judul Klausal', style: kTextHeading_Red),
+                  label: Text('Judul Klausul', style: kTextHeading_Red),
                 ),
                 DataColumn(
-                  label: Text('Dok Ref', style: kTextHeading_Red),
+                  label: Text('Dok Ref FMR (Dok No./hal)',
+                      style: kTextHeading_Red),
                 ),
                 DataColumn(
-                  label: Text('Ada/tidak', style: kTextHeading_Red),
+                  label: Text('Ada/tidak ada dalam file manajemen risiko',
+                      style: kTextHeading_Red),
                 ),
                 DataColumn(
                   label: Text('Keputusan', style: kTextHeading_Red),
                 ),
               ],
-              rows: List.generate(
-                20,
-                (index) {
-                  return DataRow(
-                    cells: [
-                      DataCell(
-                        Text('${index + 1000}', style: kTextNormal_Black),
+              rows: [
+                DataRow(
+                  cells: [
+                    const DataCell(Text('3.1')),
+                    const DataCell(Text('Proses manajemen risiko')),
+                    DataCell(TextFormField()),
+                    DataCell(
+                      Row(
+                        children: [
+                          Expanded(
+                            child: RadioListTile<bool>(
+                              title: Text('Ada', style: kTextHeading_Black),
+                              activeColor: kPrimary,
+                              value: true,
+                              groupValue: _isRisk,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _isRisk = value ?? false;
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: RadioListTile<bool>(
+                              title:
+                                  Text('Tidak ada', style: kTextHeading_Black),
+                              activeColor: kPrimary,
+                              value: false,
+                              groupValue: _isRisk,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _isRisk = value ?? false;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      DataCell(
-                        Text('Judul Klausal ${index + 1}',
-                            style: kTextNormal_Black),
-                      ),
-                      const DataCell(
-                        InputText(hintText: 'referensi'),
-                      ),
-                      DataCell(Checkbox(
-                        value: _checkboxValues[index],
-                        activeColor: kPrimary,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _checkboxValues[index] = newValue!;
-                          });
-                        },
-                      )),
-                      DataCell(
-                        Text(
-                          'LULUS ${index + 1}',
-                          style: kTextNormal_Black,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                    ),
+                    DataCell(TextFormField()),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
