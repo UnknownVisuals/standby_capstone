@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/pages/panduan/chat_bot.dart';
 import 'package:standby_capstone/pages/panduan/sni_iec_60601.dart';
+import 'package:standby_capstone/constants.dart';
 
 class PanduanPage extends StatefulWidget {
   const PanduanPage({super.key});
@@ -23,8 +24,9 @@ class _PanduanPageState extends State<PanduanPage> {
                 margin: const EdgeInsets.only(bottom: 24),
                 decoration: kEmbossDecoration,
                 child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(dividerColor: Colors.transparent),
+                  data: Theme.of(context).copyWith(
+                    dividerColor: Colors.transparent,
+                  ),
                   child: ExpansionTile(
                     iconColor: kPrimary,
                     collapsedIconColor: kPrimary,
@@ -38,14 +40,14 @@ class _PanduanPageState extends State<PanduanPage> {
                         iconColor: kPrimary,
                         collapsedIconColor: kPrimary,
                         title: Text(
-                          subSection['subTitle']!,
+                          subSection['subTitle'] as String,
                           style: kTextHeading_Black,
                         ),
                         children: [
                           ListTile(
                             dense: true,
                             title: Text(
-                              subSection['content']!,
+                              subSection['content'] as String,
                               style: kTextNormal_Black,
                             ),
                           ),
@@ -57,6 +59,20 @@ class _PanduanPageState extends State<PanduanPage> {
               );
             }).toList(),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ChatBot()),
+          );
+        },
+        backgroundColor: kPrimary,
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.chat_rounded,
+          color: kWhite,
         ),
       ),
     );
