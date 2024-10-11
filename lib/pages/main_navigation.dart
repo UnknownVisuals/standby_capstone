@@ -4,7 +4,7 @@ import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
 import 'package:standby_capstone/pages/input/input_page.dart';
 import 'package:standby_capstone/pages/notification_page.dart';
-import 'package:standby_capstone/pages/panduan/panduan_page.dart';
+import 'package:standby_capstone/pages/panduan/chat_bot.dart';
 import 'package:standby_capstone/pages/profile/profile_page.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -19,13 +19,13 @@ class MainNavigationState extends State<MainNavigation> {
   final List<String> _appBarTitles = const [
     'Dashboard',
     'Input',
-    'Panduan',
+    'Chat Bot',
     'Profile',
   ];
   final List<Widget> _screenList = const [
     DashboardPage(),
     InputPage(),
-    PanduanPage(),
+    ChatBot(),
     ProfilePage(),
   ];
 

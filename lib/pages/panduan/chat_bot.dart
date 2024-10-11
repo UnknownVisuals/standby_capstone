@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ChatBot extends StatefulWidget {
@@ -24,7 +23,7 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DeepMenuAppbar(title: 'StandBy Chat Bot'),
+      // appBar: const DeepMenuAppbar(title: 'StandBy Chat Bot'),
       body: WebViewWidget(controller: _controller),
     );
   }

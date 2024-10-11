@@ -52,6 +52,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   (latestSensorData?['ds18b20_temp'] ?? 0.0).toDouble();
               final String currentFanStatus =
                   latestSensorData?['fan_status'] ?? 'Unknown';
+              final double currentFlowRate =
+                  (latestSensorData?['flow_rate'] ?? 0.0).toDouble();
+              final String currentSoundDetected =
+                  latestSensorData?['sound_detected'] ?? 'Unknown';
 
               return Column(
                 children: [
@@ -80,6 +84,18 @@ class _DashboardPageState extends State<DashboardPage> {
                     icon: Icons.heat_pump,
                     title: currentFanStatus,
                     subtitle: 'Kipas\nPendingin',
+                  ),
+                  const SizedBox(height: 24),
+                  InfoCard(
+                    icon: Icons.air_rounded,
+                    title: '$currentFlowRate',
+                    subtitle: 'Flow\nRate',
+                  ),
+                  const SizedBox(height: 24),
+                  InfoCard(
+                    icon: Icons.volume_up_rounded,
+                    title: currentSoundDetected,
+                    subtitle: 'Sound\nDetection',
                   ),
                   const SizedBox(height: 64),
                 ],

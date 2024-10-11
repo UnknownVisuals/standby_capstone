@@ -77,6 +77,13 @@ class _SensorsDataState extends State<SensorsData> {
                         DataColumn(
                           label: Text('Fan\nStatus', style: kTextHeading_Red),
                         ),
+                        DataColumn(
+                          label: Text('Flow\nRate', style: kTextHeading_Red),
+                        ),
+                        DataColumn(
+                          label:
+                              Text('Sound\nDetected', style: kTextHeading_Red),
+                        ),
                       ],
                       rows: sensorsData.map((sensor) {
                         final timestamp = sensor['created_at'] ?? 'N/A';
@@ -84,6 +91,8 @@ class _SensorsDataState extends State<SensorsData> {
                         final dht22Humi = sensor['dht22_humi'] ?? 'N/A';
                         final ds18b20Temp = sensor['ds18b20_temp'] ?? 'N/A';
                         final fanStatus = sensor['fan_status'] ?? 'N/A';
+                        final flowRate = sensor['flow_rate'] ?? 'N/A';
+                        final soundDetected = sensor['sound_detected'] ?? 'N/A';
 
                         return DataRow(cells: [
                           DataCell(
@@ -92,6 +101,8 @@ class _SensorsDataState extends State<SensorsData> {
                           DataCell(Text(dht22Humi.toString())),
                           DataCell(Text(ds18b20Temp.toString())),
                           DataCell(Text(fanStatus.toString())),
+                          DataCell(Text(flowRate.toString())),
+                          DataCell(Text(soundDetected.toString())),
                         ]);
                       }).toList(),
                     ),
