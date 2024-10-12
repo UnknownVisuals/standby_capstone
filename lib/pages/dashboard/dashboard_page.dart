@@ -44,17 +44,23 @@ class _DashboardPageState extends State<DashboardPage> {
                       DateTime.parse(latestSensorData!['created_at']).toLocal())
                   : 'Invalid timestamp';
 
-              final double currentIncubatorTemp =
+              final double currentDHT22Temp =
                   (latestSensorData?['dht22_temp'] ?? 0.0).toDouble();
-              final double currentIncubatorHumi =
+              final double currentDHT22Humi =
                   (latestSensorData?['dht22_humi'] ?? 0.0).toDouble();
-              final double currentSkinTemp =
-                  (latestSensorData?['ds18b20_temp'] ?? 0.0).toDouble();
-              final String currentFanStatus =
-                  latestSensorData?['fan_status'] ?? 'Unknown';
+              final double currentDS18B20Temp1 =
+                  (latestSensorData?['ds18b20_temp1'] ?? 0.0).toDouble();
+              final double currentDS18B20Temp2 =
+                  (latestSensorData?['ds18b20_temp2'] ?? 0.0).toDouble();
+              final double currentDS18B20Temp3 =
+                  (latestSensorData?['ds18b20_temp3'] ?? 0.0).toDouble();
+              final double currentDS18B20Temp4 =
+                  (latestSensorData?['ds18b20_temp4'] ?? 0.0).toDouble();
               final double currentFlowRate =
                   (latestSensorData?['flow_rate'] ?? 0.0).toDouble();
-              final String currentSoundDetected =
+              final String currentFanStatus =
+                  latestSensorData?['fan_status'] ?? 'Unknown';
+              final String currentSoundStatus =
                   latestSensorData?['sound_detected'] ?? 'Unknown';
 
               return Column(
@@ -63,41 +69,59 @@ class _DashboardPageState extends State<DashboardPage> {
                   Text(formattedDate, style: kTextHeading_Red),
                   const SizedBox(height: 24),
                   InfoCard(
-                    icon: Icons.device_thermostat,
-                    title: '$currentIncubatorTemp°C',
-                    subtitle: 'Suhu\nInkubator Bayi',
+                    icon: Icons.thermostat_rounded,
+                    title: '$currentDHT22Temp°C',
+                    subtitle: 'DHT22\nTemperature',
                   ),
                   const SizedBox(height: 24),
                   InfoCard(
-                    icon: Icons.water_drop,
-                    title: '$currentIncubatorHumi%',
-                    subtitle: 'Kelembaban\nInkubator Bayi',
+                    icon: Icons.water_drop_rounded,
+                    title: '$currentDHT22Humi%',
+                    subtitle: 'DHT22\nHumidity',
                   ),
                   const SizedBox(height: 24),
                   InfoCard(
-                    icon: Icons.child_care,
-                    title: '$currentSkinTemp°C',
-                    subtitle: 'Suhu\nKulit Bayi',
+                    icon: Icons.thermostat_rounded,
+                    title: '$currentDS18B20Temp1°C',
+                    subtitle: 'DS18B20 - 1\nTemperature',
                   ),
                   const SizedBox(height: 24),
                   InfoCard(
-                    icon: Icons.heat_pump,
+                    icon: Icons.thermostat_rounded,
+                    title: '$currentDS18B20Temp2°C',
+                    subtitle: 'DS18B20 - 2\nTemperature',
+                  ),
+                  const SizedBox(height: 24),
+                  InfoCard(
+                    icon: Icons.thermostat_rounded,
+                    title: '$currentDS18B20Temp3°C',
+                    subtitle: 'DS18B20 - 3\nTemperature',
+                  ),
+                  const SizedBox(height: 24),
+                  InfoCard(
+                    icon: Icons.thermostat_rounded,
+                    title: '$currentDS18B20Temp4°C',
+                    subtitle: 'DS18B20 - 4\nTemperature',
+                  ),
+                  const SizedBox(height: 24),
+                  InfoCard(
+                    icon: Icons.heat_pump_rounded,
                     title: currentFanStatus,
-                    subtitle: 'Kipas\nPendingin',
+                    subtitle: 'Fan Status',
                   ),
                   const SizedBox(height: 24),
                   InfoCard(
                     icon: Icons.air_rounded,
                     title: '$currentFlowRate',
-                    subtitle: 'Flow\nRate',
+                    subtitle: 'Flow Rate',
                   ),
                   const SizedBox(height: 24),
                   InfoCard(
                     icon: Icons.volume_up_rounded,
-                    title: currentSoundDetected,
-                    subtitle: 'Sound\nDetection',
+                    title: currentSoundStatus,
+                    subtitle: 'Sound Status',
                   ),
-                  const SizedBox(height: 64),
+                  const SizedBox(height: 24 * 3),
                 ],
               );
             },
@@ -116,7 +140,7 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: kPrimary,
         shape: const CircleBorder(),
         child: const Icon(
-          Icons.ssid_chart_rounded,
+          Icons.timeline_rounded,
           color: kWhite,
         ),
       ),

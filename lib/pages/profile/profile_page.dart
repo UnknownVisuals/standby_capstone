@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onPressed: _signOut,
                       child: Center(
                         child: Text(
-                          'keluar',
+                          'Sign out',
                           style: kButtonTitle_White,
                         ),
                       ),

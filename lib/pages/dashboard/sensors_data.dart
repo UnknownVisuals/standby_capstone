@@ -25,7 +25,7 @@ class _SensorsDataState extends State<SensorsData> {
   String _formatTimestamp(String timestamptz) {
     try {
       DateTime parsedDate = DateTime.parse(timestamptz).toLocal();
-      return DateFormat('yyyy-MM-dd - kk:mm a').format(parsedDate);
+      return DateFormat('yyyy-MM-dd - kk:mm:ss a').format(parsedDate);
     } catch (e) {
       return 'Invalid timestamp';
     }
@@ -56,6 +56,7 @@ class _SensorsDataState extends State<SensorsData> {
                     return const Center(
                         child: Text('No sensors data available.'));
                   }
+
                   final sensorsData = snapshot.data!;
 
                   return SingleChildScrollView(
@@ -72,7 +73,20 @@ class _SensorsDataState extends State<SensorsData> {
                           label: Text('DHT22\nHumi', style: kTextHeading_Red),
                         ),
                         DataColumn(
-                          label: Text('DS18B20\nTemp', style: kTextHeading_Red),
+                          label: Text('DS18B20\nTemp - 1',
+                              style: kTextHeading_Red),
+                        ),
+                        DataColumn(
+                          label: Text('DS18B20\nTemp - 2',
+                              style: kTextHeading_Red),
+                        ),
+                        DataColumn(
+                          label: Text('DS18B20\nTemp - 3',
+                              style: kTextHeading_Red),
+                        ),
+                        DataColumn(
+                          label: Text('DS18B20\nTemp - 4',
+                              style: kTextHeading_Red),
                         ),
                         DataColumn(
                           label: Text('Fan\nStatus', style: kTextHeading_Red),
@@ -81,15 +95,17 @@ class _SensorsDataState extends State<SensorsData> {
                           label: Text('Flow\nRate', style: kTextHeading_Red),
                         ),
                         DataColumn(
-                          label:
-                              Text('Sound\nDetected', style: kTextHeading_Red),
+                          label: Text('Sound\nStatus', style: kTextHeading_Red),
                         ),
                       ],
                       rows: sensorsData.map((sensor) {
                         final timestamp = sensor['created_at'] ?? 'N/A';
                         final dht22Temp = sensor['dht22_temp'] ?? 'N/A';
                         final dht22Humi = sensor['dht22_humi'] ?? 'N/A';
-                        final ds18b20Temp = sensor['ds18b20_temp'] ?? 'N/A';
+                        final ds18b20Temp1 = sensor['ds18b20_temp1'] ?? 'N/A';
+                        final ds18b20Temp2 = sensor['ds18b20_temp2'] ?? 'N/A';
+                        final ds18b20Temp3 = sensor['ds18b20_temp3'] ?? 'N/A';
+                        final ds18b20Temp4 = sensor['ds18b20_temp4'] ?? 'N/A';
                         final fanStatus = sensor['fan_status'] ?? 'N/A';
                         final flowRate = sensor['flow_rate'] ?? 'N/A';
                         final soundDetected = sensor['sound_detected'] ?? 'N/A';
@@ -99,7 +115,10 @@ class _SensorsDataState extends State<SensorsData> {
                               Text(_formatTimestamp(timestamp.toString()))),
                           DataCell(Text(dht22Temp.toString())),
                           DataCell(Text(dht22Humi.toString())),
-                          DataCell(Text(ds18b20Temp.toString())),
+                          DataCell(Text(ds18b20Temp1.toString())),
+                          DataCell(Text(ds18b20Temp2.toString())),
+                          DataCell(Text(ds18b20Temp3.toString())),
+                          DataCell(Text(ds18b20Temp4.toString())),
                           DataCell(Text(fanStatus.toString())),
                           DataCell(Text(flowRate.toString())),
                           DataCell(Text(soundDetected.toString())),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/pages/panduan/chat_bot.dart';
-import 'package:standby_capstone/pages/panduan/sni_iec_60601.dart';
+import 'package:standby_capstone/pages/chatbot/chat_bot.dart';
+import 'package:standby_capstone/pages/chatbot/sni_iec_60601.dart';
 import 'package:standby_capstone/constants.dart';
 
 class PanduanPage extends StatefulWidget {
@@ -65,7 +65,7 @@ class _PanduanPageState extends State<PanduanPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ChatBot()),
+            MaterialPageRoute(builder: (context) => const ChatBotPage()),
           );
         },
         backgroundColor: kPrimary,

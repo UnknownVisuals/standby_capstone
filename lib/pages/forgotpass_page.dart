@@ -28,11 +28,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Lupa password?',
+                        'Forgot your password?',
                         style: kAuthTitleLarge,
                       ),
                       Text(
-                        'Silahkan hubungi Admin untuk mengganti password',
+                        'Please contact one of the Admin to change your password',
                         style: kTextNormal_White,
                       ),
                       const SizedBox(height: 16),

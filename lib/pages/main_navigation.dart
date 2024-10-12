@@ -2,9 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
-import 'package:standby_capstone/pages/input/input_page.dart';
+import 'package:standby_capstone/pages/documents/documents_page.dart';
 import 'package:standby_capstone/pages/notification_page.dart';
-import 'package:standby_capstone/pages/panduan/chat_bot.dart';
+import 'package:standby_capstone/pages/chatbot/chat_bot.dart';
 import 'package:standby_capstone/pages/profile/profile_page.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -18,14 +18,14 @@ class MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
   final List<String> _appBarTitles = const [
     'Dashboard',
-    'Input',
+    'Documents',
     'Chat Bot',
     'Profile',
   ];
   final List<Widget> _screenList = const [
     DashboardPage(),
-    InputPage(),
-    ChatBot(),
+    DocumentsPage(),
+    ChatBotPage(),
     ProfilePage(),
   ];
 
@@ -53,7 +53,7 @@ class MainNavigationState extends State<MainNavigation> {
                 ),
               );
             },
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications, color: kDarkGray),
           )
         ],
         centerTitle: true,
@@ -78,7 +78,7 @@ class MainNavigationState extends State<MainNavigation> {
             color: _currentIndex == 1 ? kPrimary : kDarkGray,
           ),
           Icon(
-            Icons.description,
+            Icons.chat_rounded,
             size: 32,
             color: _currentIndex == 2 ? kPrimary : kDarkGray,
           ),

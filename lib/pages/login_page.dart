@@ -119,11 +119,11 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Selamat datang!',
+                          'Welcome!',
                           style: kAuthTitleLarge,
                         ),
                         Text(
-                          'Silahkan login untuk melanjutkan',
+                          'Please login to continue',
                           style: kTextNormal_White,
                         ),
                         const SizedBox(height: 16),
