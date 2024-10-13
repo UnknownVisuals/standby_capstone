@@ -16,8 +16,8 @@ class PdfReport {
     final headers = [
       'Klausul',
       'Judul Klausul',
-      'Dok Ref FMR',
-      'Ada/tidak ada',
+      'Dok Ref FMR (Dok No./ hal)',
+      'Ada/tidak ada dalam file manajemen resiko',
       'Keputusan'
     ];
 
@@ -53,7 +53,34 @@ class PdfReport {
             style: pw.TextStyle(font: fontBold, fontSize: 12),
           ),
           pw.SizedBox(height: 4),
-          pw.TableHelper.fromTextArray(headers: headers, data: data),
+          pw.TableHelper.fromTextArray(
+            headers: headers,
+            data: data,
+            columnWidths: {
+              0: const pw.FixedColumnWidth(10),
+              1: const pw.FixedColumnWidth(45),
+              2: const pw.FixedColumnWidth(15),
+              3: const pw.FixedColumnWidth(15),
+              4: const pw.FixedColumnWidth(15),
+            },
+            headerStyle: pw.TextStyle(
+              font: fontBold,
+              fontSize: 12,
+            ),
+            headerDecoration: const pw.BoxDecoration(
+              color: PdfColors.grey300,
+            ),
+          ),
+          pw.SizedBox(height: 4),
+          pw.Text(
+            'Informasi tambahan:',
+            style: pw.TextStyle(font: fontBold, fontSize: 10),
+          ),
+          pw.Text(
+            'Dokumen ref harus berkaitan dengan kebijakan/prosedur dokumen dan dokumen yang berisi output perangkat tertentu.',
+            style: pw.TextStyle(font: font, fontSize: 10),
+          ),
+          pw.SizedBox(height: 16),
         ],
       ),
     );

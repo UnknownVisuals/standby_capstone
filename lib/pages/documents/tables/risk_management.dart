@@ -4,8 +4,7 @@ import 'package:standby_capstone/pages/documents/models/risk_management.dart';
 
 class RiskManagementTable extends StatelessWidget {
   final List<RiskManagement> clauses;
-  final ValueChanged<int>
-      onClauseChange; // Update to use int index for clause change
+  final ValueChanged<int> onClauseChange;
 
   const RiskManagementTable({
     super.key,
@@ -22,7 +21,7 @@ class RiskManagementTable extends StatelessWidget {
           DataColumn(label: Text('Klausul', style: kTextHeading_Black)),
           DataColumn(label: Text('Judul Klausul', style: kTextHeading_Black)),
           DataColumn(
-              label: Text('Dok Ref FMR\n (Dok No./ hal)',
+              label: Text('Dok Ref FMR (Dok No./ hal)',
                   style: kTextHeading_Black)),
           DataColumn(
               label: Text('Ada/tidak ada dalam file manajemen resiko',
@@ -38,8 +37,7 @@ class RiskManagementTable extends StatelessWidget {
             refController: clause.refController,
             decisionController: clause.decisionController,
             isRisk: clause.isRisk,
-            onRiskChanged: (bool value) =>
-                onClauseChange(index), // Pass the index for state update
+            onRiskChanged: (bool value) => onClauseChange(index),
           );
         }).toList(),
       ),
@@ -52,8 +50,7 @@ class RiskManagementTable extends StatelessWidget {
     required TextEditingController refController,
     required TextEditingController decisionController,
     required bool isRisk,
-    required ValueChanged<bool>
-        onRiskChanged, // Updated ValueChanged<bool> to bool for risk state
+    required ValueChanged<bool> onRiskChanged,
   }) {
     return DataRow(
       cells: [
@@ -76,7 +73,7 @@ class RiskManagementTable extends StatelessWidget {
               ),
               Expanded(
                 child: RadioListTile<bool>(
-                  title: const Text('Tidak Ada'),
+                  title: const Text('Tidak ada'),
                   activeColor: kPrimary,
                   value: false,
                   groupValue: isRisk,

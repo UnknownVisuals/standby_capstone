@@ -141,7 +141,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 clause: clause.clause,
                 clauseTitle: clause.title,
                 docsReference: clause.refController.text,
-                riskManagement: clause.isRisk ? 'Ada' : 'Tidak Ada',
+                riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
                 result: clause.decisionController.text,
               );
             }).toList(),
