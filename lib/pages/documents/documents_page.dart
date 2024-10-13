@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/pages/documents/models/report.dart';
+import 'package:standby_capstone/pages/documents/models/risk_management.dart';
+import 'package:standby_capstone/pages/documents/pdf_report.dart';
 import 'package:standby_capstone/pages/documents/pdf_utils.dart';
-import 'package:standby_capstone/pages/documents/simple_pdf_api.dart';
-
-class DocumentClause {
-  final String clause;
-  final String title;
-  final TextEditingController refController = TextEditingController();
-  final TextEditingController decisionController = TextEditingController();
-  bool isRisk;
-
-  DocumentClause({
-    required this.clause,
-    required this.title,
-    this.isRisk = false,
-  });
-}
+import 'package:standby_capstone/pages/documents/tables/risk_management.dart';
 
 class DocumentsPage extends StatefulWidget {
   const DocumentsPage({super.key});
@@ -25,83 +14,141 @@ class DocumentsPage extends StatefulWidget {
 }
 
 class _DocumentsPageState extends State<DocumentsPage> {
-  final List<DocumentClause> _clauses = [
-    DocumentClause(clause: '3.1', title: 'Proses manajemen risiko'),
-    DocumentClause(clause: '3.2', title: 'Tanggung jawab manajemen'),
-    DocumentClause(clause: '3.3', title: 'Kualifikasi Personil'),
-    DocumentClause(clause: '3.4', title: 'Rencana Manajemen Resiko'),
-    DocumentClause(clause: '3.5', title: 'Berkas Manajemen Resiko'),
-    DocumentClause(clause: '4.1', title: 'Proses Analisa Resiko'),
-    DocumentClause(
-        clause: '4.2',
-        title:
-            'Maksud penggunaan dan identifikasi karakteristik terkait dengan keamanan alat kesehatan'),
-    DocumentClause(clause: '4.3', title: 'Identifikasi bahaya'),
-    DocumentClause(
-        clause: '4.4', title: 'Estimasi resiko untuk setiap yang membahayakan'),
-    DocumentClause(clause: '5', title: 'Evaluasi resiko'),
-    DocumentClause(clause: '6', title: 'Kendali resiko'),
-    DocumentClause(
-        clause: '7', title: 'Evaluasi keberterimaan seluruh residu resiko'),
-    DocumentClause(clause: '8', title: 'Laporan manajemen resiko'),
-  ];
+  final _labNumberController = TextEditingController();
+  final _productNameController = TextEditingController();
+  final _modelController = TextEditingController();
+  final _serialNumberController = TextEditingController();
+
+  final List<RiskManagement> _clauses = RiskManagement.defaultClauses();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _labNumberController.dispose();
+    _productNameController.dispose();
+    _modelController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kGray,
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SingleChildScrollView(
-            child: DataTable(
-              border: TableBorder.all(color: kDarkGray),
-              columns: [
-                DataColumn(
-                  label: Text('Klausul', style: kTextHeading_Red),
+          child: Column(
+            children: [
+              Text('Enter Incubator Details', style: kTextHeading_Red),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: Text('No. Lab'),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(controller: _labNumberController),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: Text('Nama Produk'),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(controller: _productNameController),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: Text('Model'),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(controller: _modelController),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: Text('No. Serial'),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(controller: _serialNumberController),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 48),
+              Text(
+                  'TABEL. Hasil manajemen resiko. Persyaratan umum manajemen resiko.',
+                  style: kTextHeading_Red),
+              const SizedBox(height: 8),
+              RiskManagementTable(
+                clauses: _clauses,
+                onClauseChange: (int index) {
+                  setState(() {
+                    _clauses[index].isRisk = !_clauses[index].isRisk;
+                  });
+                },
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'Informasi tambahan:',
+                  style: kTextHeading_Black.copyWith(fontSize: 12),
                 ),
-                DataColumn(
-                  label: Text('Judul Klausul', style: kTextHeading_Red),
-                ),
-                DataColumn(
-                  label: Text('Dok Ref FMR (Dok No./hal)',
-                      style: kTextHeading_Red),
-                ),
-                DataColumn(
-                  label: Text('Ada/tidak ada dalam file manajemen risiko',
-                      style: kTextHeading_Red),
-                ),
-                DataColumn(
-                  label: Text('Keputusan', style: kTextHeading_Red),
-                ),
-              ],
-              rows: _clauses.map((clause) {
-                return customDataRow(
-                  clause: clause.clause,
-                  title: clause.title,
-                  refController: clause.refController,
-                  decisionController: clause.decisionController,
-                  isRisk: clause.isRisk,
-                  onRiskChanged: (bool value) {
-                    setState(() {
-                      clause.isRisk = value;
-                    });
-                  },
-                );
-              }).toList(),
-            ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                    'Dokumen ref harus berkaitan dengan kebijakan/prosedur dokumen dan dokumen yang berisi output perangkat tertentu.',
+                    style: kTextNormal_Black.copyWith(fontSize: 12)),
+              ),
+              const SizedBox(height: 48),
+              Text('TABEL. Kinerja penting.', style: kTextHeading_Red),
+              const SizedBox(height: 8),
+            ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final simpleTextPDF = await SimplePdfApi.generateSimpleTextPdf(
-            'Judul Dokumen PDF',
-            'Deskripsi blablablab ablablaba balbalb',
+          final report = Report(
+            incubatorDetail: IncubatorDetail(
+              labNumber: _labNumberController.text,
+              productName: _productNameController.text,
+              model: _modelController.text,
+              serialNumber: _serialNumberController.text,
+            ),
+            testingCondition: TestingCondition(
+              date: DateTime.now(),
+              temperature: 'temperature',
+              humidity: 'humidity',
+            ),
+            riskManagementItem: _clauses.map((clause) {
+              return RiskManagementItem(
+                clause: clause.clause,
+                clauseTitle: clause.title,
+                docsReference: clause.refController.text,
+                riskManagement: clause.isRisk ? 'Ada' : 'Tidak Ada',
+                result: clause.decisionController.text,
+              );
+            }).toList(),
           );
 
-          PdfUtils.openPdf(simpleTextPDF);
+          final finalReport = await PdfReport.generatePdfReport(report);
+          PdfUtils.openPdf(finalReport);
         },
         backgroundColor: kPrimary,
         shape: const CircleBorder(),
@@ -112,87 +159,4 @@ class _DocumentsPageState extends State<DocumentsPage> {
       ),
     );
   }
-}
-
-DataRow customDataRow({
-  required String clause,
-  required String title,
-  required TextEditingController refController,
-  required TextEditingController decisionController,
-  required bool isRisk,
-  required ValueChanged<bool> onRiskChanged,
-}) {
-  return DataRow(
-    cells: [
-      DataCell(Text(clause)),
-      DataCell(
-        IntrinsicHeight(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title),
-            ],
-          ),
-        ),
-      ),
-      DataCell(
-        IntrinsicHeight(
-          child: TextFormField(
-            controller: refController,
-            decoration: const InputDecoration(
-              hintText: 'Dok Ref FMR',
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-      ),
-      DataCell(
-        IntrinsicHeight(
-          child: Row(
-            children: [
-              Expanded(
-                child: RadioListTile<bool>(
-                  title: Tooltip(
-                    message: 'Ada di manajemen risiko',
-                    child: Text('Ada', style: kTextHeading_Black),
-                  ),
-                  activeColor: kPrimary,
-                  value: true,
-                  groupValue: isRisk,
-                  onChanged: (bool? value) {
-                    onRiskChanged(value ?? false);
-                  },
-                ),
-              ),
-              Expanded(
-                child: RadioListTile<bool>(
-                  title: Tooltip(
-                    message: 'Tidak ada di manajemen risiko',
-                    child: Text('Tidak ada', style: kTextHeading_Black),
-                  ),
-                  activeColor: kPrimary,
-                  value: false,
-                  groupValue: isRisk,
-                  onChanged: (bool? value) {
-                    onRiskChanged(value ?? false);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      DataCell(
-        IntrinsicHeight(
-          child: TextFormField(
-            controller: decisionController,
-            decoration: const InputDecoration(
-              hintText: 'Keputusan',
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
 }
