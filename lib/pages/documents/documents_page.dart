@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/pages/documents/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/simple_pdf_api.dart';
 
 class DocumentClause {
   final String clause;
@@ -54,6 +56,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
           scrollDirection: Axis.horizontal,
           child: SingleChildScrollView(
             child: DataTable(
+              border: TableBorder.all(color: kDarkGray),
               columns: [
                 DataColumn(
                   label: Text('Klausul', style: kTextHeading_Red),
@@ -91,6 +94,22 @@ class _DocumentsPageState extends State<DocumentsPage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final simpleTextPDF = await SimplePdfApi.generateSimpleTextPdf(
+            'Judul Dokumen PDF',
+            'Deskripsi blablablab ablablaba balbalb',
+          );
+
+          PdfUtils.openPdf(simpleTextPDF);
+        },
+        backgroundColor: kPrimary,
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.print_rounded,
+          color: kWhite,
+        ),
+      ),
     );
   }
 }
@@ -106,56 +125,71 @@ DataRow customDataRow({
   return DataRow(
     cells: [
       DataCell(Text(clause)),
-      DataCell(Text(title)),
       DataCell(
-        TextFormField(
-          controller: refController,
-          decoration: const InputDecoration(
-            hintText: 'Dok Ref FMR',
-            border: OutlineInputBorder(),
+        IntrinsicHeight(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title),
+            ],
           ),
         ),
       ),
       DataCell(
-        Row(
-          children: [
-            Expanded(
-              child: RadioListTile<bool>(
-                title: Tooltip(
-                  message: 'Ada di manajemen risiko',
-                  child: Text('Ada', style: kTextHeading_Black),
-                ),
-                activeColor: kPrimary,
-                value: true,
-                groupValue: isRisk,
-                onChanged: (bool? value) {
-                  onRiskChanged(value ?? false);
-                },
-              ),
+        IntrinsicHeight(
+          child: TextFormField(
+            controller: refController,
+            decoration: const InputDecoration(
+              hintText: 'Dok Ref FMR',
+              border: OutlineInputBorder(),
             ),
-            Expanded(
-              child: RadioListTile<bool>(
-                title: Tooltip(
-                  message: 'Tidak ada di manajemen risiko',
-                  child: Text('Tidak ada', style: kTextHeading_Black),
-                ),
-                activeColor: kPrimary,
-                value: false,
-                groupValue: isRisk,
-                onChanged: (bool? value) {
-                  onRiskChanged(value ?? false);
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
       DataCell(
-        TextFormField(
-          controller: decisionController,
-          decoration: const InputDecoration(
-            hintText: 'Keputusan',
-            border: OutlineInputBorder(),
+        IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                child: RadioListTile<bool>(
+                  title: Tooltip(
+                    message: 'Ada di manajemen risiko',
+                    child: Text('Ada', style: kTextHeading_Black),
+                  ),
+                  activeColor: kPrimary,
+                  value: true,
+                  groupValue: isRisk,
+                  onChanged: (bool? value) {
+                    onRiskChanged(value ?? false);
+                  },
+                ),
+              ),
+              Expanded(
+                child: RadioListTile<bool>(
+                  title: Tooltip(
+                    message: 'Tidak ada di manajemen risiko',
+                    child: Text('Tidak ada', style: kTextHeading_Black),
+                  ),
+                  activeColor: kPrimary,
+                  value: false,
+                  groupValue: isRisk,
+                  onChanged: (bool? value) {
+                    onRiskChanged(value ?? false);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      DataCell(
+        IntrinsicHeight(
+          child: TextFormField(
+            controller: decisionController,
+            decoration: const InputDecoration(
+              hintText: 'Keputusan',
+              border: OutlineInputBorder(),
+            ),
           ),
         ),
       ),
