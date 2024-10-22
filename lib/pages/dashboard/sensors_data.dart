@@ -13,7 +13,7 @@ class SensorsData extends StatefulWidget {
 
 class _SensorsDataState extends State<SensorsData> {
   Future<List<dynamic>> _fetchSensorsData() async {
-    final response = await supabase.from('esp32').select();
+    final response = await supabase.from('esp32_1').select();
     response.sort((a, b) {
       DateTime dateA = DateTime.parse(a['created_at']).toLocal();
       DateTime dateB = DateTime.parse(b['created_at']).toLocal();

@@ -4,7 +4,10 @@ import 'package:standby_capstone/pages/documents/models/report.dart';
 import 'package:standby_capstone/pages/documents/models/risk_management.dart';
 import 'package:standby_capstone/pages/documents/pdf_report.dart';
 import 'package:standby_capstone/pages/documents/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/tables/performance_matters.dart';
+import 'package:standby_capstone/pages/documents/tables/power_input.dart';
 import 'package:standby_capstone/pages/documents/tables/risk_management.dart';
+import 'package:standby_capstone/pages/documents/tables/test_table.dart';
 
 class DocumentsPage extends StatefulWidget {
   const DocumentsPage({super.key});
@@ -89,9 +92,12 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 ],
               ),
               const SizedBox(height: 48),
-              Text(
-                  'TABEL. Hasil manajemen resiko. Persyaratan umum manajemen resiko.',
-                  style: kTextHeading_Red),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                    '4.2.2. TABEL. Hasil manajemen resiko. Persyaratan umum manajemen resiko.',
+                    style: kTextHeading_Red),
+              ),
               const SizedBox(height: 8),
               RiskManagementTable(
                 clauses: _clauses,
@@ -116,8 +122,36 @@ class _DocumentsPageState extends State<DocumentsPage> {
                     style: kTextNormal_Black.copyWith(fontSize: 12)),
               ),
               const SizedBox(height: 48),
-              Text('TABEL. Kinerja penting.', style: kTextHeading_Red),
+              SizedBox(
+                width: double.infinity,
+                child: Text('4.3. TABEL. Kinerja penting.',
+                    style: kTextHeading_Red),
+              ),
               const SizedBox(height: 8),
+              const PerformanceMattersTable(),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'Informasi tambahan:',
+                  style: kTextHeading_Black.copyWith(fontSize: 12),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                    'Kinerja esensial adalah kinerja yang tidak ada atau penurunannya akan menghasilkan resiko yang tidak dapat diterima.',
+                    style: kTextNormal_Black.copyWith(fontSize: 12)),
+              ),
+              const SizedBox(height: 48),
+              SizedBox(
+                width: double.infinity,
+                child:
+                    Text('4.11. TABEL. Input daya.', style: kTextHeading_Red),
+              ),
+              const SizedBox(height: 8),
+              const PowerInputTable(),
+              const MergedTable(),
             ],
           ),
         ),

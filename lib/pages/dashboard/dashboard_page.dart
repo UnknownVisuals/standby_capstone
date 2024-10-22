@@ -13,7 +13,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final _sensorStream = supabase.from('esp32').stream(primaryKey: ['id']);
+  final _sensorStream = supabase.from('esp32_1').stream(primaryKey: ['id']);
 
   @override
   Widget build(BuildContext context) {
