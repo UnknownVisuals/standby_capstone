@@ -35,6 +35,70 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final List<PowerInputModel> powers1 = PowerInputModel.defaultPowers('170');
   final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200');
 
+  Widget _buildTextRow(String label, TextEditingController controller) {
+    return Row(
+      children: [
+        Expanded(flex: 1, child: Text(label)),
+        Expanded(flex: 2, child: TextFormField(controller: controller)),
+      ],
+    );
+  }
+
+  Future<void> _generateReport() async {
+    final report = Report(
+      incubatorDetail: IncubatorDetail(
+        labNumber: _labNumberController.text,
+        productName: _productNameController.text,
+        model: _modelController.text,
+        serialNumber: _serialNumberController.text,
+      ),
+      testingCondition: TestingCondition(
+        date: DateTime.now(),
+        temperature: '$currentTemp °C',
+        humidity: '$currentHumi %RH',
+      ),
+      riskManagementItem: clauses.map((clause) {
+        return RiskManagementItem(
+          clause: clause.clause,
+          clauseTitle: clause.title,
+          docsReference: clause.refController.text,
+          riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
+          result: clause.decisionController.text,
+        );
+      }).toList(),
+      performanceMattersItem: matters.map((matters) {
+        return PerformanceMattersItem(
+          performanceMatters: matters.perfMattersController.text,
+          docsReference: matters.docsReferenceController.text,
+          notes: matters.notesController.text,
+        );
+      }).toList(),
+      powerInputItem0: _convertToPowerInputItems(powers0),
+      powerInputItem1: _convertToPowerInputItems(powers1),
+      powerInputItem2: _convertToPowerInputItems(powers2),
+    );
+
+    final finalReport = await PdfReport.generatePdfReport(report);
+
+    if (!mounted) return;
+
+    PdfUtils.openPdf(finalReport);
+    PdfUtils.uploadPdf(finalReport, context);
+  }
+
+  List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
+    return powers.map((powers) {
+      return PowerInputItem(
+        voltage: powers.voltageController,
+        power: double.tryParse(powers.powerController.text) ?? 0.0,
+        current: double.tryParse(powers.currentController.text) ?? 0.0,
+        powerFactor: double.tryParse(powers.powerFactorController.text) ?? 1.0,
+        result: powers.resultController.text,
+        notes: powers.notesController,
+      );
+    }).toList();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -104,65 +168,5 @@ class _DocumentsPageState extends State<DocumentsPage> {
         child: const Icon(Icons.print_rounded, color: kWhite),
       ),
     );
-  }
-
-  Widget _buildTextRow(String label, TextEditingController controller) {
-    return Row(
-      children: [
-        Expanded(flex: 1, child: Text(label)),
-        Expanded(flex: 2, child: TextFormField(controller: controller)),
-      ],
-    );
-  }
-
-  Future<void> _generateReport() async {
-    final report = Report(
-      incubatorDetail: IncubatorDetail(
-        labNumber: _labNumberController.text,
-        productName: _productNameController.text,
-        model: _modelController.text,
-        serialNumber: _serialNumberController.text,
-      ),
-      testingCondition: TestingCondition(
-        date: DateTime.now(),
-        temperature: '$currentTemp °C',
-        humidity: '$currentHumi %RH',
-      ),
-      riskManagementItem: clauses.map((clause) {
-        return RiskManagementItem(
-          clause: clause.clause,
-          clauseTitle: clause.title,
-          docsReference: clause.refController.text,
-          riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
-          result: clause.decisionController.text,
-        );
-      }).toList(),
-      performanceMattersItem: matters.map((matters) {
-        return PerformanceMattersItem(
-          performanceMatters: matters.perfMattersController.text,
-          docsReference: matters.docsReferenceController.text,
-          notes: matters.notesController.text,
-        );
-      }).toList(),
-      powerInputItem0: _convertToPowerInputItems(powers0),
-      powerInputItem1: _convertToPowerInputItems(powers1),
-      powerInputItem2: _convertToPowerInputItems(powers2),
-    );
-
-    final finalReport = await PdfReport.generatePdfReport(report);
-    PdfUtils.openPdf(finalReport);
-  }
-
-  List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
-    return powers.map((powers) {
-      return PowerInputItem(
-        voltage: powers.voltageController,
-        power: double.tryParse(powers.powerController.text) ?? 0.0,
-        current: double.tryParse(powers.currentController.text) ?? 0.0,
-        powerFactor: double.tryParse(powers.powerFactorController.text) ?? 1.0,
-        result: powers.resultController.text,
-        notes: powers.notesController,
-      );
-    }).toList();
   }
 }
