@@ -1,70 +1,70 @@
 import 'package:flutter/material.dart';
 
-class RiskManagement {
+class RiskManagementModel {
   final String clause;
   final String title;
   final TextEditingController refController = TextEditingController();
   final TextEditingController decisionController = TextEditingController();
   bool isRisk;
 
-  RiskManagement({
+  RiskManagementModel({
     required this.clause,
     required this.title,
     this.isRisk = false,
   });
 
-  static List<RiskManagement> defaultClauses() {
+  static List<RiskManagementModel> defaultClauses() {
     return [
-      RiskManagement(
+      RiskManagementModel(
         clause: '3.1',
         title: 'Proses manajemen risiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '3.2',
         title: 'Tanggung jawab manajemen',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '3.3',
         title: 'Kualifikasi Personil',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '3.4',
         title: 'Rencana Manajemen Resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '3.5',
         title: 'Berkas Manajemen Resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '4.1',
         title: 'Proses Analisa Resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '4.2',
         title:
             'Maksud penggunaan dan identifikasi karakteristik terkait dengan keamanan alat kesehatan',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '4.3',
         title: 'Identifikasi bahaya',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '4.4',
         title: 'Estimasi resiko untuk setiap yang membahayakan',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '5',
         title: 'Evaluasi resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '6',
         title: 'Kendali resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '7',
         title: 'Evaluasi keberterimaan seluruh residu resiko',
       ),
-      RiskManagement(
+      RiskManagementModel(
         clause: '8',
         title: 'Laporan manajemen resiko',
       ),

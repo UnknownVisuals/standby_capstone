@@ -2,11 +2,13 @@ class Report {
   final IncubatorDetail incubatorDetail;
   final TestingCondition testingCondition;
   final List<RiskManagementItem> riskManagementItem;
+  final List<PerformanceMattersItem> performanceMattersItem;
 
   Report({
     required this.incubatorDetail,
     required this.testingCondition,
     required this.riskManagementItem,
+    required this.performanceMattersItem,
   });
 }
 
@@ -49,5 +51,17 @@ class RiskManagementItem {
     required this.docsReference,
     required this.riskManagement,
     required this.result,
+  });
+}
+
+class PerformanceMattersItem {
+  final String performanceMatters;
+  final String docsReference;
+  final String notes;
+
+  PerformanceMattersItem({
+    required this.performanceMatters,
+    required this.docsReference,
+    required this.notes,
   });
 }

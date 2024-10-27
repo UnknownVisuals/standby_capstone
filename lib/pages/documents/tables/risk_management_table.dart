@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/pages/documents/models/risk_management.dart';
+import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
 
 class RiskManagementTable extends StatelessWidget {
-  final List<RiskManagement> clauses;
+  final List<RiskManagementModel> clauses;
   final ValueChanged<int> onClauseChange;
 
   const RiskManagementTable({
@@ -18,19 +18,40 @@ class RiskManagementTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: [
-          DataColumn(label: Text('Klausul', style: kTextHeading_Black)),
-          DataColumn(label: Text('Judul Klausul', style: kTextHeading_Black)),
           DataColumn(
-              label: Text('Dok Ref FMR (Dok No./ hal)',
-                  style: kTextHeading_Black)),
+            label: Text(
+              'Klausul',
+              style: kTextHeading_Black,
+            ),
+          ),
           DataColumn(
-              label: Text('Ada/tidak ada dalam file manajemen resiko',
-                  style: kTextHeading_Black)),
-          DataColumn(label: Text('Keputusan', style: kTextHeading_Black)),
+            label: Text(
+              'Judul Klausul',
+              style: kTextHeading_Black,
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'Dok Ref FMR (Dok No./ hal)',
+              style: kTextHeading_Black,
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'Ada/tidak ada dalam file manajemen resiko',
+              style: kTextHeading_Black,
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              'Keputusan',
+              style: kTextHeading_Black,
+            ),
+          ),
         ],
         rows: clauses.asMap().entries.map((entry) {
           int index = entry.key;
-          RiskManagement clause = entry.value;
+          RiskManagementModel clause = entry.value;
           return customDataRow(
             clause: clause.clause,
             title: clause.title,

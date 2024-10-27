@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/pages/documents/models/report.dart';
-import 'package:standby_capstone/pages/documents/models/risk_management.dart';
-import 'package:standby_capstone/pages/documents/pdf_report.dart';
-import 'package:standby_capstone/pages/documents/pdf_utils.dart';
-import 'package:standby_capstone/pages/documents/tables/performance_matters.dart';
+import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
+import 'package:standby_capstone/pages/documents/models/performance_matters_model.dart';
+import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
+import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
+import 'package:standby_capstone/pages/documents/_report/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/subpages/performance_matters_page.dart';
+import 'package:standby_capstone/pages/documents/subpages/risk_management_page.dart';
 import 'package:standby_capstone/pages/documents/tables/power_input.dart';
-import 'package:standby_capstone/pages/documents/tables/risk_management.dart';
-import 'package:standby_capstone/pages/documents/tables/test_table.dart';
 
 class DocumentsPage extends StatefulWidget {
   const DocumentsPage({super.key});
@@ -22,7 +22,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final _modelController = TextEditingController();
   final _serialNumberController = TextEditingController();
 
-  final List<RiskManagement> _clauses = RiskManagement.defaultClauses();
+  final List<RiskManagementModel> clauses =
+      RiskManagementModel.defaultClauses();
+  final List<PerformanceMattersModel> matters = [];
 
   @override
   void dispose() {
@@ -92,57 +94,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 ],
               ),
               const SizedBox(height: 48),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                    '4.2.2. TABEL. Hasil manajemen resiko. Persyaratan umum manajemen resiko.',
-                    style: kTextHeading_Red),
-              ),
-              const SizedBox(height: 8),
-              RiskManagementTable(
-                clauses: _clauses,
-                onClauseChange: (int index) {
-                  setState(() {
-                    _clauses[index].isRisk = !_clauses[index].isRisk;
-                  });
-                },
-              ),
-              const SizedBox(height: 8),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  'Informasi tambahan:',
-                  style: kTextHeading_Black.copyWith(fontSize: 12),
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                    'Dokumen ref harus berkaitan dengan kebijakan/prosedur dokumen dan dokumen yang berisi output perangkat tertentu.',
-                    style: kTextNormal_Black.copyWith(fontSize: 12)),
-              ),
+              RiskManagementPage(clauses: clauses),
               const SizedBox(height: 48),
-              SizedBox(
-                width: double.infinity,
-                child: Text('4.3. TABEL. Kinerja penting.',
-                    style: kTextHeading_Red),
-              ),
-              const SizedBox(height: 8),
-              const PerformanceMattersTable(),
-              const SizedBox(height: 8),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  'Informasi tambahan:',
-                  style: kTextHeading_Black.copyWith(fontSize: 12),
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                    'Kinerja esensial adalah kinerja yang tidak ada atau penurunannya akan menghasilkan resiko yang tidak dapat diterima.',
-                    style: kTextNormal_Black.copyWith(fontSize: 12)),
-              ),
+              PerformanceMattersPage(matters: matters),
               const SizedBox(height: 48),
               SizedBox(
                 width: double.infinity,
@@ -151,7 +105,6 @@ class _DocumentsPageState extends State<DocumentsPage> {
               ),
               const SizedBox(height: 8),
               const PowerInputTable(),
-              const MergedTable(),
             ],
           ),
         ),
@@ -170,13 +123,20 @@ class _DocumentsPageState extends State<DocumentsPage> {
               temperature: 'temperature',
               humidity: 'humidity',
             ),
-            riskManagementItem: _clauses.map((clause) {
+            riskManagementItem: clauses.map((clause) {
               return RiskManagementItem(
                 clause: clause.clause,
                 clauseTitle: clause.title,
                 docsReference: clause.refController.text,
                 riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
                 result: clause.decisionController.text,
+              );
+            }).toList(),
+            performanceMattersItem: matters.map((matters) {
+              return PerformanceMattersItem(
+                performanceMatters: matters.perfMattersController.text,
+                docsReference: matters.docsReferenceController.text,
+                notes: matters.notesController.text,
               );
             }).toList(),
           );
