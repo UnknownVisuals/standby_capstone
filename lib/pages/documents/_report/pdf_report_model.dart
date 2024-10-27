@@ -3,12 +3,16 @@ class Report {
   final TestingCondition testingCondition;
   final List<RiskManagementItem> riskManagementItem;
   final List<PerformanceMattersItem> performanceMattersItem;
+  final List<PowerInputItem> powerInputItem0, powerInputItem1, powerInputItem2;
 
   Report({
     required this.incubatorDetail,
     required this.testingCondition,
     required this.riskManagementItem,
     required this.performanceMattersItem,
+    required this.powerInputItem0,
+    required this.powerInputItem1,
+    required this.powerInputItem2,
   });
 }
 
@@ -62,6 +66,24 @@ class PerformanceMattersItem {
   PerformanceMattersItem({
     required this.performanceMatters,
     required this.docsReference,
+    required this.notes,
+  });
+}
+
+class PowerInputItem {
+  final String voltage;
+  final double power;
+  final double current;
+  final double powerFactor;
+  final String result;
+  final String notes;
+
+  PowerInputItem({
+    required this.voltage,
+    required this.power,
+    required this.current,
+    required this.powerFactor,
+    required this.result,
     required this.notes,
   });
 }

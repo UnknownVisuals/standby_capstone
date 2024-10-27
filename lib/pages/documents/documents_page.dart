@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
-import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
-import 'package:standby_capstone/pages/documents/models/performance_matters_model.dart';
-import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
+import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/models/performance_matters_model.dart';
+import 'package:standby_capstone/pages/documents/models/power_input_model.dart';
+import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
 import 'package:standby_capstone/pages/documents/subpages/performance_matters_page.dart';
+import 'package:standby_capstone/pages/documents/subpages/power_input_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/risk_management_page.dart';
-import 'package:standby_capstone/pages/documents/tables/power_input.dart';
 
 class DocumentsPage extends StatefulWidget {
   const DocumentsPage({super.key});
@@ -25,6 +26,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final List<RiskManagementModel> clauses =
       RiskManagementModel.defaultClauses();
   final List<PerformanceMattersModel> matters = [];
+  final List<PowerInputModel> powers0 = PowerInputModel.defaultPowers('100');
+  final List<PowerInputModel> powers1 = PowerInputModel.defaultPowers('170');
+  final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200');
 
   @override
   void dispose() {
@@ -96,14 +100,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
               const SizedBox(height: 24),
               RiskManagementPage(clauses: clauses),
               PerformanceMattersPage(matters: matters),
-              const SizedBox(height: 48),
-              SizedBox(
-                width: double.infinity,
-                child:
-                    Text('4.11. TABEL. Input daya.', style: kTextHeading_Red),
-              ),
-              const SizedBox(height: 8),
-              const PowerInputTable(),
+              PowerInputPage(powers: powers0),
+              PowerInputPage(powers: powers1),
+              PowerInputPage(powers: powers2),
+              const SizedBox(height: 24 * 3),
             ],
           ),
         ),
@@ -136,6 +136,39 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 performanceMatters: matters.perfMattersController.text,
                 docsReference: matters.docsReferenceController.text,
                 notes: matters.notesController.text,
+              );
+            }).toList(),
+            powerInputItem0: powers0.map((powers) {
+              return PowerInputItem(
+                voltage: powers.voltageController,
+                power: double.tryParse(powers.powerController.text) ?? 0.0,
+                current: double.tryParse(powers.currentController.text) ?? 0.0,
+                powerFactor:
+                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
+                result: powers.resultController.text,
+                notes: powers.notesController,
+              );
+            }).toList(),
+            powerInputItem1: powers1.map((powers) {
+              return PowerInputItem(
+                voltage: powers.voltageController,
+                power: double.tryParse(powers.powerController.text) ?? 0.0,
+                current: double.tryParse(powers.currentController.text) ?? 0.0,
+                powerFactor:
+                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
+                result: powers.resultController.text,
+                notes: powers.notesController,
+              );
+            }).toList(),
+            powerInputItem2: powers2.map((powers) {
+              return PowerInputItem(
+                voltage: powers.voltageController,
+                power: double.tryParse(powers.powerController.text) ?? 0.0,
+                current: double.tryParse(powers.currentController.text) ?? 0.0,
+                powerFactor:
+                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
+                result: powers.resultController.text,
+                notes: powers.notesController,
               );
             }).toList(),
           );
