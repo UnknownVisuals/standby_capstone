@@ -67,14 +67,7 @@ class _PowerInputTableState extends State<PowerInputTable> {
               ),
             ],
             rows: widget.powerInput.map((powerInput) {
-              return customDataRow(
-                voltageController: powerInput.voltageController,
-                powerController: powerInput.powerController,
-                currentController: powerInput.currentController,
-                powerFactorController: powerInput.powerFactorController,
-                resultController: powerInput.resultController,
-                notesController: powerInput.notesController,
-              );
+              return customDataRow(powerInput);
             }).toList(),
           ),
         ),
@@ -82,38 +75,25 @@ class _PowerInputTableState extends State<PowerInputTable> {
     );
   }
 
-  DataRow customDataRow({
-    required String voltageController,
-    required TextEditingController powerController,
-    required TextEditingController currentController,
-    required TextEditingController powerFactorController,
-    required TextEditingController resultController,
-    required String notesController,
-  }) {
+  DataRow customDataRow(PowerInputModel powerInput) {
     return DataRow(
       cells: [
-        DataCell(Text(voltageController)),
-        DataCell(
-          TextFormField(controller: powerController),
-        ),
-        DataCell(
-          TextFormField(controller: currentController),
-        ),
-        DataCell(
-          TextFormField(controller: powerFactorController),
-        ),
+        DataCell(Text(powerInput.voltageController)),
+        DataCell(TextFormField(controller: powerInput.powerController)),
+        DataCell(TextFormField(controller: powerInput.currentController)),
+        DataCell(TextFormField(controller: powerInput.powerFactorController)),
         DataCell(
           ValueListenableBuilder(
             valueListenable: resultValue,
             builder: (context, value, child) {
               return TextFormField(
-                controller: resultController..text = value,
+                controller: powerInput.resultController..text = value,
                 onChanged: (newValue) => resultValue.value = newValue,
               );
             },
           ),
         ),
-        DataCell(Text(notesController)),
+        DataCell(Text(powerInput.notesController)),
       ],
     );
   }

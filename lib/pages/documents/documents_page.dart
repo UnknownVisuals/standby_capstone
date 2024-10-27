@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_utils.dart';
@@ -23,6 +24,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final _modelController = TextEditingController();
   final _serialNumberController = TextEditingController();
 
+  final _sensorStream = supabase.from('esp32_1').stream(primaryKey: ['id']);
+  double currentTemp = 0.0;
+  double currentHumi = 0.0;
+
   final List<RiskManagementModel> clauses =
       RiskManagementModel.defaultClauses();
   final List<PerformanceMattersModel> matters = [];
@@ -36,153 +41,128 @@ class _DocumentsPageState extends State<DocumentsPage> {
     _labNumberController.dispose();
     _productNameController.dispose();
     _modelController.dispose();
+    _serialNumberController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kGray,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text('Enter Incubator Details', style: kTextHeading_Red),
-              const SizedBox(height: 8),
-              Row(
+      body: StreamBuilder(
+        stream: _sensorStream,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(kPrimary),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No sensors data available.'));
+          }
+
+          final latestSensorData = snapshot.data?.last;
+
+          currentTemp =
+              ((latestSensorData?['ds18b20_temp1'] ?? 0.0).toDouble() +
+                      (latestSensorData?['ds18b20_temp2'] ?? 0.0).toDouble() +
+                      (latestSensorData?['ds18b20_temp3'] ?? 0.0).toDouble() +
+                      (latestSensorData?['ds18b20_temp4'] ?? 0.0).toDouble()) /
+                  4;
+          currentHumi = (latestSensorData?['dht22_humi'] ?? 0.0).toDouble();
+
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Text('No. Lab'),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: TextFormField(controller: _labNumberController),
-                  ),
+                  Text('Enter Incubator Details', style: kTextHeading_Red),
+                  const SizedBox(height: 8),
+                  _buildTextRow('No. Lab', _labNumberController),
+                  _buildTextRow('Nama Produk', _productNameController),
+                  _buildTextRow('Model', _modelController),
+                  _buildTextRow('No. Serial', _serialNumberController),
+                  const SizedBox(height: 24),
+                  RiskManagementPage(clauses: clauses),
+                  PerformanceMattersPage(matters: matters),
+                  PowerInputPage(powers: powers0),
+                  PowerInputPage(powers: powers1),
+                  PowerInputPage(powers: powers2),
+                  const SizedBox(height: 72),
                 ],
               ),
-              Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Text('Nama Produk'),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: TextFormField(controller: _productNameController),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Text('Model'),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: TextFormField(controller: _modelController),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Text('No. Serial'),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: TextFormField(controller: _serialNumberController),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              RiskManagementPage(clauses: clauses),
-              PerformanceMattersPage(matters: matters),
-              PowerInputPage(powers: powers0),
-              PowerInputPage(powers: powers1),
-              PowerInputPage(powers: powers2),
-              const SizedBox(height: 24 * 3),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final report = Report(
-            incubatorDetail: IncubatorDetail(
-              labNumber: _labNumberController.text,
-              productName: _productNameController.text,
-              model: _modelController.text,
-              serialNumber: _serialNumberController.text,
-            ),
-            testingCondition: TestingCondition(
-              date: DateTime.now(),
-              temperature: 'temperature',
-              humidity: 'humidity',
-            ),
-            riskManagementItem: clauses.map((clause) {
-              return RiskManagementItem(
-                clause: clause.clause,
-                clauseTitle: clause.title,
-                docsReference: clause.refController.text,
-                riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
-                result: clause.decisionController.text,
-              );
-            }).toList(),
-            performanceMattersItem: matters.map((matters) {
-              return PerformanceMattersItem(
-                performanceMatters: matters.perfMattersController.text,
-                docsReference: matters.docsReferenceController.text,
-                notes: matters.notesController.text,
-              );
-            }).toList(),
-            powerInputItem0: powers0.map((powers) {
-              return PowerInputItem(
-                voltage: powers.voltageController,
-                power: double.tryParse(powers.powerController.text) ?? 0.0,
-                current: double.tryParse(powers.currentController.text) ?? 0.0,
-                powerFactor:
-                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
-                result: powers.resultController.text,
-                notes: powers.notesController,
-              );
-            }).toList(),
-            powerInputItem1: powers1.map((powers) {
-              return PowerInputItem(
-                voltage: powers.voltageController,
-                power: double.tryParse(powers.powerController.text) ?? 0.0,
-                current: double.tryParse(powers.currentController.text) ?? 0.0,
-                powerFactor:
-                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
-                result: powers.resultController.text,
-                notes: powers.notesController,
-              );
-            }).toList(),
-            powerInputItem2: powers2.map((powers) {
-              return PowerInputItem(
-                voltage: powers.voltageController,
-                power: double.tryParse(powers.powerController.text) ?? 0.0,
-                current: double.tryParse(powers.currentController.text) ?? 0.0,
-                powerFactor:
-                    double.tryParse(powers.powerFactorController.text) ?? 1.0,
-                result: powers.resultController.text,
-                notes: powers.notesController,
-              );
-            }).toList(),
-          );
-
-          final finalReport = await PdfReport.generatePdfReport(report);
-          PdfUtils.openPdf(finalReport);
-        },
+        onPressed: _generateReport,
         backgroundColor: kPrimary,
         shape: const CircleBorder(),
-        child: const Icon(
-          Icons.print_rounded,
-          color: kWhite,
-        ),
+        child: const Icon(Icons.print_rounded, color: kWhite),
       ),
     );
+  }
+
+  Widget _buildTextRow(String label, TextEditingController controller) {
+    return Row(
+      children: [
+        Expanded(flex: 1, child: Text(label)),
+        Expanded(flex: 2, child: TextFormField(controller: controller)),
+      ],
+    );
+  }
+
+  Future<void> _generateReport() async {
+    final report = Report(
+      incubatorDetail: IncubatorDetail(
+        labNumber: _labNumberController.text,
+        productName: _productNameController.text,
+        model: _modelController.text,
+        serialNumber: _serialNumberController.text,
+      ),
+      testingCondition: TestingCondition(
+        date: DateTime.now(),
+        temperature: '$currentTemp °C',
+        humidity: '$currentHumi %RH',
+      ),
+      riskManagementItem: clauses.map((clause) {
+        return RiskManagementItem(
+          clause: clause.clause,
+          clauseTitle: clause.title,
+          docsReference: clause.refController.text,
+          riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
+          result: clause.decisionController.text,
+        );
+      }).toList(),
+      performanceMattersItem: matters.map((matters) {
+        return PerformanceMattersItem(
+          performanceMatters: matters.perfMattersController.text,
+          docsReference: matters.docsReferenceController.text,
+          notes: matters.notesController.text,
+        );
+      }).toList(),
+      powerInputItem0: _convertToPowerInputItems(powers0),
+      powerInputItem1: _convertToPowerInputItems(powers1),
+      powerInputItem2: _convertToPowerInputItems(powers2),
+    );
+
+    final finalReport = await PdfReport.generatePdfReport(report);
+    PdfUtils.openPdf(finalReport);
+  }
+
+  List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
+    return powers.map((powers) {
+      return PowerInputItem(
+        voltage: powers.voltageController,
+        power: double.tryParse(powers.powerController.text) ?? 0.0,
+        current: double.tryParse(powers.currentController.text) ?? 0.0,
+        powerFactor: double.tryParse(powers.powerFactorController.text) ?? 1.0,
+        result: powers.resultController.text,
+        notes: powers.notesController,
+      );
+    }).toList();
   }
 }
