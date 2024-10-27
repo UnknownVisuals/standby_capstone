@@ -93,9 +93,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 24),
               RiskManagementPage(clauses: clauses),
-              const SizedBox(height: 48),
               PerformanceMattersPage(matters: matters),
               const SizedBox(height: 48),
               SizedBox(

@@ -37,8 +37,8 @@ class PdfPerformanceMatters {
           data: data,
           columnWidths: {
             0: const pw.FlexColumnWidth(30),
-            1: const pw.FlexColumnWidth(40),
-            2: const pw.FlexColumnWidth(30),
+            1: const pw.FlexColumnWidth(50),
+            2: const pw.FlexColumnWidth(20),
           },
           headerStyle: pw.TextStyle(
             font: fontBold,

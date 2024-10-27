@@ -17,6 +17,7 @@ class RiskManagementTable extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
+        columnSpacing: 16.0,
         columns: [
           DataColumn(
             label: Text(

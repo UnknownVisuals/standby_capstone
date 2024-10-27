@@ -42,7 +42,7 @@ class RiskManagementModel {
       RiskManagementModel(
         clause: '4.2',
         title:
-            'Maksud penggunaan dan identifikasi karakteristik terkait dengan keamanan alat kesehatan',
+            'Maksud penggunaan dan identifikasi karakteristik\nterkait dengan keamanan alat kesehatan',
       ),
       RiskManagementModel(
         clause: '4.3',

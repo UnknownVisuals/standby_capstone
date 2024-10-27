@@ -17,6 +17,7 @@ class PerformanceMattersTable extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
+            columnSpacing: 16.0,
             columns: [
               DataColumn(
                 label: Text(
