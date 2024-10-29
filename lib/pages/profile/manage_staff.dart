@@ -72,74 +72,67 @@ class _ManageStaffState extends State<ManageStaff> {
     return Scaffold(
       backgroundColor: kGray,
       appBar: const DeepMenuAppbar(title: 'Manage Staff'),
-      body: Container(
-        color: kGray,
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            StreamBuilder(
-              stream: staffStream,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(kPrimary),
+      body: StreamBuilder(
+        stream: staffStream,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(kPrimary),
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No staffs data available.'));
+          }
+
+          final staffs = snapshot.data as List<Map<String, dynamic>>;
+
+          return Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(24),
+              itemCount: staffs.length,
+              itemBuilder: (context, index) {
+                final staff = staffs[index];
+                final avatarUrl = staff['avatar_url'] ?? '';
+
+                return Container(
+                  decoration: kEmbossDecoration,
+                  margin: const EdgeInsets.only(bottom: 24),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      maxRadius: 32,
+                      foregroundImage: avatarUrl.isNotEmpty
+                          ? NetworkImage(avatarUrl)
+                          : const AssetImage(
+                                  'assets/images/illustration_forgotpass.png')
+                              as ImageProvider,
+                      backgroundColor: kPrimary,
                     ),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No staffs data available.'));
-                }
-
-                final staffs = snapshot.data as List<Map<String, dynamic>>;
-
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: staffs.length,
-                    itemBuilder: (context, index) {
-                      final staff = staffs[index];
-                      final avatarUrl = staff['avatar_url'] ?? '';
-
-                      return Container(
-                        decoration: kEmbossDecoration,
-                        margin: const EdgeInsets.only(bottom: 24),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            maxRadius: 32,
-                            foregroundImage: avatarUrl.isNotEmpty
-                                ? NetworkImage(avatarUrl)
-                                : const AssetImage(
-                                        'assets/images/illustration_forgotpass.png')
-                                    as ImageProvider,
-                            backgroundColor: kPrimary,
-                          ),
-                          title: Text(
-                            staff['full_name'] ?? 'Full name not found',
-                            style: kTextHeading_Red,
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                staff['email'] ?? 'Email not found',
-                                style: kTextNormal_Black,
-                              ),
-                              Text(
-                                staff['is_admin'] ? 'Admin' : 'Staff',
-                                style: kTextHeading_Black,
-                              ),
-                            ],
-                          ),
+                    title: Text(
+                      staff['full_name'] ?? 'Full name not found',
+                      style: kTextHeading_Red,
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          staff['email'] ?? 'Email not found',
+                          style: kTextNormal_Black,
                         ),
-                      );
-                    },
+                        Text(
+                          staff['is_admin'] ? 'Admin' : 'Staff',
+                          style: kTextHeading_Black,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             ),
-          ],
-        ),
+          );
+        },
       ),
       floatingActionButton: _isAdmin
           ? FloatingActionButton(
