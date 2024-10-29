@@ -13,6 +13,19 @@ class PerformanceMattersPage extends StatefulWidget {
 }
 
 class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.matters.length < 3) {
+      widget.matters.addAll(
+        List.generate(
+          3 - widget.matters.length,
+          (_) => PerformanceMattersModel(),
+        ),
+      );
+    }
+  }
+
   void addRow() {
     setState(() {
       widget.matters.add(PerformanceMattersModel());
@@ -34,9 +47,7 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
       ),
       children: [
         const SizedBox(height: 8),
-        PerformanceMattersTable(
-          performanceMatters: widget.matters,
-        ),
+        PerformanceMattersTable(performanceMatters: widget.matters),
         const SizedBox(height: 8),
         Container(
           width: 128,

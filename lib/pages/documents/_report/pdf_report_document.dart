@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:standby_capstone/pages/documents/_report/build/pdf_incubator_details.dart';
+import 'package:standby_capstone/pages/documents/_report/build/pdf_leakage_current.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_performance_matters.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_power_input.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_risk_management.dart';
@@ -22,14 +23,19 @@ class PdfReport {
 
     final riskManagementWidget =
         await PdfRiskManagement.buildRiskManagement(report);
+
     final performanceMattersWidget =
         await PdfPerformanceMatters.buildPerformanceMatters(report);
+
     final powerInputItem0Widget = await PdfPowerInputModel.buildPowerInput(
         report, report.powerInputItem0);
     final powerInputItem1Widget = await PdfPowerInputModel.buildPowerInput(
         report, report.powerInputItem1);
     final powerInputItem2Widget = await PdfPowerInputModel.buildPowerInput(
         report, report.powerInputItem2);
+
+    final leakageCurrentWidget =
+        await PdfLeakageCurrent.buildLeakageCurrent(report);
 
     pdf.addPage(
       pw.MultiPage(
@@ -100,6 +106,26 @@ class PdfReport {
           powerInputItem1Widget,
           pw.SizedBox(height: 16),
           powerInputItem2Widget,
+        ],
+      ),
+    );
+
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        margin: const pw.EdgeInsets.all(32),
+        header: (context) => PdfReportUtils.buildPageHeader(
+          context,
+          logo,
+          fontBold,
+        ),
+        footer: (context) => PdfReportUtils.buildPageNumber(
+          context,
+          font,
+        ),
+        build: (context) => [
+          pw.SizedBox(height: 16),
+          leakageCurrentWidget,
         ],
       ),
     );

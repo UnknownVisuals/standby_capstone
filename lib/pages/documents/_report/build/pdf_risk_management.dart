@@ -32,8 +32,8 @@ class PdfRiskManagement {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          'TABEL : Hasil manajemen resiko : Persyaratan umum manajemen resiko',
-          style: pw.TextStyle(font: fontBold, fontSize: 12),
+          '4.2.2. TABEL : Hasil manajemen resiko : Persyaratan umum manajemen resiko',
+          style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),
         pw.TableHelper.fromTextArray(
@@ -46,13 +46,11 @@ class PdfRiskManagement {
             3: const pw.FixedColumnWidth(15),
             4: const pw.FixedColumnWidth(15),
           },
-          headerStyle: pw.TextStyle(
-            font: fontBold,
-            fontSize: 12,
-          ),
-          headerDecoration: const pw.BoxDecoration(
-            color: PdfColors.grey300,
-          ),
+          headerStyle: pw.TextStyle(font: fontBold, fontSize: 10),
+          headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
+          cellStyle: pw.TextStyle(font: font, fontSize: 10),
+          cellAlignment: pw.Alignment.centerLeft,
+          headerAlignment: pw.Alignment.center,
         ),
         pw.SizedBox(height: 4),
         pw.Text(

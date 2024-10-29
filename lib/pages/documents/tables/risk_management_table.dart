@@ -8,8 +8,8 @@ class RiskManagementTable extends StatelessWidget {
 
   const RiskManagementTable({
     super.key,
-    required this.clauses,
     required this.onClauseChange,
+    required this.clauses,
   });
 
   @override

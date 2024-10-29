@@ -4,9 +4,11 @@ import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/models/leakage_current_model.dart';
 import 'package:standby_capstone/pages/documents/models/performance_matters_model.dart';
 import 'package:standby_capstone/pages/documents/models/power_input_model.dart';
 import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
+import 'package:standby_capstone/pages/documents/subpages/leakage_current_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/performance_matters_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/power_input_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/risk_management_page.dart';
@@ -31,9 +33,11 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final List<RiskManagementModel> clauses =
       RiskManagementModel.defaultClauses();
   final List<PerformanceMattersModel> matters = [];
-  final List<PowerInputModel> powers0 = PowerInputModel.defaultPowers('100');
-  final List<PowerInputModel> powers1 = PowerInputModel.defaultPowers('170');
-  final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200');
+  final List<PowerInputModel> powers0 = PowerInputModel.defaultPowers('100 V');
+  final List<PowerInputModel> powers1 = PowerInputModel.defaultPowers('170 V');
+  final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200 V');
+  final List<LeakageCurrentModel> leakages =
+      LeakageCurrentModel.defaultLeakageCurrent();
 
   Widget _buildTextRow(String label, TextEditingController controller) {
     return Row(
@@ -76,6 +80,14 @@ class _DocumentsPageState extends State<DocumentsPage> {
       powerInputItem0: _convertToPowerInputItems(powers0),
       powerInputItem1: _convertToPowerInputItems(powers1),
       powerInputItem2: _convertToPowerInputItems(powers2),
+      leakageCurrentItem: leakages.map((leakages) {
+        return LeakageCurrentItem(
+          leakageCurrentType: leakages.leakageCurrentType,
+          microAmpere: leakages.microAmpere.text,
+          maxMiliAmp: leakages.maxMiliAmp,
+          result: leakages.result.text,
+        );
+      }).toList(),
     );
 
     final finalReport = await PdfReport.generatePdfReport(report);
@@ -83,7 +95,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     if (!mounted) return;
 
     PdfUtils.openPdf(finalReport);
-    PdfUtils.uploadPdf(finalReport, context);
+    // PdfUtils.uploadPdf(finalReport, context);
   }
 
   List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
@@ -154,7 +166,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
                   PowerInputPage(powers: powers0),
                   PowerInputPage(powers: powers1),
                   PowerInputPage(powers: powers2),
-                  const SizedBox(height: 72),
+                  LeakageCurrentPage(leakages: leakages),
+                  const SizedBox(height: 24 * 3),
                 ],
               ),
             ),

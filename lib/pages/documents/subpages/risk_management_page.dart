@@ -43,8 +43,9 @@ class _RiskManagementPageState extends State<RiskManagementPage> {
         SizedBox(
           width: double.infinity,
           child: Text(
-              'Dokumen ref harus berkaitan dengan kebijakan/prosedur dokumen dan dokumen yang berisi output perangkat tertentu.',
-              style: kTextNormal_Black.copyWith(fontSize: 12)),
+            'Dokumen ref harus berkaitan dengan kebijakan/prosedur dokumen dan dokumen yang berisi output perangkat tertentu.',
+            style: kTextNormal_Black.copyWith(fontSize: 12),
+          ),
         ),
         const SizedBox(height: 8),
       ],

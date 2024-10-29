@@ -4,6 +4,7 @@ class Report {
   final List<RiskManagementItem> riskManagementItem;
   final List<PerformanceMattersItem> performanceMattersItem;
   final List<PowerInputItem> powerInputItem0, powerInputItem1, powerInputItem2;
+  final List<LeakageCurrentItem> leakageCurrentItem;
 
   Report({
     required this.incubatorDetail,
@@ -13,6 +14,7 @@ class Report {
     required this.powerInputItem0,
     required this.powerInputItem1,
     required this.powerInputItem2,
+    required this.leakageCurrentItem,
   });
 }
 
@@ -85,5 +87,19 @@ class PowerInputItem {
     required this.powerFactor,
     required this.result,
     required this.notes,
+  });
+}
+
+class LeakageCurrentItem {
+  final String leakageCurrentType;
+  final String microAmpere;
+  final String maxMiliAmp;
+  final String result;
+
+  LeakageCurrentItem({
+    required this.leakageCurrentType,
+    required this.microAmpere,
+    required this.maxMiliAmp,
+    required this.result,
   });
 }

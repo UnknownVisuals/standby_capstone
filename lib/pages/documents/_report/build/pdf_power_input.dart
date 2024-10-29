@@ -6,6 +6,8 @@ import 'package:standby_capstone/pages/documents/_report/pdf_report_utils.dart';
 class PdfPowerInputModel {
   static Future<pw.Widget> buildPowerInput(
       Report report, List<PowerInputItem> dataItems) async {
+    final font =
+        await PdfReportUtils.loadFont('assets/fonts/Roboto-Regular.ttf');
     final fontBold =
         await PdfReportUtils.loadFont('assets/fonts/Roboto-Bold.ttf');
 
@@ -34,7 +36,7 @@ class PdfPowerInputModel {
       children: [
         pw.Text(
           'TABEL : Input daya',
-          style: pw.TextStyle(font: fontBold, fontSize: 12),
+          style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),
         pw.TableHelper.fromTextArray(
@@ -48,13 +50,11 @@ class PdfPowerInputModel {
             4: const pw.FixedColumnWidth(1),
             5: const pw.FixedColumnWidth(1),
           },
-          headerStyle: pw.TextStyle(
-            font: fontBold,
-            fontSize: 12,
-          ),
-          headerDecoration: const pw.BoxDecoration(
-            color: PdfColors.grey300,
-          ),
+          headerStyle: pw.TextStyle(font: fontBold, fontSize: 10),
+          headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
+          cellStyle: pw.TextStyle(font: font, fontSize: 10),
+          cellAlignment: pw.Alignment.centerLeft,
+          headerAlignment: pw.Alignment.center,
         ),
         pw.SizedBox(height: 4),
       ],

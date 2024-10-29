@@ -8,15 +8,15 @@ class PdfTestingConditions {
       children: [
         pw.Text(
           'Tanggal Uji : ${report.testingCondition.date}',
-          style: pw.TextStyle(font: font),
+          style: pw.TextStyle(font: font, fontSize: 10),
         ),
         pw.Text(
           'Suhu Ruang : ${report.testingCondition.temperature}',
-          style: pw.TextStyle(font: font),
+          style: pw.TextStyle(font: font, fontSize: 10),
         ),
         pw.Text(
           'Kelembaban Ruang : ${report.testingCondition.humidity}',
-          style: pw.TextStyle(font: font),
+          style: pw.TextStyle(font: font, fontSize: 10),
         ),
       ],
     );

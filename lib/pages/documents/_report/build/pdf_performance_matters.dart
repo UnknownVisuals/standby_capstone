@@ -29,7 +29,7 @@ class PdfPerformanceMatters {
       children: [
         pw.Text(
           '4.3. TABEL. Kinerja penting.',
-          style: pw.TextStyle(font: fontBold, fontSize: 12),
+          style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),
         pw.TableHelper.fromTextArray(
@@ -40,13 +40,8 @@ class PdfPerformanceMatters {
             1: const pw.FlexColumnWidth(50),
             2: const pw.FlexColumnWidth(20),
           },
-          headerStyle: pw.TextStyle(
-            font: fontBold,
-            fontSize: 10,
-          ),
-          headerDecoration: const pw.BoxDecoration(
-            color: PdfColors.grey300,
-          ),
+          headerStyle: pw.TextStyle(font: fontBold, fontSize: 10),
+          headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
           cellStyle: pw.TextStyle(font: font, fontSize: 10),
           cellAlignment: pw.Alignment.centerLeft,
           headerAlignment: pw.Alignment.center,

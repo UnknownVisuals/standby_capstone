@@ -14,7 +14,7 @@ class PdfReportUtils {
           children: [
             pw.Text(
               'Test Report - StandBy',
-              style: pw.TextStyle(font: fontBold, fontSize: 12),
+              style: pw.TextStyle(font: fontBold, fontSize: 10),
             ),
             pw.Spacer(),
             pw.Image(pw.MemoryImage(logo), width: 64),
@@ -29,7 +29,7 @@ class PdfReportUtils {
     return pw.Center(
       child: pw.Text(
         '${context.pageNumber}',
-        style: pw.TextStyle(font: font, fontSize: 12),
+        style: pw.TextStyle(font: font, fontSize: 10),
       ),
     );
   }
