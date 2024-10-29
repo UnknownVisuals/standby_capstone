@@ -46,7 +46,6 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
         child: Text('4.3. TABEL. Kinerja penting.', style: kTextHeading_Red),
       ),
       children: [
-        const SizedBox(height: 8),
         PerformanceMattersTable(performanceMatters: widget.matters),
         const SizedBox(height: 8),
         Container(
@@ -85,7 +84,6 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
             style: kTextNormal_Black.copyWith(fontSize: 12),
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }

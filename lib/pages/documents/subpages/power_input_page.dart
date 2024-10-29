@@ -20,10 +20,7 @@ class _PowerInputPageState extends State<PowerInputPage> {
         width: double.infinity,
         child: Text('4.11. TABEL. Input daya', style: kTextHeading_Red),
       ),
-      children: [
-        const SizedBox(height: 8),
-        PowerInputTable(powerInput: widget.powers),
-      ],
+      children: [PowerInputTable(powerInput: widget.powers)],
     );
   }
 }

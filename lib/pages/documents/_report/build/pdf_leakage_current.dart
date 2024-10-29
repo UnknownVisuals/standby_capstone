@@ -67,7 +67,11 @@ class PdfLeakageCurrent {
           style: pw.TextStyle(font: font, fontSize: 10),
         ),
         pw.Text(
-          'Catatan 4: Nila total arus bocor pasien hanya relatif terhadap peralatan dengan multipel bagian yang diaplikasikan dari tipe yang sama. Lihat 8.7.4.7 h). Bagian yang diaplikasikan individu sesuai dengan nilai arus pelengkap pasien. Catatan 5: Selain kondisi yang ditunjukkan dalam TABEL, pengujian dilakukan pada suhu operasi dan setelah kondisi kelembaban awal 5.7. peralatan diberi energi dalam kondisi stanby dan beroperasi penuh, frekuensi suplai pengenal maks, pada 110% dari pengenal tegangan utama, dan setelah pengujian yang relevan dari Klausul 11.6 (yaitu, luapan, tumpahan, kebocoran, masuknya air dan materi partikulat, pembersihan & desinfeksi, & sterilisasi).',
+          'Catatan 4: Nila total arus bocor pasien hanya relatif terhadap peralatan dengan multipel bagian yang diaplikasikan dari tipe yang sama. Lihat 8.7.4.7 h). Bagian yang diaplikasikan individu sesuai dengan nilai arus pelengkap pasien.',
+          style: pw.TextStyle(font: font, fontSize: 10),
+        ),
+        pw.Text(
+          'Catatan 5: Selain kondisi yang ditunjukkan dalam TABEL, pengujian dilakukan pada suhu operasi dan setelah kondisi kelembaban awal 5.7. peralatan diberi energi dalam kondisi stanby dan beroperasi penuh, frekuensi suplai pengenal maks, pada 110% dari pengenal tegangan utama, dan setelah pengujian yang relevan dari Klausul 11.6 (yaitu, luapan, tumpahan, kebocoran, masuknya air dan materi partikulat, pembersihan & desinfeksi, & sterilisasi).',
           style: pw.TextStyle(font: font, fontSize: 10),
         ),
       ],

@@ -23,7 +23,6 @@ class _RiskManagementPageState extends State<RiskManagementPage> {
             style: kTextHeading_Red),
       ),
       children: [
-        const SizedBox(height: 8),
         RiskManagementTable(
           clauses: widget.clauses,
           onClauseChange: (int index) {
@@ -47,7 +46,6 @@ class _RiskManagementPageState extends State<RiskManagementPage> {
             style: kTextNormal_Black.copyWith(fontSize: 12),
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }

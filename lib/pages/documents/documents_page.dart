@@ -48,6 +48,79 @@ class _DocumentsPageState extends State<DocumentsPage> {
     );
   }
 
+  Future<void> _confirmAndGenerateReport() async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: const Icon(
+            Icons.picture_as_pdf_rounded,
+            color: kPrimary,
+            size: 48,
+          ),
+          backgroundColor: kGray,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          title: Center(
+            child: Text(
+              'Generate & Upload PDF',
+              style: kTextHeading_Red.copyWith(fontSize: 16),
+            ),
+          ),
+          content: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              'Are you sure you want to generate and upload this PDF report?',
+              textAlign: TextAlign.center,
+              style: kTextNormal_Black,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Container(
+                height: 48.0,
+                width: 120.0,
+                decoration: kEmbossDecoration,
+                child: Center(
+                  child: Text(
+                    'Cancel',
+                    style: kButtonTitle_Black,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 20),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Container(
+                height: 48.0,
+                width: 120.0,
+                decoration: kEmbossDecorationGrad,
+                child: Center(
+                  child: Text(
+                    'Confirm',
+                    style: kButtonTitle_White,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirm == true) {
+      await _generateReport();
+    }
+  }
+
   Future<void> _generateReport() async {
     final report = Report(
       incubatorDetail: IncubatorDetail(
@@ -95,7 +168,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     if (!mounted) return;
 
     PdfUtils.openPdf(finalReport);
-    // PdfUtils.uploadPdf(finalReport, context);
+    PdfUtils.uploadPdf(finalReport, context);
   }
 
   List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
@@ -149,9 +222,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
                   4;
           currentHumi = (latestSensorData?['dht22_humi'] ?? 0.0).toDouble();
 
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: SingleChildScrollView(
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   Text('Enter Incubator Details', style: kTextHeading_Red),
@@ -161,12 +234,71 @@ class _DocumentsPageState extends State<DocumentsPage> {
                   _buildTextRow('Model', _modelController),
                   _buildTextRow('No. Serial', _serialNumberController),
                   const SizedBox(height: 24),
-                  RiskManagementPage(clauses: clauses),
-                  PerformanceMattersPage(matters: matters),
-                  PowerInputPage(powers: powers0),
-                  PowerInputPage(powers: powers1),
-                  PowerInputPage(powers: powers2),
-                  LeakageCurrentPage(leakages: leakages),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: RiskManagementPage(clauses: clauses),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: PerformanceMattersPage(matters: matters),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: PowerInputPage(powers: powers0),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: PowerInputPage(powers: powers1),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: PowerInputPage(powers: powers2),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: LeakageCurrentPage(leakages: leakages),
+                    ),
+                  ),
                   const SizedBox(height: 24 * 3),
                 ],
               ),
@@ -175,7 +307,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _generateReport,
+        onPressed: _confirmAndGenerateReport,
         backgroundColor: kPrimary,
         shape: const CircleBorder(),
         child: const Icon(Icons.print_rounded, color: kWhite),
