@@ -41,6 +41,7 @@ class _AddStaffState extends State<AddStaff> {
       final AuthResponse authResponse = await supabase.auth.signUp(
         password: _passwordController.text,
         email: _emailController.text,
+        emailRedirectTo: 'io.supabase.flutterquickstart://login-callback/',
         data: {
           'full_name': _fullNameController.text,
           'is_admin': _isAdmin,
@@ -162,28 +163,26 @@ class _AddStaffState extends State<AddStaff> {
                 hintText: 'Full Name',
                 controller: _fullNameController,
                 icon: Icons.person_rounded,
-                obscureText: false,
               ),
               const SizedBox(height: 24),
               AuthInputField(
                 hintText: 'Email',
                 controller: _emailController,
                 icon: Icons.mail_rounded,
-                obscureText: false,
               ),
               const SizedBox(height: 24),
               AuthInputField(
                 hintText: 'Password',
                 controller: _passwordController,
                 icon: Icons.lock_rounded,
-                obscureText: true,
+                useObscure: true,
               ),
               const SizedBox(height: 24),
               AuthInputField(
                 hintText: 'Confirm Password',
                 controller: _confirmPasswordController,
                 icon: Icons.lock_rounded,
-                obscureText: true,
+                useObscure: true,
               ),
               const SizedBox(height: 24),
               Text('Account Role:', style: kTextHeading_Red),

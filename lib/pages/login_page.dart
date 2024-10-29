@@ -159,14 +159,13 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: 'Email',
                           controller: _emailController,
                           icon: Icons.email_rounded,
-                          obscureText: false,
                         ),
                         const SizedBox(height: 24),
                         AuthInputField(
                           hintText: 'Password',
                           controller: _passwordController,
                           icon: Icons.lock_rounded,
-                          obscureText: true,
+                          useObscure: true,
                         ),
                         const SizedBox(height: 24),
                         GestureDetector(

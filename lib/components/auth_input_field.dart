@@ -2,19 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
 
-class AuthInputField extends StatelessWidget {
+class AuthInputField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final IconData icon;
-  final bool obscureText;
+  final bool useObscure;
 
   const AuthInputField({
     super.key,
     required this.hintText,
     required this.controller,
     required this.icon,
-    required this.obscureText,
+    this.useObscure = false,
   });
+
+  @override
+  State<AuthInputField> createState() => _AuthInputFieldState();
+}
+
+class _AuthInputFieldState extends State<AuthInputField> {
+  late bool _isObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscured = true;
+  }
+
+  void _toggleObscureText() {
+    setState(() {
+      _isObscured = !_isObscured;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +41,23 @@ class AuthInputField extends StatelessWidget {
       decoration: kDebossDecoration,
       padding: const EdgeInsets.only(left: 8),
       child: TextFormField(
-        controller: controller,
-        obscureText: obscureText,
+        controller: widget.controller,
+        obscureText: widget.useObscure && _isObscured,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: kDarkGray),
-          hintText: hintText,
+          prefixIcon: Icon(widget.icon, color: kDarkGray),
+          hintText: widget.hintText,
           hintStyle: GoogleFonts.poppins(fontSize: 16),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(16),
+          suffixIcon: widget.useObscure
+              ? IconButton(
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                    color: kDarkGray,
+                  ),
+                  onPressed: _toggleObscureText,
+                )
+              : null,
         ),
         style: GoogleFonts.poppins(fontSize: 16),
       ),
