@@ -4,7 +4,7 @@ import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
 import 'package:standby_capstone/pages/documents/documents_page.dart';
 import 'package:standby_capstone/pages/notification_page.dart';
-import 'package:standby_capstone/pages/chatbot/chat_bot.dart';
+import 'package:standby_capstone/pages/chatbot/chat_bot_page.dart';
 import 'package:standby_capstone/pages/profile/profile_page.dart';
 
 class MainNavigation extends StatefulWidget {

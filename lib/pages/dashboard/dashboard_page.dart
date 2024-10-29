@@ -40,7 +40,7 @@ class _DashboardPageState extends State<DashboardPage> {
               final latestSensorData = snapshot.data?.last;
 
               final formattedDate = (latestSensorData?['created_at'] != null)
-                  ? DateFormat.yMMMMEEEEd().add_jms().format(
+                  ? DateFormat('EEEE, d MMMM y - kk:mm:ss a').format(
                       DateTime.parse(latestSensorData!['created_at']).toLocal())
                   : 'Invalid timestamp';
 

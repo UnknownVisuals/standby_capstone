@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:standby_capstone/pages/chatbot/chat_bot.dart';
+import 'package:standby_capstone/pages/chatbot/chat_bot_page.dart';
 import 'package:standby_capstone/pages/chatbot/sni_iec_60601.dart';
 import 'package:standby_capstone/constants.dart';
 
