@@ -54,7 +54,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     );
   }
 
-  Future<void> _confirmAndGenerateReport() async {
+  Future<void> _confirmUploadReport() async {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -70,14 +70,14 @@ class _DocumentsPageState extends State<DocumentsPage> {
           ),
           title: Center(
             child: Text(
-              'Generate & Upload PDF',
+              'Upload PDF Report',
               style: kTextHeading_Red.copyWith(fontSize: 16),
             ),
           ),
           content: Padding(
             padding: const EdgeInsets.all(12),
             child: Text(
-              'Are you sure you want to generate and upload this PDF report?',
+              'Are you sure you want to upload this PDF Report?',
               textAlign: TextAlign.center,
               style: kTextNormal_Black,
             ),
@@ -123,7 +123,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     );
 
     if (confirm == true) {
-      await _generateReport();
+      await _uploadReport();
     }
   }
 
@@ -192,6 +192,73 @@ class _DocumentsPageState extends State<DocumentsPage> {
 
     PdfUtils.openPdf(finalReport);
     // PdfUtils.uploadPdf(finalReport, context);
+  }
+
+  Future<void> _uploadReport() async {
+    final report = Report(
+      incubatorDetail: IncubatorDetail(
+        labNumber: _labNumberController.text,
+        productName: _productNameController.text,
+        model: _modelController.text,
+        serialNumber: _serialNumberController.text,
+      ),
+      testingCondition: TestingCondition(
+        date: DateTime.now(),
+        temperature: '$currentTemp °C',
+        humidity: '$currentHumi %RH',
+      ),
+      riskManagementItem: clauses.map((clause) {
+        return RiskManagementItem(
+          clause: clause.clause,
+          clauseTitle: clause.title,
+          docsReference: clause.refController.text,
+          riskManagement: clause.isRisk ? 'Ada' : 'Tidak ada',
+          result: clause.decisionController.text,
+        );
+      }).toList(),
+      performanceMattersItem: matters.map((matters) {
+        return PerformanceMattersItem(
+          performanceMatters: matters.perfMattersController.text,
+          docsReference: matters.docsReferenceController.text,
+          notes: matters.notesController.text,
+        );
+      }).toList(),
+      powerInputItem0: _convertToPowerInputItems(powers0),
+      powerInputItem1: _convertToPowerInputItems(powers1),
+      powerInputItem2: _convertToPowerInputItems(powers2),
+      powerInputItem3: _convertToPowerInputItems(powers3),
+      powerInputItem4: _convertToPowerInputItems(powers4),
+      powerInputItem5: _convertToPowerInputItems(powers5),
+      leakageCurrentItem: leakages.map((leakages) {
+        return LeakageCurrentItem(
+          leakageCurrentType: leakages.leakageCurrentType,
+          microAmpere: leakages.microAmpere.text,
+          maxMiliAmp: leakages.maxMiliAmp,
+          result: leakages.result.text,
+        );
+      }).toList(),
+      dielectricStrengthItem: dielectrics.map((dielectrics) {
+        return DielectricStrengthItem(
+          sampleIsolationController: dielectrics.sampleIsolationController.text,
+          insulationTypeController: dielectrics.insulationTypeController.text,
+          voltagePeakController:
+              double.tryParse(dielectrics.voltagePeakController.text) ?? 0.0,
+          voltagePeakDCController:
+              double.tryParse(dielectrics.voltagePeakDCController.text) ?? 0.0,
+          voltageTestController:
+              double.tryParse(dielectrics.voltageTestController.text) ?? 0.0,
+          dielectricDamageController:
+              dielectrics.dielectricDamageController.text,
+        );
+      }).toList(),
+    );
+
+    final finalReport = await PdfReport.generatePdfReport(report);
+
+    if (!mounted) return;
+
+    // PdfUtils.openPdf(finalReport);
+    PdfUtils.uploadPdf(finalReport, context);
   }
 
   List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
@@ -379,11 +446,23 @@ class _DocumentsPageState extends State<DocumentsPage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _confirmAndGenerateReport,
-        backgroundColor: kPrimary,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.print_rounded, color: kWhite),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _generateReport,
+            backgroundColor: kPrimary,
+            shape: const CircleBorder(),
+            child: const Icon(Icons.print_rounded, color: kWhite),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: _confirmUploadReport,
+            backgroundColor: kPrimary,
+            shape: const CircleBorder(),
+            child: const Icon(Icons.upload_file_rounded, color: kWhite),
+          ),
+        ],
       ),
     );
   }
