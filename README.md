@@ -2,7 +2,7 @@
     <img src="assets/logo/logo.png" alt="Logo StandBy" width="360" align="center">
 </div>
 
-## 🏃 - How to run the app
+## 🏃 - How to run the App
 
 1. clone this repository
 
@@ -16,13 +16,7 @@
    flutter pub get
    ```
 
-3. setup firebase
-
-   ```bash
-   flutterfire configure
-   ```
-
-4. clone this repository
+3. run the app
 
    ```bash
    flutter run -d DEVICENAME
@@ -30,5 +24,4 @@
 
    **NOTE**
 
-   - make sure [**flutter**](https://docs.flutter.dev/get-started/install) is configured.
-   - make sure [**firebase**](https://firebase.google.com/docs/flutter/setup?platform=android) for **flutter** is configured.
+   - make sure [**supabase client**](https://supabase.com/docs/guides/getting-started/quickstarts/flutter) .env keys is configured.
