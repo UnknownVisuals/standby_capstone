@@ -34,6 +34,12 @@ class PdfReport {
         report, report.powerInputItem1);
     final powerInputItem2Widget = await PdfPowerInputModel.buildPowerInput(
         report, report.powerInputItem2);
+    final powerInputItem3Widget = await PdfPowerInputModel.buildPowerInput(
+        report, report.powerInputItem3);
+    final powerInputItem4Widget = await PdfPowerInputModel.buildPowerInput(
+        report, report.powerInputItem4);
+    final powerInputItem5Widget = await PdfPowerInputModel.buildPowerInput(
+        report, report.powerInputItem5);
 
     final leakageCurrentWidget =
         await PdfLeakageCurrent.buildLeakageCurrent(report);
@@ -129,7 +135,11 @@ class PdfReport {
         ),
         build: (context) => [
           pw.SizedBox(height: 16),
-          leakageCurrentWidget,
+          powerInputItem3Widget,
+          pw.SizedBox(height: 16),
+          powerInputItem4Widget,
+          pw.SizedBox(height: 16),
+          powerInputItem5Widget,
         ],
       ),
     );
@@ -148,6 +158,8 @@ class PdfReport {
           font,
         ),
         build: (context) => [
+          pw.SizedBox(height: 16),
+          leakageCurrentWidget,
           pw.SizedBox(height: 16),
           dielectricStrengthWidget,
         ],

@@ -3,7 +3,12 @@ class Report {
   final TestingCondition testingCondition;
   final List<RiskManagementItem> riskManagementItem;
   final List<PerformanceMattersItem> performanceMattersItem;
-  final List<PowerInputItem> powerInputItem0, powerInputItem1, powerInputItem2;
+  final List<PowerInputItem> powerInputItem0,
+      powerInputItem1,
+      powerInputItem2,
+      powerInputItem3,
+      powerInputItem4,
+      powerInputItem5;
   final List<LeakageCurrentItem> leakageCurrentItem;
   final List<DielectricStrengthItem> dielectricStrengthItem;
 
@@ -15,6 +20,9 @@ class Report {
     required this.powerInputItem0,
     required this.powerInputItem1,
     required this.powerInputItem2,
+    required this.powerInputItem3,
+    required this.powerInputItem4,
+    required this.powerInputItem5,
     required this.leakageCurrentItem,
     required this.dielectricStrengthItem,
   });

@@ -38,6 +38,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final List<PowerInputModel> powers0 = PowerInputModel.defaultPowers('100 V');
   final List<PowerInputModel> powers1 = PowerInputModel.defaultPowers('170 V');
   final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200 V');
+  final List<PowerInputModel> powers3 = PowerInputModel.defaultPowers('220 V');
+  final List<PowerInputModel> powers4 = PowerInputModel.defaultPowers('230 V');
+  final List<PowerInputModel> powers5 = PowerInputModel.defaultPowers('240 V');
   final List<LeakageCurrentModel> leakages =
       LeakageCurrentModel.defaultLeakageCurrent();
   final List<DielectricStrengthModel> dielectrics = [];
@@ -156,6 +159,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
       powerInputItem0: _convertToPowerInputItems(powers0),
       powerInputItem1: _convertToPowerInputItems(powers1),
       powerInputItem2: _convertToPowerInputItems(powers2),
+      powerInputItem3: _convertToPowerInputItems(powers3),
+      powerInputItem4: _convertToPowerInputItems(powers4),
+      powerInputItem5: _convertToPowerInputItems(powers5),
       leakageCurrentItem: leakages.map((leakages) {
         return LeakageCurrentItem(
           leakageCurrentType: leakages.leakageCurrentType,
@@ -280,7 +286,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
                       data: Theme.of(context).copyWith(
                         dividerColor: Colors.transparent,
                       ),
-                      child: PowerInputPage(powers: powers0),
+                      child:
+                          PowerInputPage(powers: powers0, voltage: '(100 V)'),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -291,7 +298,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
                       data: Theme.of(context).copyWith(
                         dividerColor: Colors.transparent,
                       ),
-                      child: PowerInputPage(powers: powers1),
+                      child:
+                          PowerInputPage(powers: powers1, voltage: '(170 V)'),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -302,7 +310,44 @@ class _DocumentsPageState extends State<DocumentsPage> {
                       data: Theme.of(context).copyWith(
                         dividerColor: Colors.transparent,
                       ),
-                      child: PowerInputPage(powers: powers2),
+                      child:
+                          PowerInputPage(powers: powers2, voltage: '(200 V)'),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child:
+                          PowerInputPage(powers: powers3, voltage: '(220 V)'),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child:
+                          PowerInputPage(powers: powers4, voltage: '(230 V)'),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child:
+                          PowerInputPage(powers: powers5, voltage: '(240 V)'),
                     ),
                   ),
                   const SizedBox(height: 24),
