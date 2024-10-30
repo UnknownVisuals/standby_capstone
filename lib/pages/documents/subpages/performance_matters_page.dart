@@ -26,13 +26,13 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
     }
   }
 
-  void addRow() {
+  void _addRow() {
     setState(() {
       widget.matters.add(PerformanceMattersModel());
     });
   }
 
-  void removeRow() {
+  void _removeRow() {
     setState(() {
       widget.matters.removeLast();
     });
@@ -59,12 +59,12 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
             children: [
               IconButton(
                 icon: const Icon(Icons.remove, color: kWhite),
-                onPressed: removeRow,
+                onPressed: _removeRow,
               ),
               Container(width: 1, height: 24, color: kWhite),
               IconButton(
                 icon: const Icon(Icons.add, color: kWhite),
-                onPressed: addRow,
+                onPressed: _addRow,
               ),
             ],
           ),

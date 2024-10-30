@@ -4,10 +4,12 @@ import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_model.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_utils.dart';
+import 'package:standby_capstone/pages/documents/models/dielectric_strength_model.dart';
 import 'package:standby_capstone/pages/documents/models/leakage_current_model.dart';
 import 'package:standby_capstone/pages/documents/models/performance_matters_model.dart';
 import 'package:standby_capstone/pages/documents/models/power_input_model.dart';
 import 'package:standby_capstone/pages/documents/models/risk_management_model.dart';
+import 'package:standby_capstone/pages/documents/subpages/dielectric_strength_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/leakage_current_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/performance_matters_page.dart';
 import 'package:standby_capstone/pages/documents/subpages/power_input_page.dart';
@@ -38,6 +40,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
   final List<PowerInputModel> powers2 = PowerInputModel.defaultPowers('200 V');
   final List<LeakageCurrentModel> leakages =
       LeakageCurrentModel.defaultLeakageCurrent();
+  final List<DielectricStrengthModel> dielectrics = [];
 
   Widget _buildTextRow(String label, TextEditingController controller) {
     return Row(
@@ -161,6 +164,20 @@ class _DocumentsPageState extends State<DocumentsPage> {
           result: leakages.result.text,
         );
       }).toList(),
+      dielectricStrengthItem: dielectrics.map((dielectrics) {
+        return DielectricStrengthItem(
+          sampleIsolationController: dielectrics.sampleIsolationController.text,
+          insulationTypeController: dielectrics.insulationTypeController.text,
+          voltagePeakController:
+              double.tryParse(dielectrics.voltagePeakController.text) ?? 0.0,
+          voltagePeakDCController:
+              double.tryParse(dielectrics.voltagePeakDCController.text) ?? 0.0,
+          voltageTestController:
+              double.tryParse(dielectrics.voltageTestController.text) ?? 0.0,
+          dielectricDamageController:
+              dielectrics.dielectricDamageController.text,
+        );
+      }).toList(),
     );
 
     final finalReport = await PdfReport.generatePdfReport(report);
@@ -168,7 +185,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     if (!mounted) return;
 
     PdfUtils.openPdf(finalReport);
-    PdfUtils.uploadPdf(finalReport, context);
+    // PdfUtils.uploadPdf(finalReport, context);
   }
 
   List<PowerInputItem> _convertToPowerInputItems(List<PowerInputModel> powers) {
@@ -297,6 +314,17 @@ class _DocumentsPageState extends State<DocumentsPage> {
                         dividerColor: Colors.transparent,
                       ),
                       child: LeakageCurrentPage(leakages: leakages),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: kEmbossDecoration,
+                    padding: const EdgeInsets.all(12),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: DielectrictStrengthPage(dielectrics: dielectrics),
                     ),
                   ),
                   const SizedBox(height: 24 * 3),

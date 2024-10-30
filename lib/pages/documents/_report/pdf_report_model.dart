@@ -5,6 +5,7 @@ class Report {
   final List<PerformanceMattersItem> performanceMattersItem;
   final List<PowerInputItem> powerInputItem0, powerInputItem1, powerInputItem2;
   final List<LeakageCurrentItem> leakageCurrentItem;
+  final List<DielectricStrengthItem> dielectricStrengthItem;
 
   Report({
     required this.incubatorDetail,
@@ -15,6 +16,7 @@ class Report {
     required this.powerInputItem1,
     required this.powerInputItem2,
     required this.leakageCurrentItem,
+    required this.dielectricStrengthItem,
   });
 }
 
@@ -101,5 +103,23 @@ class LeakageCurrentItem {
     required this.microAmpere,
     required this.maxMiliAmp,
     required this.result,
+  });
+}
+
+class DielectricStrengthItem {
+  final String sampleIsolationController;
+  final String insulationTypeController;
+  final double voltagePeakController;
+  final double voltagePeakDCController;
+  final double voltageTestController;
+  final String dielectricDamageController;
+
+  DielectricStrengthItem({
+    required this.sampleIsolationController,
+    required this.insulationTypeController,
+    required this.voltagePeakController,
+    required this.voltagePeakDCController,
+    required this.voltageTestController,
+    required this.dielectricDamageController,
   });
 }

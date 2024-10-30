@@ -43,7 +43,7 @@ class PerformanceMattersTable extends StatelessWidget {
               return customDataRow(
                 mattersController: matters.perfMattersController,
                 refController: matters.docsReferenceController,
-                notesController: matters.notesController, // Fixed controller
+                notesController: matters.notesController,
               );
             }).toList(),
           ),

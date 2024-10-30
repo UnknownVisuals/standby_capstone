@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:standby_capstone/pages/documents/_report/build/pdf_dielectric_strength.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_incubator_details.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_leakage_current.dart';
 import 'package:standby_capstone/pages/documents/_report/build/pdf_performance_matters.dart';
@@ -36,6 +37,9 @@ class PdfReport {
 
     final leakageCurrentWidget =
         await PdfLeakageCurrent.buildLeakageCurrent(report);
+
+    final dielectricStrengthWidget =
+        await PdfDielectricStrengthModel.buildDielectricStrength(report);
 
     pdf.addPage(
       pw.MultiPage(
@@ -126,6 +130,26 @@ class PdfReport {
         build: (context) => [
           pw.SizedBox(height: 16),
           leakageCurrentWidget,
+        ],
+      ),
+    );
+
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        margin: const pw.EdgeInsets.all(32),
+        header: (context) => PdfReportUtils.buildPageHeader(
+          context,
+          logo,
+          fontBold,
+        ),
+        footer: (context) => PdfReportUtils.buildPageNumber(
+          context,
+          font,
+        ),
+        build: (context) => [
+          pw.SizedBox(height: 16),
+          dielectricStrengthWidget,
         ],
       ),
     );
