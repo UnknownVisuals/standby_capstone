@@ -95,11 +95,11 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: kGray,
       body: Padding(
         padding: const EdgeInsets.all(24),
-        child: _loading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: [
-                  Container(
+        child: Column(
+          children: [
+            _loading
+                ? const Center(child: CircularProgressIndicator())
+                : Container(
                     width: double.infinity,
                     height: 64,
                     margin: const EdgeInsets.only(bottom: 24),
@@ -136,41 +136,41 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  const ButtonIconText(
-                    icon: Icons.person_add_alt_rounded,
-                    text: 'Manage Staff',
-                    nextPage: ManageStaffPage(),
+            const SizedBox(height: 12),
+            const ButtonIconText(
+              icon: Icons.person_add_alt_rounded,
+              text: 'Manage Staff',
+              nextPage: ManageStaffPage(),
+            ),
+            const SizedBox(height: 24),
+            const ButtonIconText(
+              icon: Icons.info_rounded,
+              text: 'About StandBy',
+              nextPage: AboutStandbyPage(),
+            ),
+            const SizedBox(height: 24),
+            const ButtonIconText(
+              icon: Icons.groups_rounded,
+              text: 'About Us',
+              nextPage: AboutUsPage(),
+            ),
+            const Spacer(),
+            Container(
+              height: 48,
+              width: double.infinity,
+              decoration: kEmbossDecorationGrad,
+              child: TextButton(
+                onPressed: _signOut,
+                child: Center(
+                  child: Text(
+                    'Sign out',
+                    style: kButtonTitle_White,
                   ),
-                  const SizedBox(height: 24),
-                  const ButtonIconText(
-                    icon: Icons.info_rounded,
-                    text: 'About StandBy',
-                    nextPage: AboutStandbyPage(),
-                  ),
-                  const SizedBox(height: 24),
-                  const ButtonIconText(
-                    icon: Icons.groups_rounded,
-                    text: 'About Us',
-                    nextPage: AboutUsPage(),
-                  ),
-                  const Spacer(),
-                  Container(
-                    height: 48,
-                    width: double.infinity,
-                    decoration: kEmbossDecorationGrad,
-                    child: TextButton(
-                      onPressed: _signOut,
-                      child: Center(
-                        child: Text(
-                          'Sign out',
-                          style: kButtonTitle_White,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
+            ),
+          ],
+        ),
       ),
     );
   }

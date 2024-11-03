@@ -23,7 +23,7 @@ class _AboutStandbyPageState extends State<AboutStandbyPage> {
             Center(child: Image.asset('assets/logo/logo.png', height: 96)),
             const SizedBox(height: 36),
             Text(
-              'StandBy adalah sebuah platform yang menyediakan automasi dan informasi mengenai standarisasi inkubator bayi, berdasarkan dengan Standar Nasional Indonesia (SNI).',
+              'StandBy adalah sebuah platform yang menyediakan automasi dan informasi mengenai standarisasi inkubator bayi, berdasarkan Standar Nasional Indonesia (SNI).',
               style: kTextNormal_Black,
             ),
             const SizedBox(height: 24),
