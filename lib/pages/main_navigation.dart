@@ -68,7 +68,7 @@ class MainNavigationState extends State<MainNavigation> {
         animationDuration: const Duration(milliseconds: 300),
         items: <Widget>[
           Icon(
-            Icons.dashboard,
+            Icons.dashboard_rounded,
             size: 32,
             color: _currentIndex == 0 ? kPrimary : kDarkGray,
           ),
@@ -83,7 +83,7 @@ class MainNavigationState extends State<MainNavigation> {
             color: _currentIndex == 2 ? kPrimary : kDarkGray,
           ),
           Icon(
-            Icons.manage_accounts,
+            Icons.manage_accounts_rounded,
             size: 32,
             color: _currentIndex == 3 ? kPrimary : kDarkGray,
           ),

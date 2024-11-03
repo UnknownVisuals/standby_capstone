@@ -8,14 +8,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class AddStaff extends StatefulWidget {
-  const AddStaff({super.key});
+class AddStaffPage extends StatefulWidget {
+  const AddStaffPage({super.key});
 
   @override
-  State<AddStaff> createState() => _AddStaffState();
+  State<AddStaffPage> createState() => _AddStaffPageState();
 }
 
-class _AddStaffState extends State<AddStaff> {
+class _AddStaffPageState extends State<AddStaffPage> {
   String? _avatarUrl;
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();

@@ -84,38 +84,45 @@ class _DocumentsPageState extends State<DocumentsPage> {
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Container(
-                height: 48.0,
-                width: 120.0,
-                decoration: kEmbossDecoration,
-                child: Center(
-                  child: Text(
-                    'Cancel',
-                    style: kButtonTitle_Black,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Container(
+                      height: 48.0,
+                      decoration: kEmbossDecoration,
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: kButtonTitle_Black,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(width: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Container(
-                height: 48.0,
-                width: 120.0,
-                decoration: kEmbossDecorationGrad,
-                child: Center(
-                  child: Text(
-                    'Confirm',
-                    style: kButtonTitle_White,
+                const SizedBox(width: 20),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Container(
+                      height: 48.0,
+                      decoration: kEmbossDecorationGrad,
+                      child: Center(
+                        child: Text(
+                          'Confirm',
+                          style: kButtonTitle_White,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         );

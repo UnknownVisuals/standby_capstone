@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
-import 'package:standby_capstone/pages/profile/add_staff.dart';
+import 'package:standby_capstone/pages/profile/admin/add_staff_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class ManageStaff extends StatefulWidget {
-  const ManageStaff({super.key});
+class ManageStaffPage extends StatefulWidget {
+  const ManageStaffPage({super.key});
 
   @override
-  State<ManageStaff> createState() => _ManageStaffState();
+  State<ManageStaffPage> createState() => _ManageStaffPageState();
 }
 
-class _ManageStaffState extends State<ManageStaff> {
+class _ManageStaffPageState extends State<ManageStaffPage> {
   final staffStream = supabase.from('profiles').stream(primaryKey: ['id']);
   final User? user = supabase.auth.currentUser;
   Map<String, dynamic>? userProfiles;
@@ -140,7 +140,7 @@ class _ManageStaffState extends State<ManageStaff> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const AddStaff(),
+                    builder: (context) => const AddStaffPage(),
                   ),
                 );
               },

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 
-class AboutStandby extends StatefulWidget {
-  const AboutStandby({super.key});
+class AboutStandbyPage extends StatefulWidget {
+  const AboutStandbyPage({super.key});
 
   @override
-  State<AboutStandby> createState() => _AboutStandbyState();
+  State<AboutStandbyPage> createState() => _AboutStandbyPageState();
 }
 
-class _AboutStandbyState extends State<AboutStandby> {
+class _AboutStandbyPageState extends State<AboutStandbyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class _AboutStandbyState extends State<AboutStandby> {
             Center(child: Image.asset('assets/logo/logo.png', height: 96)),
             const SizedBox(height: 36),
             Text(
-              'StandBy adalah sebuah sistem untuk mempermudah proses standardisasi inkubator bayi. Aplikasi mobile ini merupakan salah satu bagian dari sistem StandBy.',
+              'StandBy adalah sebuah platform yang menyediakan automasi dan informasi mengenai standarisasi inkubator bayi, berdasarkan dengan Standar Nasional Indonesia (SNI).',
               style: kTextNormal_Black,
             ),
             const SizedBox(height: 24),

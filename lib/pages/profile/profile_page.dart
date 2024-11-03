@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:standby_capstone/components/button_icon_text.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
-import 'package:standby_capstone/pages/profile/about_standby.dart';
-import 'package:standby_capstone/pages/profile/about_us.dart';
-import 'package:standby_capstone/pages/profile/manage_staff.dart';
+import 'package:standby_capstone/pages/profile/about_standby_page.dart';
+import 'package:standby_capstone/pages/profile/about_us_page.dart';
+import 'package:standby_capstone/pages/profile/manage_staff_page.dart';
 import 'package:standby_capstone/pages/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -140,19 +140,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   const ButtonIconText(
                     icon: Icons.person_add_alt_rounded,
                     text: 'Manage Staff',
-                    nextPage: ManageStaff(),
+                    nextPage: ManageStaffPage(),
                   ),
                   const SizedBox(height: 24),
                   const ButtonIconText(
                     icon: Icons.info_rounded,
                     text: 'About StandBy',
-                    nextPage: AboutStandby(),
+                    nextPage: AboutStandbyPage(),
                   ),
                   const SizedBox(height: 24),
                   const ButtonIconText(
                     icon: Icons.groups_rounded,
                     text: 'About Us',
-                    nextPage: AboutUs(),
+                    nextPage: AboutUsPage(),
                   ),
                   const Spacer(),
                   Container(

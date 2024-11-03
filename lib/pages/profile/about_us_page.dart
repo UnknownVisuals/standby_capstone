@@ -3,14 +3,14 @@ import 'package:standby_capstone/components/card_profile.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
 
-class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+class AboutUsPage extends StatefulWidget {
+  const AboutUsPage({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
+  State<AboutUsPage> createState() => _AboutUsPageState();
 }
 
-class _AboutUsState extends State<AboutUs> {
+class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

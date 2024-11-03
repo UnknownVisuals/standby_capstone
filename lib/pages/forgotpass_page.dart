@@ -40,7 +40,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         child: Center(
                           child: Image.asset(
                             'assets/images/illustration_forgotpass.png',
-                            height: 256,
                           ),
                         ),
                       ),
