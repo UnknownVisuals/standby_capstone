@@ -1,37 +1,26 @@
 {
   "project_info": {
-    "project_number": "627233552935",
-    "firebase_url": "https://standby-c50ba-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "standby-c50ba",
-    "storage_bucket": "standby-c50ba.appspot.com"
+    "project_number": "546015919369",
+    "project_id": "standby-incubator",
+    "storage_bucket": "standby-incubator.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:627233552935:android:373882a6c82614a43bac02",
+        "mobilesdk_app_id": "1:546015919369:android:bd29fa2d7ed1d97d7b27d8",
         "android_client_info": {
-          "package_name": "com.example.standby_capstone"
+          "package_name": "com.standby.incubator"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "627233552935-rprpgr3le3ic4tushqm5q5tr7qooa1oh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA2_bnE8k4YvfPhScMXclOOdwqjya4lc34"
+          "current_key": "AIzaSyBdQW7U2msNgLdNpMtVENWaE5iNKHs_ck4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "627233552935-rprpgr3le3ic4tushqm5q5tr7qooa1oh.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
