@@ -10,18 +10,27 @@
    git clone https://github.com/UnknownVisuals/standby_capstone.git
    ```
 
-2. get the dependencies
+2. provide SUPABASE_URL & SUPABASE_ANON_KEY on .env
+
+   ```env
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+3. configure firebase_options
+
+   ```bash
+   flutterfire configure
+   ```
+
+4. get the dependencies
 
    ```bash
    flutter pub get
    ```
 
-3. run the app
+5. run the app
 
    ```bash
    flutter run -d DEVICENAME
    ```
-
-   **NOTE**
-
-   - make sure [**supabase client**](https://supabase.com/docs/guides/getting-started/quickstarts/flutter) .env keys is configured.
