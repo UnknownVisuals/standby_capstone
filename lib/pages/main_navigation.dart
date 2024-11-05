@@ -1,11 +1,16 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
+import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
 import 'package:standby_capstone/pages/documents/documents_page.dart';
 import 'package:standby_capstone/pages/notification_page.dart';
 import 'package:standby_capstone/pages/chatbot/chat_bot_page.dart';
 import 'package:standby_capstone/pages/profile/profile_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -28,6 +33,46 @@ class MainNavigationState extends State<MainNavigation> {
     ChatBotPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    supabase.auth.onAuthStateChange.listen((event) async {
+      if (event.event == AuthChangeEvent.signedIn) {
+        await FirebaseMessaging.instance.requestPermission();
+        await FirebaseMessaging.instance.getAPNSToken();
+
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+
+        if (fcmToken != null) {
+          await _setFcmToken(fcmToken);
+        }
+      }
+    });
+
+    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+      await _setFcmToken(fcmToken);
+    });
+
+    FirebaseMessaging.onMessage.listen((payload) {
+      final notification = payload.notification;
+      if (!mounted) return;
+      if (notification != null) {
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+            message: '${notification.title} ${notification.body}',
+          ),
+        );
+      }
+    });
+  }
+
+  Future<void> _setFcmToken(String fcmToken) async {
+    await supabase.from('profiles').update({
+      'fcm_token': fcmToken,
+    }).eq('id', supabase.auth.currentUser!.id);
+  }
 
   @override
   Widget build(BuildContext context) {

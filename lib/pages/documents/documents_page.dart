@@ -303,11 +303,14 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 valueColor: AlwaysStoppedAnimation(kPrimary),
               ),
             );
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No sensors data available.'));
           }
+
+          // else if (snapshot.hasError) {
+          //   return Center(child: Text('Error: ${snapshot.error}'));
+          // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          //   return const Center(
+          //       child: Text('No sensors data available.'));
+          // }
 
           final latestSensorData = snapshot.data?.last;
 

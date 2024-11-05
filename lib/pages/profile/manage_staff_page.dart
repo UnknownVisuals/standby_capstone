@@ -81,11 +81,13 @@ class _ManageStaffPageState extends State<ManageStaffPage> {
                 valueColor: AlwaysStoppedAnimation(kPrimary),
               ),
             );
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No staffs data available.'));
           }
+
+          // else if (snapshot.hasError) {
+          //   return Center(child: Text('Error: ${snapshot.error}'));
+          // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          //   return const Center(child: Text('No staffs data available.'));
+          // }
 
           final staffs = snapshot.data as List<Map<String, dynamic>>;
 

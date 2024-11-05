@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:standby_capstone/components/card_info.dart';
@@ -40,12 +42,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       valueColor: AlwaysStoppedAnimation(kPrimary),
                     ),
                   );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
-                      child: Text('No sensors data available.'));
                 }
+
+                // else if (snapshot.hasError) {
+                //   return Center(child: Text('Error: ${snapshot.error}'));
+                // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                //   return const Center(
+                //       child: Text('No sensors data available.'));
+                // }
 
                 final latestSensorData = snapshot.data?.last;
 

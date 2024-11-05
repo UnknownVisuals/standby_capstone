@@ -237,15 +237,22 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
                 future: _sensorDataFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(
-                        child: Text('No sensors data available.'));
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(kPrimary),
+                      ),
+                    );
                   }
 
+                  // else if (snapshot.hasError) {
+                  //   return Center(child: Text('Error: ${snapshot.error}'));
+                  // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  //   return const Center(
+                  //       child: Text('No sensors data available.'));
+                  // }
+
                   final sensorsData = snapshot.data!;
+
                   return SingleChildScrollView(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
