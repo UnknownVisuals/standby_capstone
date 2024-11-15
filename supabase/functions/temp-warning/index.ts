@@ -1,11 +1,9 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { JWT } from 'npm:google-auth-library@9'
 import serviceAccount from '../service-account.json' with { type: 'json' }
 
 interface Notification {
   id: string
-  user_id: string
   temp: number
 }
 
@@ -22,26 +20,27 @@ const supabase = createClient(
 )
 
 Deno.serve(async (req) => {
-  const payload: WebhookPayload = await req.json()
+  const payload: WebhookPayload = await req.json();
 
-  const { data: tokensData } = await supabase
+  // Fetch all FCM tokens
+  const { data } = await supabase
     .from('profiles')
-    .select('fcm_token, full_name, avatar_url')
-    .neq('fcm_token', null)
+    .select('fcm_token')
+    .neq('fcm_token', null);
 
-  if (!tokensData || tokensData.length === 0) {
-    return new Response(JSON.stringify({ message: "No tokens found" }), {
-      headers: { 'Content-Type': 'application/json' },
-    })
+  if (!data || data.length === 0) {
+    return new Response(JSON.stringify({ error: "No FCM tokens found" }), { status: 404 });
   }
+
+  const fcmTokens = data.map((row) => row.fcm_token);
 
   const accessToken = await getAccessToken({
     clientEmail: serviceAccount.client_email,
     privateKey: serviceAccount.private_key,
-  })
+  });
 
-  const responses = await Promise.all(
-    tokensData.map(async ({ fcm_token }) => {
+  const results = await Promise.all(
+    fcmTokens.map(async (token) => {
       const res = await fetch(
         `https://fcm.googleapis.com/v1/projects/${serviceAccount.project_id}/messages:send`,
         {
@@ -52,34 +51,23 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({
             message: {
-              token: fcm_token,
+              token,
               notification: {
-                title: `⚠️ Temperature Warning! ⚠️`,
-                body: `**${full_name}**\n${payload.record.temp}°C is outside the suitable range for the incubator.`,
-                image: `${avatar_url}`
-              },
-              android: {
-                notification: {
-                image: avatar_url,
-                style: {
-                  type: 'bigpicture',
-                  big_picture: avatar_url,
-                  summary_text: `**${full_name}**\n${payload.record.temp}°C is outside the suitable range for the incubator.`,
-                },
-                },
+                title: `⚠️ TEMPERATURE WARNING ⚠️`,
+                body: `${payload.record.temp}°C is outside suitable range for Incubator`,
               },
             },
           }),
         }
-      )
-      return res.json()
+      );
+      return res.json();
     })
-  )
+  );
 
-  return new Response(JSON.stringify(responses), {
+  return new Response(JSON.stringify(results), {
     headers: { 'Content-Type': 'application/json' },
-  })
-})
+  });
+});
 
 const getAccessToken = ({
   clientEmail,
