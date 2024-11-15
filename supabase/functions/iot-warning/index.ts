@@ -26,7 +26,7 @@ Deno.serve(async (req) => {
 
   const { data: tokensData } = await supabase
     .from('profiles')
-    .select('fcm_token')
+    .select('fcm_token, full_name, avatar_url')
     .neq('fcm_token', null)
 
   if (!tokensData || tokensData.length === 0) {
@@ -54,8 +54,19 @@ Deno.serve(async (req) => {
             message: {
               token: fcm_token,
               notification: {
-                title: `Temperature Warning!`,
-                body: `${payload.record.temp}°C is outside the suitable range for the incubator.`,
+                title: `⚠️ Temperature Warning! ⚠️`,
+                body: `**${full_name}**\n${payload.record.temp}°C is outside the suitable range for the incubator.`,
+                image: `${avatar_url}`
+              },
+              android: {
+                notification: {
+                image: avatar_url,
+                style: {
+                  type: 'bigpicture',
+                  big_picture: avatar_url,
+                  summary_text: `**${full_name}**\n${payload.record.temp}°C is outside the suitable range for the incubator.`,
+                },
+                },
               },
             },
           }),
