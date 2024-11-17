@@ -15,12 +15,6 @@ class _NotificationPageState extends State<NotificationPage> {
   List<Map<String, dynamic>> notifications = [];
   bool isLoading = true;
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchNotifications();
-  }
-
   Future<void> _fetchNotifications() async {
     try {
       final response = await supabase
@@ -40,6 +34,12 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _fetchNotifications();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DeepMenuAppbar(title: 'Notifications'),
@@ -47,7 +47,11 @@ class _NotificationPageState extends State<NotificationPage> {
         color: kGray,
         height: double.infinity,
         child: isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(kPrimary),
+                ),
+              )
             : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(24),

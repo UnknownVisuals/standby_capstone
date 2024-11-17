@@ -61,24 +61,101 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _signOut() async {
-    try {
-      await supabase.auth.signOut();
-      if (!mounted) return;
-    } on AuthException catch (e) {
-      showTopSnackBar(
-        Overlay.of(context),
-        CustomSnackBar.error(message: e.message.toString()),
-      );
-    } catch (e) {
-      showTopSnackBar(
-        Overlay.of(context),
-        const CustomSnackBar.error(message: 'Unexpected error occurred'),
-      );
-    } finally {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const LoginPage()),
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: const Icon(
+            Icons.logout_rounded,
+            color: kPrimary,
+            size: 48,
+          ),
+          backgroundColor: kGray,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          title: Center(
+            child: Text(
+              'Logout',
+              style: kTextHeading_Red.copyWith(fontSize: 16),
+            ),
+          ),
+          content: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              'Are you sure you want to logout?',
+              style: kTextNormal_Black,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Container(
+                      height: 48.0,
+                      decoration: kEmbossDecoration,
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: kButtonTitle_Black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Container(
+                      height: 48.0,
+                      decoration: kEmbossDecorationGrad,
+                      child: Center(
+                        child: Text(
+                          'Confirm',
+                          style: kButtonTitle_White,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         );
+      },
+    );
+
+    if (confirm == true) {
+      try {
+        await supabase.auth.signOut();
+        if (!mounted) return;
+      } on AuthException catch (e) {
+        if (!mounted) return;
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(message: e.message.toString()),
+        );
+      } catch (e) {
+        if (!mounted) return;
+        showTopSnackBar(
+          Overlay.of(context),
+          const CustomSnackBar.error(message: 'Unexpected error occurred'),
+        );
+      } finally {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const LoginPage()),
+          );
+        }
       }
     }
   }
