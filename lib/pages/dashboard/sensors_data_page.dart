@@ -260,35 +260,40 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
                         columnSpacing: 32,
                         columns: [
                           DataColumn(
-                              label:
-                                  Text('Timestamp', style: kTextHeading_Red)),
+                            label: Text('Timestamp', style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label:
-                                  Text('DHT22\nTemp', style: kTextHeading_Red)),
+                            label: Text('DHT22\nTemp', style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label:
-                                  Text('DHT22\nHumi', style: kTextHeading_Red)),
+                            label: Text('DHT22\nHumi', style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label: Text('DS18B20\nTemp - 1',
-                                  style: kTextHeading_Red)),
+                            label: Text('DS18B20\nTemp - 1',
+                                style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label: Text('DS18B20\nTemp - 2',
-                                  style: kTextHeading_Red)),
+                            label: Text('DS18B20\nTemp - 2',
+                                style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label: Text('DS18B20\nTemp - 3',
-                                  style: kTextHeading_Red)),
+                            label: Text('DS18B20\nTemp - 3',
+                                style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label: Text('DS18B20\nTemp - 4',
-                                  style: kTextHeading_Red)),
+                            label: Text('DS18B20\nTemp - 4',
+                                style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label:
-                                  Text('Fan\nStatus', style: kTextHeading_Red)),
+                            label: Text('Fan\nStatus', style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label:
-                                  Text('Flow\nRate', style: kTextHeading_Red)),
+                            label: Text('Flow\nRate', style: kTextHeading_Red),
+                          ),
                           DataColumn(
-                              label: Text('Sound\nStatus',
-                                  style: kTextHeading_Red)),
+                            label:
+                                Text('Sound\nStatus', style: kTextHeading_Red),
+                          ),
                         ],
                         rows: sensorsData.map((sensor) {
                           return DataRow(cells: [
