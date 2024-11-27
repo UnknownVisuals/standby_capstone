@@ -5,6 +5,7 @@ import 'package:standby_capstone/constants.dart';
 class AuthInputField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
+  final bool numberInput;
   final IconData icon;
   final bool useObscure;
 
@@ -14,6 +15,7 @@ class AuthInputField extends StatefulWidget {
     required this.controller,
     required this.icon,
     this.useObscure = false,
+    this.numberInput = false,
   });
 
   @override
@@ -42,6 +44,8 @@ class _AuthInputFieldState extends State<AuthInputField> {
       padding: const EdgeInsets.only(left: 8),
       child: TextFormField(
         controller: widget.controller,
+        keyboardType:
+            widget.numberInput ? TextInputType.number : TextInputType.text,
         obscureText: widget.useObscure && _isObscured,
         decoration: InputDecoration(
           prefixIcon: Icon(widget.icon, color: kDarkGray),

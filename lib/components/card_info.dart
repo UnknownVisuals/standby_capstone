@@ -6,18 +6,21 @@ class InfoCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
+  final double width;
 
   const InfoCard({
     super.key,
     required this.icon,
     required this.title,
     required this.subtitle,
+    this.width = double.infinity,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 128,
+      width: width,
       padding: const EdgeInsets.all(12),
       decoration: kEmbossDecoration,
       child: Row(
@@ -25,7 +28,7 @@ class InfoCard extends StatelessWidget {
           Expanded(
             child: Container(
               alignment: Alignment.topLeft,
-              height: 128,
+              height: double.infinity,
               child: Icon(
                 icon,
                 size: 48,
@@ -37,8 +40,9 @@ class InfoCard extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
+                  child: Container(
+                    alignment: Alignment.topRight,
+                    // width: double.infinity,
                     child: Text(
                       title,
                       textAlign: TextAlign.right,
@@ -53,7 +57,7 @@ class InfoCard extends StatelessWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.bottomRight,
-                    width: double.infinity,
+                    // width: double.infinity,
                     child: Text(
                       subtitle,
                       textAlign: TextAlign.right,
