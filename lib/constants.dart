@@ -124,3 +124,15 @@ final TextStyle kTextNormal_Black = GoogleFonts.poppins(
   fontSize: 14,
   fontWeight: FontWeight.normal,
 );
+
+final TextStyle kMonitor = GoogleFonts.poppins(
+  color: kPrimary,
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+);
+
+final TextStyle kMonitorDescription = GoogleFonts.poppins(
+  color: kBlack,
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);

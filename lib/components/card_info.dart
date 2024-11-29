@@ -1,74 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:standby_capstone/constants.dart';
 
 class InfoCard extends StatelessWidget {
   final IconData icon;
-  final String title;
-  final String subtitle;
-  final double width;
+  final String value;
+  final String unit;
+  final String description;
 
   const InfoCard({
     super.key,
     required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.width = double.infinity,
+    required this.value,
+    required this.unit,
+    required this.description,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 128,
-      width: width,
       padding: const EdgeInsets.all(12),
+      height: 128,
       decoration: kEmbossDecoration,
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.topLeft,
-              height: double.infinity,
-              child: Icon(
-                icon,
-                size: 48,
-                color: kDarkGray,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Icon(
+                    icon,
+                    size: 48,
+                    color: kDarkGray,
+                  ),
+                ),
               ),
-            ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topRight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(value, style: kMonitor),
+                      Text(unit, style: kMonitor),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.topRight,
-                    // width: double.infinity,
-                    child: Text(
-                      title,
-                      textAlign: TextAlign.right,
-                      style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: kPrimary,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.bottomRight,
-                    // width: double.infinity,
-                    child: Text(
-                      subtitle,
-                      textAlign: TextAlign.right,
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        color: kBlack,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: Container(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                description,
+                textAlign: TextAlign.right,
+                style: kMonitorDescription,
+              ),
             ),
           ),
         ],
