@@ -17,13 +17,12 @@ class _ChatBotPageState extends State<ChatBotPage> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(
-          'https://cdn.botpress.cloud/webchat/v2.1/shareable.html?botId=abf73d59-de68-4f12-993a-aafd25b94f9a'));
+          'https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/03/01/20241003014651-PU6UGL6W.json'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const DeepMenuAppbar(title: 'StandBy Chat Bot'),
       body: WebViewWidget(controller: _controller),
     );
   }
