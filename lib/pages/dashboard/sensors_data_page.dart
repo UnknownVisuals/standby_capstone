@@ -15,10 +15,10 @@ class SensorsDataPage extends StatefulWidget {
 
 class _SensorsDataPageState extends State<SensorsDataPage> {
   final TextEditingController _pageController = TextEditingController();
-  final List<int> _itemsPerPageOptions = [25, 50, 100];
+  final List<int> _itemsPerPageOptions = [25, 50, 100, 250, 500];
   Future<List<dynamic>>? _sensorDataFuture;
   List<dynamic> _allData = [];
-  int _itemsPerPage = 50;
+  int _itemsPerPage = 100;
   int _currentPage = 1;
   int _totalPages = 1;
 
@@ -64,26 +64,19 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
       final esp32_1 = await supabase.from('esp32_1').select();
       final esp32_2 = await supabase.from('esp32_2').select();
 
-      // Determine the longer table
       final int maxLength =
           esp32_1.length > esp32_2.length ? esp32_1.length : esp32_2.length;
 
-      // Ensure both lists have the same length by adding placeholders
       final paddedEsp32_1 =
           List<Map<String, dynamic>>.generate(maxLength, (index) {
-        return index < esp32_1.length
-            ? esp32_1[index]
-            : {}; // Empty map for missing data
+        return index < esp32_1.length ? esp32_1[index] : {};
       });
 
       final paddedEsp32_2 =
           List<Map<String, dynamic>>.generate(maxLength, (index) {
-        return index < esp32_2.length
-            ? esp32_2[index]
-            : {}; // Empty map for missing data
+        return index < esp32_2.length ? esp32_2[index] : {};
       });
 
-      // Combine the two tables row by row
       final combinedData =
           List<Map<String, dynamic>>.generate(maxLength, (index) {
         return {
@@ -92,12 +85,10 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
         };
       });
 
-      // Add default values ("N/A") for missing data
       for (var row in combinedData) {
         row.updateAll((key, value) => value ?? 'N/A');
       }
 
-      // Sort by timestamp
       combinedData.sort((a, b) {
         final dateA = a['created_at'] != 'N/A'
             ? DateTime.parse(a['created_at']).toLocal()
@@ -105,7 +96,7 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
         final dateB = b['created_at'] != 'N/A'
             ? DateTime.parse(b['created_at']).toLocal()
             : DateTime.fromMillisecondsSinceEpoch(0);
-        return dateB.compareTo(dateA); // Descending order
+        return dateB.compareTo(dateA);
       });
 
       return combinedData;
@@ -307,7 +298,8 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(
-                        child: Text('No sensor data available.'));
+                      child: Text('No sensor data available.'),
+                    );
                   }
 
                   final sensorsData = snapshot.data!;
