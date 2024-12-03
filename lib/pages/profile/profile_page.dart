@@ -6,6 +6,7 @@ import 'package:standby_capstone/pages/profile/about_standby_page.dart';
 import 'package:standby_capstone/pages/profile/about_us_page.dart';
 import 'package:standby_capstone/pages/profile/manage_staff_page.dart';
 import 'package:standby_capstone/pages/login_page.dart';
+import 'package:standby_capstone/pages/profile/wifi_manager_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -230,6 +231,12 @@ class _ProfilePageState extends State<ProfilePage> {
               icon: Icons.groups_rounded,
               text: 'About Us',
               nextPage: AboutUsPage(),
+            ),
+            const SizedBox(height: 24),
+            const ButtonIconText(
+              icon: Icons.wifi,
+              text: 'WiFi Manager',
+              nextPage: WifiManagerPage(),
             ),
             const Spacer(),
             Container(
