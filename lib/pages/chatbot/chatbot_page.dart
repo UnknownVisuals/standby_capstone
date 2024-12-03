@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class ChatBotPage extends StatefulWidget {
-  const ChatBotPage({super.key});
+class ChatbotPage extends StatefulWidget {
+  const ChatbotPage({super.key});
 
   @override
-  State<ChatBotPage> createState() => _ChatBotPageState();
+  State<ChatbotPage> createState() => _ChatbotPageState();
 }
 
-class _ChatBotPageState extends State<ChatBotPage> {
+class _ChatbotPageState extends State<ChatbotPage> {
   late final WebViewController _controller;
 
   @override

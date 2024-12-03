@@ -6,7 +6,7 @@ import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/dashboard/dashboard_page.dart';
 import 'package:standby_capstone/pages/documents/documents_page.dart';
 import 'package:standby_capstone/pages/notification_page.dart';
-import 'package:standby_capstone/pages/chatbot/chat_bot_page.dart';
+import 'package:standby_capstone/pages/chatbot/chatbot_page.dart';
 import 'package:standby_capstone/pages/profile/profile_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -25,14 +25,14 @@ class MainNavigationState extends State<MainNavigation> {
   final List<String> _appBarTitles = const [
     'Dashboard',
     'Documents',
-    'Chat Bot',
+    'Chatbot',
     'Profile',
   ];
 
   final List<Widget> _screenList = const [
     DashboardPage(),
     DocumentsPage(),
-    ChatBotPage(),
+    ChatbotPage(),
     ProfilePage(),
   ];
 
