@@ -20,31 +20,28 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           children: [
             Expanded(
               flex: 2,
-              child: Container(
-                color: kPrimary,
-                child: Padding(
-                  padding: const EdgeInsets.all(36),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Forgot your password?',
-                        style: kAuthTitleLarge,
-                      ),
-                      Text(
-                        'Please contact one of the Admin to change your password',
-                        style: kTextNormal_White,
-                      ),
-                      const SizedBox(height: 16),
-                      Expanded(
-                        child: Center(
-                          child: Image.asset(
-                            'assets/images/illustration_forgotpass.png',
-                          ),
+              child: Padding(
+                padding: const EdgeInsets.all(36),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Forgot your password?',
+                      style: kAuthTitleLarge,
+                    ),
+                    Text(
+                      'Please contact one of the Admin to change your password',
+                      style: kTextNormal_White,
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Center(
+                        child: Image.asset(
+                          'assets/images/illustration_forgotpass.png',
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

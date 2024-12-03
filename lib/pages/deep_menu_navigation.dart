@@ -21,13 +21,19 @@ class DeepMenuAppbar extends StatelessWidget implements PreferredSizeWidget {
           height: 40,
         ),
       ),
-      title: Text(title, style: kAppbarTitle),
+      title: Text(
+        title,
+        style: kAppbarTitle,
+      ),
       actions: [
         IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.close, color: kDarkGray),
+          icon: const Icon(
+            Icons.close,
+            color: kDarkGray,
+          ),
         )
       ],
       centerTitle: true,

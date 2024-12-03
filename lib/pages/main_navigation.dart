@@ -21,12 +21,14 @@ class MainNavigation extends StatefulWidget {
 
 class MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
+
   final List<String> _appBarTitles = const [
     'Dashboard',
     'Documents',
     'Chat Bot',
     'Profile',
   ];
+
   final List<Widget> _screenList = const [
     DashboardPage(),
     DocumentsPage(),
@@ -34,16 +36,12 @@ class MainNavigationState extends State<MainNavigation> {
     ProfilePage(),
   ];
 
-  @override
-  void initState() {
-    super.initState();
+  void _setNotification() {
     supabase.auth.onAuthStateChange.listen((event) async {
       if (event.event == AuthChangeEvent.signedIn) {
         await FirebaseMessaging.instance.requestPermission();
         await FirebaseMessaging.instance.getAPNSToken();
-
         final fcmToken = await FirebaseMessaging.instance.getToken();
-
         if (fcmToken != null) {
           await _setFcmToken(fcmToken);
         }
@@ -72,6 +70,12 @@ class MainNavigationState extends State<MainNavigation> {
     await supabase.from('profiles').update({
       'fcm_token': fcmToken,
     }).eq('id', supabase.auth.currentUser!.id);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _setNotification();
   }
 
   @override

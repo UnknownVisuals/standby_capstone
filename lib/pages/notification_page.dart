@@ -12,8 +12,8 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  List<Map<String, dynamic>> notifications = [];
-  bool isLoading = true;
+  List<Map<String, dynamic>> _notifications = [];
+  bool _isLoading = true;
 
   Future<void> _fetchNotifications() async {
     try {
@@ -23,12 +23,12 @@ class _NotificationPageState extends State<NotificationPage> {
           .order('created_at', ascending: false);
 
       setState(() {
-        notifications = List<Map<String, dynamic>>.from(response);
-        isLoading = false;
+        _notifications = List<Map<String, dynamic>>.from(response);
+        _isLoading = false;
       });
     } catch (error) {
       setState(() {
-        isLoading = false;
+        _isLoading = false;
       });
     }
   }
@@ -46,7 +46,7 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Container(
         color: kGray,
         height: double.infinity,
-        child: isLoading
+        child: _isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(kPrimary),
@@ -65,7 +65,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   List<Widget> _generateExpansionTiles() {
-    if (notifications.isEmpty) {
+    if (_notifications.isEmpty) {
       return [
         Center(
           child: Text('No notifications available.', style: kTextHeading_Red),
@@ -73,7 +73,7 @@ class _NotificationPageState extends State<NotificationPage> {
       ];
     }
 
-    return notifications.map((data) {
+    return _notifications.map((data) {
       final temp = data['temp'] ?? 0.0;
       final date = DateFormat('dd/MM/yyyy - kk:mm:ss').format(
         DateTime.parse(data['created_at']).toLocal(),

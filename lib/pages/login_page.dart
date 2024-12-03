@@ -108,32 +108,29 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: kPrimary,
       body: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: [
             Expanded(
-              child: Container(
-                color: kPrimary,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(36, 36, 36, 0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome!',
-                          style: kAuthTitleLarge,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(36, 36, 36, 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome!',
+                        style: kAuthTitleLarge,
+                      ),
+                      Text(
+                        'Please login to continue',
+                        style: kTextNormal_White,
+                      ),
+                      const SizedBox(height: 32),
+                      Center(
+                        child: Image.asset(
+                          'assets/images/illustration_login.png',
                         ),
-                        Text(
-                          'Please login to continue',
-                          style: kTextNormal_White,
-                        ),
-                        const SizedBox(height: 16),
-                        Center(
-                          child: Image.asset(
-                            'assets/images/illustration_login.png',
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
