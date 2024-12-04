@@ -43,7 +43,7 @@ class _PerformanceMattersPageState extends State<PerformanceMattersPage> {
     return ExpansionTile(
       title: SizedBox(
         width: double.infinity,
-        child: Text('4.3. TABEL. Kinerja penting.', style: kTextHeading_Red),
+        child: Text('4.3. TABEL: Kinerja penting.', style: kTextHeading_Red),
       ),
       children: [
         PerformanceMattersTable(performanceMatters: widget.matters),

@@ -14,12 +14,12 @@ class PdfUtils {
     required String name,
     required pw.Document pdf,
   }) async {
-    String timestamp = DateFormat('yyyy_MM_dd-HH_mm_ss').format(DateTime.now());
+    String timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
     final directory = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
 
-    final filePath = '${directory?.path}/$name-$timestamp.pdf';
+    final filePath = '${directory?.path}/${name}_$timestamp.pdf';
     final file = File(filePath);
     await file.writeAsBytes(await pdf.save());
     return file;

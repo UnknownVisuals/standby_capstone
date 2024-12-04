@@ -7,15 +7,15 @@ class PdfTestingConditions {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          'Tanggal Uji : ${report.testingCondition.date}',
+          'Tanggal Uji: ${report.testingCondition.date}',
           style: pw.TextStyle(font: font, fontSize: 10),
         ),
         pw.Text(
-          'Suhu Ruang : ${report.testingCondition.temperature}',
+          'Suhu Ruang: ${report.testingCondition.temperature}',
           style: pw.TextStyle(font: font, fontSize: 10),
         ),
         pw.Text(
-          'Kelembaban Ruang : ${report.testingCondition.humidity}',
+          'Kelembaban Ruang: ${report.testingCondition.humidity}',
           style: pw.TextStyle(font: font, fontSize: 10),
         ),
       ],

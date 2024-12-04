@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:standby_capstone/constants.dart';
 import 'package:standby_capstone/main.dart';
 import 'package:standby_capstone/pages/documents/_report/pdf_report_document.dart';
@@ -49,6 +50,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     return Row(
       children: [
         Expanded(flex: 1, child: Text(label)),
+        Text(':  '),
         Expanded(flex: 2, child: TextFormField(controller: controller)),
       ],
     );
@@ -143,9 +145,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
         serialNumber: _serialNumberController.text,
       ),
       testingCondition: TestingCondition(
-        date: DateTime.now(),
-        temperature: '$currentTemp °C',
-        humidity: '$currentHumi %RH',
+        date: DateFormat('dd/MM/y - HH:mm:ss').format(DateTime.now()),
+        temperature: '${currentTemp.toStringAsFixed(2)}°C',
+        humidity: '${currentHumi.toStringAsFixed(2)}%RH',
       ),
       riskManagementItem: clauses.map((clause) {
         return RiskManagementItem(
@@ -210,9 +212,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
         serialNumber: _serialNumberController.text,
       ),
       testingCondition: TestingCondition(
-        date: DateTime.now(),
-        temperature: '$currentTemp °C',
-        humidity: '$currentHumi %RH',
+        date: DateFormat('dd/MM/y - HH:mm:ss').format(DateTime.now()),
+        temperature: '${currentTemp.toStringAsFixed(2)}°C',
+        humidity: '${currentHumi.toStringAsFixed(2)}%RH',
       ),
       riskManagementItem: clauses.map((clause) {
         return RiskManagementItem(
@@ -303,14 +305,11 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 valueColor: AlwaysStoppedAnimation(kPrimary),
               ),
             );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No sensors data available.'));
           }
-
-          // else if (snapshot.hasError) {
-          //   return Center(child: Text('Error: ${snapshot.error}'));
-          // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          //   return const Center(
-          //       child: Text('No sensors data available.'));
-          // }
 
           final latestSensorData = snapshot.data?.last;
 

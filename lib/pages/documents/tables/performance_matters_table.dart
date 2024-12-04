@@ -22,18 +22,21 @@ class PerformanceMattersTable extends StatelessWidget {
               DataColumn(
                 label: Text(
                   'Daftar fungsi kinerja penting',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Referensi nomor dokumen produsen atau referensi\ndari standard ini atau standard tertentu',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Catatan',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),

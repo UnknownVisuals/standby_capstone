@@ -22,30 +22,35 @@ class RiskManagementTable extends StatelessWidget {
           DataColumn(
             label: Text(
               'Klausul',
+              textAlign: TextAlign.center,
               style: kTextHeading_Black,
             ),
           ),
           DataColumn(
             label: Text(
               'Judul Klausul',
+              textAlign: TextAlign.center,
               style: kTextHeading_Black,
             ),
           ),
           DataColumn(
             label: Text(
               'Dok Ref FMR (Dok No./ hal)',
+              textAlign: TextAlign.center,
               style: kTextHeading_Black,
             ),
           ),
           DataColumn(
             label: Text(
               'Ada/tidak ada dalam file manajemen resiko',
+              textAlign: TextAlign.center,
               style: kTextHeading_Black,
             ),
           ),
           DataColumn(
             label: Text(
               'Keputusan',
+              textAlign: TextAlign.center,
               style: kTextHeading_Black,
             ),
           ),

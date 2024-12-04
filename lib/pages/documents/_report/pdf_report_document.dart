@@ -166,6 +166,6 @@ class PdfReport {
       ),
     );
 
-    return PdfUtils.savePdf(name: 'report', pdf: pdf);
+    return PdfUtils.savePdf(name: 'fieldreport', pdf: pdf);
   }
 }

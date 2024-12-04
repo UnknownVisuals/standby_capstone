@@ -30,7 +30,7 @@ class PdfLeakageCurrent {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          '8.7. TABEL. Arus bocor.',
+          '8.7. TABEL: Arus bocor.',
           style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),
@@ -52,27 +52,27 @@ class PdfLeakageCurrent {
         pw.SizedBox(height: 4),
         pw.Text(
           'Informasi tambahan:',
-          style: pw.TextStyle(font: fontBold, fontSize: 10),
+          style: pw.TextStyle(font: fontBold, fontSize: 8),
         ),
         pw.Text(
           'Catatan 1: Untuk kebocoran arus pembumian lihat 8.7.3 d) dan 8.7 45;',
-          style: pw.TextStyle(font: font, fontSize: 10),
+          style: pw.TextStyle(font: font, fontSize: 8),
         ),
         pw.Text(
           'Catatan 2: Untuk arus sentuh lihat 8.7.3 c) dan 8 7 4.6;',
-          style: pw.TextStyle(font: font, fontSize: 10),
+          style: pw.TextStyle(font: font, fontSize: 8),
         ),
         pw.Text(
           'Catatan 3: Untuk arus pelengkap pasien lihat 8.7.3 b) dan 8.7 4.7;',
-          style: pw.TextStyle(font: font, fontSize: 10),
+          style: pw.TextStyle(font: font, fontSize: 8),
         ),
         pw.Text(
           'Catatan 4: Nila total arus bocor pasien hanya relatif terhadap peralatan dengan multipel bagian yang diaplikasikan dari tipe yang sama. Lihat 8.7.4.7 h). Bagian yang diaplikasikan individu sesuai dengan nilai arus pelengkap pasien.',
-          style: pw.TextStyle(font: font, fontSize: 10),
+          style: pw.TextStyle(font: font, fontSize: 8),
         ),
         pw.Text(
           'Catatan 5: Selain kondisi yang ditunjukkan dalam TABEL, pengujian dilakukan pada suhu operasi dan setelah kondisi kelembaban awal 5.7. peralatan diberi energi dalam kondisi stanby dan beroperasi penuh, frekuensi suplai pengenal maks, pada 110% dari pengenal tegangan utama, dan setelah pengujian yang relevan dari Klausul 11.6 (yaitu, luapan, tumpahan, kebocoran, masuknya air dan materi partikulat, pembersihan & desinfeksi, & sterilisasi).',
-          style: pw.TextStyle(font: font, fontSize: 10),
+          style: pw.TextStyle(font: font, fontSize: 8),
         ),
       ],
     );

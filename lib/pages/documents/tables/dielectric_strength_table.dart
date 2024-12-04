@@ -22,36 +22,42 @@ class DielectricStrengthTable extends StatelessWidget {
               DataColumn(
                 label: Text(
                   'Isolasi sample yang diuji\n(area dari diagram isolasi)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Tipe insulasi\n(1 or 2 SPO/SPP)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Tegangan Kerja Puncak\nVpeak',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Tegangan Kerja Puncak\nV d.c.',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'AC tegangan uji pada\nV r.m.s',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Kerusakan dielektrik setelah\n1 menit (Ya / Tidak)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),

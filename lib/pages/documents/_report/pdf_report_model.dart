@@ -43,7 +43,7 @@ class IncubatorDetail {
 }
 
 class TestingCondition {
-  final DateTime date;
+  final String date;
   final String temperature;
   final String humidity;
 

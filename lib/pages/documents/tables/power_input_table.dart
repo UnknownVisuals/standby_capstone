@@ -31,37 +31,43 @@ class _PowerInputTableState extends State<PowerInputTable> {
             columns: [
               DataColumn(
                 label: Text(
-                  'Kondisi operasi dan\nDaya pengenal\n(W, A, VA)',
+                  'Kondisi operasi dan Daya pengenal\n(W, A, VA)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
-                  'Daya (W/VA)\nTerukur',
+                  'Daya\n(W/VA)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
-                  'Arus (A)\nTerukur',
+                  'Arus\n(A)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
-                  'Power faktor\n(cos theta)\nTerukur',
+                  'Power faktor\n(cos φ)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
-                  'Hasil\n(W/ VA)',
+                  'Hasil\n(W/VA)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Catatan',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),

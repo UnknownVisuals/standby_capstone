@@ -21,24 +21,28 @@ class LekageCurrentTable extends StatelessWidget {
               DataColumn(
                 label: Text(
                   'Jenis arus bocor',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   '1 (µA)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Maks 1 (mA)',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),
               DataColumn(
                 label: Text(
                   'Hasil',
+                  textAlign: TextAlign.center,
                   style: kTextHeading_Black,
                 ),
               ),

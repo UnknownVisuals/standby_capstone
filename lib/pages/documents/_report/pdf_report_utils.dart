@@ -13,8 +13,12 @@ class PdfReportUtils {
         pw.Row(
           children: [
             pw.Text(
-              'Test Report - StandBy',
-              style: pw.TextStyle(font: fontBold, fontSize: 10),
+              'Field Test Report - StandBy',
+              style: pw.TextStyle(
+                font: fontBold,
+                fontSize: 10,
+                color: const PdfColor(0.8902, 0.2196, 0.2275),
+              ),
             ),
             pw.Spacer(),
             pw.Image(pw.MemoryImage(logo), width: 64),

@@ -34,7 +34,7 @@ class PdfDielectricStrengthModel {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          '8.8.3. TABEL. Uji kekuatan dielektrik bahan insulasi padat dengan fungsi kemanan - Sarana perlingdungan operator (SPO) / Sarana perlindungan pasien (SPP).',
+          '8.8.3. TABEL: Uji kekuatan dielektrik bahan insulasi padat dengan fungsi kemanan - Sarana perlingdungan operator (SPO) / Sarana perlindungan pasien (SPP).',
           style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),

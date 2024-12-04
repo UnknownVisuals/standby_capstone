@@ -32,7 +32,7 @@ class PdfRiskManagement {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          '4.2.2. TABEL : Hasil manajemen resiko : Persyaratan umum manajemen resiko',
+          '4.2.2. TABEL: Hasil manajemen resiko; Persyaratan umum manajemen resiko.',
           style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),

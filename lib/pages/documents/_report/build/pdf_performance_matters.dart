@@ -28,7 +28,7 @@ class PdfPerformanceMatters {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          '4.3. TABEL. Kinerja penting.',
+          '4.3. TABEL: Kinerja penting.',
           style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),

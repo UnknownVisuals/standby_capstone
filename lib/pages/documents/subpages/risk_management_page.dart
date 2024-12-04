@@ -19,7 +19,7 @@ class _RiskManagementPageState extends State<RiskManagementPage> {
       title: SizedBox(
         width: double.infinity,
         child: Text(
-            '4.2.2. TABEL. Hasil manajemen resiko. Persyaratan umum manajemen resiko.',
+            '4.2.2. TABEL: Hasil manajemen resiko; Persyaratan umum manajemen resiko.',
             style: kTextHeading_Red),
       ),
       children: [

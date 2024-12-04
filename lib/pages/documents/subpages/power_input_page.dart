@@ -24,7 +24,7 @@ class _PowerInputPageState extends State<PowerInputPage> {
       title: SizedBox(
         width: double.infinity,
         child: Text(
-          '4.11. TABEL. Input daya ${widget.voltage}',
+          '4.11. TABEL: Input daya ${widget.voltage}.',
           style: kTextHeading_Red,
         ),
       ),

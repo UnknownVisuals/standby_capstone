@@ -35,7 +35,7 @@ class PdfPowerInputModel {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          '4.11. TABEL. Input daya',
+          '4.11. TABEL: Input daya.',
           style: pw.TextStyle(font: fontBold, fontSize: 10),
         ),
         pw.SizedBox(height: 4),

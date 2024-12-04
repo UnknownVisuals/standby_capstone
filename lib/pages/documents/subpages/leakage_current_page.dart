@@ -18,7 +18,7 @@ class _LeakageCurrentPageState extends State<LeakageCurrentPage> {
     return ExpansionTile(
       title: SizedBox(
         width: double.infinity,
-        child: Text('8.7. TABEL. Arus bocor.', style: kTextHeading_Red),
+        child: Text('8.7. TABEL: Arus bocor.', style: kTextHeading_Red),
       ),
       children: [
         LekageCurrentTable(leakageCurrent: widget.leakages),
@@ -54,7 +54,7 @@ class _LeakageCurrentPageState extends State<LeakageCurrentPage> {
         SizedBox(
           width: double.infinity,
           child: Text(
-            'Catatan 4: Nila total arus bocor pasien hanya relatif terhadap peralatan dengan multipel bagian yang diaplikasikan dari tipe yang sama. Lihat 8.7.4.7 h). Bagian yang diaplikasikan individu sesuai dengan nilai arus pelengkap pasien.',
+            'Catatan 4: Nila total arus bocor pasien hanya relatif terhadap peralatan dengan multipel bagian yang diaplikasikan dari tipe yang sama. Lihat 8.7.4.7 h). Bagian yang diaplikasikan individu sesuai dengan nilai arus pelengkap pasien;',
             style: kTextNormal_Black.copyWith(fontSize: 12),
           ),
         ),
