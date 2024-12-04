@@ -298,8 +298,7 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(
-                      child: Text('No sensor data available.'),
-                    );
+                        child: Text('No sensor data available.'));
                   }
 
                   final sensorsData = snapshot.data!;

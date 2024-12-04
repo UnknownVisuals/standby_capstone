@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:standby_capstone/components/card_profile.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
@@ -36,27 +37,27 @@ class _AboutUsPageState extends State<AboutUsPage> {
               Text('from left to right', style: kTextNormal_Black),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Icons.web_rounded,
+                icon: Symbols.language_rounded,
                 name: 'Fakhriadi Rasyaad',
                 desc: 'Frontend Develover for StandBy',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Icons.psychology_rounded,
+                icon: Symbols.network_intelligence_rounded,
                 name: 'Marshaniswah Syamsul',
                 desc: 'Artificial Intelligence Developer for StandBy',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Icons.phone_iphone_rounded,
+                icon: Symbols.smartphone_rounded,
                 name: 'Reynaldhi Tryana Graha',
                 desc: 'Mobile Application Developer for StandBy',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Icons.precision_manufacturing_rounded,
+                icon: Symbols.home_iot_device_rounded,
                 name: 'Sadam Al Rasyid',
-                desc: 'IoT and Backend Developer for StandBy',
+                desc: 'IoT Developer for StandBy',
               ),
               const SizedBox(height: 24),
               Text(

@@ -68,13 +68,9 @@ class _ManageStaffPageState extends State<ManageStaffPage> {
               ),
             );
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
+            return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return const Center(
-              child: Text('No staff data available.'),
-            );
+            return const Center(child: Text('No staff data available.'));
           }
 
           final staffs =

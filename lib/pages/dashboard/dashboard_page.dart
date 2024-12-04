@@ -48,13 +48,11 @@ class _DashboardPageState extends State<DashboardPage> {
                       valueColor: AlwaysStoppedAnimation(kPrimary),
                     ),
                   );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No sensor data available.'));
                 }
-
-                // else if (snapshot.hasError) {
-                //   return Center(child: Text('Error: ${snapshot.error}'));
-                // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                //   return const Center(child: Text('No sensor data available.'));
-                // }
 
                 final esp32_1 = snapshot.data?['esp32_1']?.last;
                 final esp32_2 = snapshot.data?['esp32_2']?.last;
