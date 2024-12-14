@@ -71,10 +71,35 @@ class LekageCurrentTable extends StatelessWidget {
   }) {
     return DataRow(
       cells: [
-        DataCell(Text(leakageCurrentType)),
-        DataCell(TextFormField(controller: microAmpereController)),
-        DataCell(Text(maxMiliAmp)),
-        DataCell(TextFormField(controller: resultController)),
+        DataCell(
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Text(
+              leakageCurrentType,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+            ),
+          ),
+        ),
+        DataCell(
+          TextFormField(
+            controller: microAmpereController,
+            keyboardType: TextInputType.number,
+          ),
+        ),
+        DataCell(
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Text(
+              maxMiliAmp,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+            ),
+          ),
+        ),
+        DataCell(
+          TextFormField(controller: resultController),
+        ),
       ],
     );
   }
