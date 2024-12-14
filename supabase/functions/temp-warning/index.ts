@@ -4,7 +4,9 @@ import serviceAccount from '../service-account.json' with { type: 'json' }
 
 interface Notification {
   id: string
-  temp: number
+  temp?: number
+  anomaly?: number
+  anomaly_score?: number
 }
 
 interface WebhookPayload {
@@ -22,7 +24,6 @@ const supabase = createClient(
 Deno.serve(async (req) => {
   const payload: WebhookPayload = await req.json();
 
-  // Fetch all FCM tokens
   const { data } = await supabase
     .from('profiles')
     .select('fcm_token')
@@ -39,6 +40,21 @@ Deno.serve(async (req) => {
     privateKey: serviceAccount.private_key,
   });
 
+  const messages = [];
+  if (payload.record.temp !== undefined && payload.record.temp !== null) {
+    messages.push({
+      title: `⚠️ TEMPERATURE WARNING ⚠️`,
+      body: `${payload.record.temp}°C is outside suitable range for Incubator`,
+    });
+  }
+
+  if (payload.record.anomaly !== undefined && payload.record.anomaly !== null) {
+    messages.push({
+      title: `⚠️ ANOMALY DETECTED ⚠️`,
+      body: `Check your hardware device! Anomaly score: ${payload.record.anomaly_score}`,
+    });
+  }
+
   const results = await Promise.all(
     fcmTokens.map(async (token) => {
       const res = await fetch(
@@ -52,10 +68,7 @@ Deno.serve(async (req) => {
           body: JSON.stringify({
             message: {
               token,
-              notification: {
-                title: `⚠️ TEMPERATURE WARNING ⚠️`,
-                body: `${payload.record.temp}°C is outside suitable range for Incubator`,
-              },
+              notification: messages.length > 0 ? messages[0] : null,
             },
           }),
         }
