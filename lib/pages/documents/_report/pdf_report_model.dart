@@ -87,16 +87,20 @@ class PowerInputItem {
   final double power;
   final double current;
   final double powerFactor;
-  final String result;
   final String notes;
+  final double meanPower;
+  final double meanCurrent;
+  final double meanPowerFactor;
 
   PowerInputItem({
     required this.voltage,
     required this.power,
     required this.current,
     required this.powerFactor,
-    required this.result,
     required this.notes,
+    required this.meanPower,
+    required this.meanCurrent,
+    required this.meanPowerFactor,
   });
 }
 

@@ -50,7 +50,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
     return Row(
       children: [
         Expanded(flex: 1, child: Text(label)),
-        Text(':  '),
+        const Text(':  '),
         Expanded(flex: 2, child: TextFormField(controller: controller)),
       ],
     );
@@ -276,9 +276,11 @@ class _DocumentsPageState extends State<DocumentsPage> {
         voltage: powers.voltageController,
         power: double.tryParse(powers.powerController.text) ?? 0.0,
         current: double.tryParse(powers.currentController.text) ?? 0.0,
-        powerFactor: double.tryParse(powers.powerFactorController.text) ?? 1.0,
-        result: powers.resultController.text,
+        powerFactor: double.tryParse(powers.powerFactorController.text) ?? 0.0,
         notes: powers.notesController,
+        meanPower: powers.meanPowerController,
+        meanCurrent: powers.meanCurrentController,
+        meanPowerFactor: powers.meanPowerFactorController,
       );
     }).toList();
   }
