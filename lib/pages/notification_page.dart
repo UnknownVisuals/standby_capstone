@@ -19,7 +19,7 @@ class _NotificationPageState extends State<NotificationPage> {
     try {
       final response = await supabase
           .from('notifications')
-          .select('id, created_at, temp')
+          .select('id, created_at, temp, anomaly, anomaly_score')
           .order('created_at', ascending: false);
 
       setState(() {
@@ -74,10 +74,28 @@ class _NotificationPageState extends State<NotificationPage> {
     }
 
     return _notifications.map((data) {
-      final temp = data['temp'] ?? 0.0;
+      final temp = data['temp'];
+      final anomaly = data['anomaly'];
+      final anomalyScore = data['anomaly_score'];
       final date = DateFormat('dd/MM/yyyy - kk:mm:ss').format(
         DateTime.parse(data['created_at']).toLocal(),
       );
+
+      String title;
+      String content;
+
+      if (temp != null) {
+        title = 'Temperature Warning';
+        content =
+            '${temp.toStringAsFixed(2)}°C is outside suitable range for Incubator';
+      } else if (anomaly != null) {
+        title = 'Anomaly Warning';
+        content =
+            'Check your hardware device! Anomaly score: ${anomalyScore?.toStringAsFixed(2)}';
+      } else {
+        title = 'Unknown Notification';
+        content = 'No details available.';
+      }
 
       return Container(
         margin: const EdgeInsets.only(bottom: 24),
@@ -90,17 +108,14 @@ class _NotificationPageState extends State<NotificationPage> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Temperature Warning', style: kTextHeading_Red),
+                Text(title, style: kTextHeading_Red),
                 Text(date, style: kTextNormal_Black),
               ],
             ),
             children: [
               ListTile(
                 dense: true,
-                title: Text(
-                  '${temp.toStringAsFixed(2)}°C is outside suitable range for Incubator',
-                  style: kTextNormal_Black,
-                ),
+                title: Text(content, style: kTextNormal_Black),
               ),
             ],
           ),
