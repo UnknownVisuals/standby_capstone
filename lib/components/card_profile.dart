@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:standby_capstone/constants.dart';
 
 class ProfileCard extends StatelessWidget {
-  final IconData icon;
+  final String picturePath;
   final String name;
-  final String desc;
+  final String role;
+  final String jobdesc;
 
   const ProfileCard({
     super.key,
-    required this.icon,
+    required this.picturePath,
     required this.name,
-    required this.desc,
+    required this.role,
+    required this.jobdesc,
   });
 
   @override
@@ -20,18 +22,23 @@ class ProfileCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: kDarkGray, size: 48),
+            CircleAvatar(
+              maxRadius: 40,
+              foregroundImage: AssetImage(picturePath) as ImageProvider,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(name, style: kTextHeading_Red.copyWith(fontSize: 16)),
-                  Text(desc, style: kTextNormal_Black),
+                  Text(role, style: kTextHeading_Black),
+                  Text(jobdesc, style: kTextNormal_Black),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

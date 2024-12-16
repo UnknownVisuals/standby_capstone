@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:standby_capstone/components/card_profile.dart';
 import 'package:standby_capstone/pages/deep_menu_navigation.dart';
 import 'package:standby_capstone/constants.dart';
@@ -22,48 +21,71 @@ class _AboutUsPageState extends State<AboutUsPage> {
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  'assets/images/about_us.jpg',
-                  width: double.infinity,
-                ),
+              Text(
+                'Meet Our Supervisors',
+                style: kTextHeading_Red.copyWith(fontSize: 24),
               ),
+              const SizedBox(height: 24),
+              const ProfileCard(
+                picturePath: 'assets/peoples/SAO.jpg',
+                name: 'Suryo Adhi Wibowo, S.T., M.T., Ph.D.',
+                role: '1st Supervisor',
+                jobdesc: 'Vice Director CoE AILO Telkom University',
+              ),
+              const SizedBox(height: 24),
+              const ProfileCard(
+                picturePath: 'assets/peoples/KRU.jpg',
+                name: 'Dr. Koredianto Usman, S.T., M.Sc.',
+                role: '2nd Supervisor',
+                jobdesc: 'Lecturer at Telkom University',
+              ),
+              const SizedBox(height: 24 * 2),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(16),
+              //   child: Image.asset(
+              //     'assets/images/about_us.jpg',
+              //     width: double.infinity,
+              //   ),
+              // ),
               const SizedBox(height: 12),
               Text(
                 'Meet Our Team',
                 style: kTextHeading_Red.copyWith(fontSize: 24),
               ),
-              Text('from left to right', style: kTextNormal_Black),
+              // Text('from left to right', style: kTextNormal_Black),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Symbols.language_rounded,
+                picturePath: 'assets/peoples/HRI.jpg',
                 name: 'Fakhriadi Rasyaad',
-                desc: 'Frontend Develover for StandBy',
+                role: 'Website Developer',
+                jobdesc: 'Website & Backend Development (Storage Management)',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Symbols.network_intelligence_rounded,
+                picturePath: 'assets/peoples/CHA.jpg',
                 name: 'Marshaniswah Syamsul',
-                desc: 'Artificial Intelligence Developer for StandBy',
+                role: 'Artificial Intelligence & Cloud Developer',
+                jobdesc:
+                    'Artificial Intelligence Development & Cloud System Management',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Symbols.smartphone_rounded,
+                picturePath: 'assets/peoples/REY.jpg',
                 name: 'Reynaldhi Tryana Graha',
-                desc: 'Mobile Application Developer for StandBy',
+                role: 'Mobile Application Developer',
+                jobdesc:
+                    'Mobile Application & Backend Development Development (Authentication)',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
-                icon: Symbols.home_iot_device_rounded,
+                picturePath: 'assets/peoples/DAM.jpg',
                 name: 'Sadam Al Rasyid',
-                desc: 'IoT Developer for StandBy',
+                role: 'IoT Developer',
+                jobdesc:
+                    'IoT Hardware & Backend Development (Realtime Database)',
               ),
               const SizedBox(height: 24),
-              Text(
-                '© 2024 StandBy Incubator',
-                style: kTextHeading_Red,
-              ),
+              Text('© 2024 StandBy Incubator', style: kTextHeading_Red),
             ],
           ),
         ),

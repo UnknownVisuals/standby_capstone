@@ -18,6 +18,7 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
   final List<int> _itemsPerPageOptions = [25, 50, 100, 250, 500];
   Future<List<dynamic>>? _sensorDataFuture;
   List<dynamic> _allData = [];
+  String _dataSource = 'esp32_1';
   int _itemsPerPage = 100;
   int _currentPage = 1;
   int _totalPages = 1;
@@ -39,67 +40,15 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
     }
   }
 
-  // Future<List<dynamic>> _fetchSensorsData() async {
-  //   try {
-  //     final response = await supabase.from('esp32_1').select();
-  //     response.sort((a, b) {
-  //       DateTime dateA = DateTime.parse(a['created_at']).toLocal();
-  //       DateTime dateB = DateTime.parse(b['created_at']).toLocal();
-  //       return dateB.compareTo(dateA);
-  //     });
-  //     return response;
-  //   } catch (e) {
-  //     if (mounted) {
-  //       showTopSnackBar(
-  //         Overlay.of(context),
-  //         CustomSnackBar.error(message: 'Error fetching sensor data: $e'),
-  //       );
-  //     }
-  //     rethrow;
-  //   }
-  // }
-
   Future<List<dynamic>> _fetchSensorsData() async {
     try {
-      final esp32_1 = await supabase.from('esp32_1').select();
-      final esp32_2 = await supabase.from('esp32_2').select();
-
-      final int maxLength =
-          esp32_1.length > esp32_2.length ? esp32_1.length : esp32_2.length;
-
-      final paddedEsp32_1 =
-          List<Map<String, dynamic>>.generate(maxLength, (index) {
-        return index < esp32_1.length ? esp32_1[index] : {};
-      });
-
-      final paddedEsp32_2 =
-          List<Map<String, dynamic>>.generate(maxLength, (index) {
-        return index < esp32_2.length ? esp32_2[index] : {};
-      });
-
-      final combinedData =
-          List<Map<String, dynamic>>.generate(maxLength, (index) {
-        return {
-          ...paddedEsp32_1[index],
-          ...paddedEsp32_2[index],
-        };
-      });
-
-      for (var row in combinedData) {
-        row.updateAll((key, value) => value ?? 'N/A');
-      }
-
-      combinedData.sort((a, b) {
-        final dateA = a['created_at'] != 'N/A'
-            ? DateTime.parse(a['created_at']).toLocal()
-            : DateTime.fromMillisecondsSinceEpoch(0);
-        final dateB = b['created_at'] != 'N/A'
-            ? DateTime.parse(b['created_at']).toLocal()
-            : DateTime.fromMillisecondsSinceEpoch(0);
+      final response = await supabase.from(_dataSource).select();
+      response.sort((a, b) {
+        DateTime dateA = DateTime.parse(a['created_at']).toLocal();
+        DateTime dateB = DateTime.parse(b['created_at']).toLocal();
         return dateB.compareTo(dateA);
       });
-
-      return combinedData;
+      return response;
     } catch (e) {
       if (mounted) {
         showTopSnackBar(
@@ -187,6 +136,16 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
     }
   }
 
+  void _changeDataSource(String? newSource) {
+    if (newSource != null) {
+      setState(() {
+        _dataSource = newSource;
+        _currentPage = 1;
+        _initializeData();
+      });
+    }
+  }
+
   String _formatTimestamp(String timestamptz) {
     DateTime parsedDate = DateTime.parse(timestamptz).toLocal();
     return DateFormat('dd/MM/yyyy - kk:mm:ss').format(parsedDate);
@@ -198,6 +157,23 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          DropdownButton<String>(
+            dropdownColor: kGray,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            elevation: 4,
+            value: _dataSource,
+            items: [
+              DropdownMenuItem(
+                value: 'esp32_1',
+                child: Text('esp32_1 table', style: kTextNormal_Black),
+              ),
+              DropdownMenuItem(
+                value: 'esp32_2',
+                child: Text('esp32_2 table', style: kTextNormal_Black),
+              ),
+            ],
+            onChanged: _changeDataSource,
+          ),
           IconButton(
             icon: const Icon(Icons.first_page),
             onPressed: _currentPage > 1 ? () => _changePage(1) : null,
@@ -279,7 +255,10 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
       backgroundColor: kGray,
       body: Column(
         children: [
-          _buildPaginationControls(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _buildPaginationControls(),
+          ),
           Expanded(
             child: RefreshIndicator(
               onRefresh: _refreshData,
@@ -308,172 +287,214 @@ class _SensorsDataPageState extends State<SensorsDataPage> {
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
                         columnSpacing: 32,
-                        columns: [
-                          DataColumn(
-                            label: Text(
-                              'Timestamp',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DHT22\nTemp',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DHT22\nHumi',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DS18B20\nTemp - 1',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DS18B20\nTemp - 2',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DS18B20\nTemp - 3',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'DS18B20\nTemp - 4',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Fan\nStatus',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Flow\nRate',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Sound\nStatus',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Sound\nLevel',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Light\nIntensity',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Air\nQuality',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Device\nTemperature',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Relay\nStatus',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Heart\nRate',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Oxygen\nSaturation',
-                              style: kTextHeading_Red,
-                            ),
-                          ),
-                        ],
-                        rows: sensorsData.map((sensor) {
-                          return DataRow(cells: [
-                            DataCell(
-                              Text(
-                                _formatTimestamp(sensor['created_at'] ?? 'N/A'),
-                              ),
-                            ),
-                            DataCell(
-                              Text(sensor['dht22_temp']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['dht22_humi']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(
-                                  sensor['ds18b20_temp1']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(
-                                  sensor['ds18b20_temp2']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(
-                                  sensor['ds18b20_temp3']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(
-                                  sensor['ds18b20_temp4']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['fan_status']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['flow_rate']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['sound_detected']?.toString() ??
-                                  'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['sound_level']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['light_lux']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['mq135_ppm']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['temperature']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['relay_status']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['bpm']?.toString() ?? 'N/A'),
-                            ),
-                            DataCell(
-                              Text(sensor['spo2']?.toString() ?? 'N/A'),
-                            ),
-                          ]);
-                        }).toList(),
+                        columns: _dataSource == 'esp32_1'
+                            ? [
+                                DataColumn(
+                                  label: Text(
+                                    'Timestamp',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DHT22\nTemp',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DHT22\nHumi',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DS18B20\nTemp - 1',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DS18B20\nTemp - 2',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DS18B20\nTemp - 3',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'DS18B20\nTemp - 4',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Fan\nStatus',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Flow\nRate',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Sound\nStatus',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                              ]
+                            : [
+                                DataColumn(
+                                  label: Text(
+                                    'Timestamp',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Sound\nLevel',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Light\nIntensity',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Air\nQuality',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Device\nTemperature',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Relay\nStatus',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Heart\nRate',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Oxygen\nSaturation',
+                                    style: kTextHeading_Red,
+                                  ),
+                                ),
+                              ],
+                        rows: sensorsData.map(
+                          (sensor) {
+                            return DataRow(
+                              cells: _dataSource == 'esp32_1'
+                                  ? [
+                                      DataCell(
+                                        Text(
+                                          _formatTimestamp(
+                                              sensor['created_at'] ?? '....'),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['dht22_temp']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['dht22_humi']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['ds18b20_temp1']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['ds18b20_temp2']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['ds18b20_temp3']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['ds18b20_temp4']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['fan_status']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['flow_rate']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['sound_detected']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                    ]
+                                  : [
+                                      DataCell(
+                                        Text(
+                                          _formatTimestamp(
+                                              sensor['created_at'] ?? '....'),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                            sensor['sound_level']?.toString() ??
+                                                '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['light_lux']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['mq135_ppm']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                            sensor['temperature']?.toString() ??
+                                                '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['relay_status']
+                                                ?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['bpm']?.toString() ??
+                                            '....'),
+                                      ),
+                                      DataCell(
+                                        Text(sensor['spo2']?.toString() ??
+                                            '....'),
+                                      ),
+                                    ],
+                            );
+                          },
+                        ).toList(),
                       ),
                     ),
                   );
