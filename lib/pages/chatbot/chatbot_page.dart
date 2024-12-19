@@ -17,7 +17,8 @@ class _ChatbotPageState extends State<ChatbotPage> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(
-          'https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/03/01/20241003014651-PU6UGL6W.json'));
+        'https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/16/15/20241216155017-1MK60RAM.json',
+      ));
   }
 
   @override
