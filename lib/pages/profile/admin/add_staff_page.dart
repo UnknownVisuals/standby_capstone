@@ -18,8 +18,6 @@ class AddStaffPage extends StatefulWidget {
 class _AddStaffPageState extends State<AddStaffPage> {
   String? _avatarUrl;
   final _fullNameController = TextEditingController();
-  bool _gender = true;
-  final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -46,8 +44,6 @@ class _AddStaffPageState extends State<AddStaffPage> {
         emailRedirectTo: 'io.supabase.flutterquickstart://login-callback/',
         data: {
           'full_name': _fullNameController.text,
-          'gender': _gender,
-          'phone_number': _phoneNumberController.text,
           'is_admin': _isAdmin,
           'avatar_url': _avatarUrl,
         },
@@ -169,45 +165,6 @@ class _AddStaffPageState extends State<AddStaffPage> {
                 hintText: 'Full Name',
                 controller: _fullNameController,
                 icon: Icons.person_rounded,
-              ),
-              const SizedBox(height: 24),
-              Text('Gender:', style: kTextHeading_Red),
-              Row(
-                children: [
-                  Expanded(
-                    child: RadioListTile<bool>(
-                      title: Text('Male', style: kTextHeading_Black),
-                      activeColor: kPrimary,
-                      value: true,
-                      groupValue: _gender,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _gender = value ?? false;
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: RadioListTile<bool>(
-                      title: Text('Female', style: kTextHeading_Black),
-                      activeColor: kPrimary,
-                      value: false,
-                      groupValue: _gender,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _gender = value ?? false;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              AuthInputField(
-                hintText: 'Phone Number',
-                controller: _phoneNumberController,
-                numberInput: true,
-                icon: Icons.phone_rounded,
               ),
               const SizedBox(height: 24),
               AuthInputField(
