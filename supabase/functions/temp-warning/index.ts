@@ -41,11 +41,19 @@ Deno.serve(async (req) => {
   });
 
   const messages = [];
+
   if (payload.record.temp !== undefined && payload.record.temp !== null) {
-    messages.push({
-      title: `⚠️ TEMPERATURE WARNING ⚠️`,
-      body: `${payload.record.temp}°C is outside suitable range for Incubator`,
-    });
+    if (payload.record.temp === 85.0) {
+      messages.push({
+        title: `🟢 DEVICE ON 🟢`,
+        body: `Device is on and ready for real-time monitoring!`,
+      });
+    } else {
+      messages.push({
+        title: `⚠️ TEMPERATURE WARNING ⚠️`,
+        body: `${payload.record.temp}°C is outside the suitable range for the incubator.`,
+      });
+    }
   }
 
   if (payload.record.anomaly !== undefined && payload.record.anomaly !== null) {
