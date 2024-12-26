@@ -23,7 +23,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             children: [
               Text(
                 'Meet Our Supervisors',
-                style: kTextHeading_Red.copyWith(fontSize: 24),
+                style: kTextHeading_Black.copyWith(fontSize: 20),
               ),
               const SizedBox(height: 24),
               const ProfileCard(
@@ -39,20 +39,19 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 role: '2nd Supervisor',
                 jobdesc: 'Lecturer at Telkom University',
               ),
-              const SizedBox(height: 24 * 2),
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(16),
-              //   child: Image.asset(
-              //     'assets/images/about_us.jpg',
-              //     width: double.infinity,
-              //   ),
-              // ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 24 * 3),
               Text(
                 'Meet Our Team',
-                style: kTextHeading_Red.copyWith(fontSize: 24),
+                style: kTextHeading_Black.copyWith(fontSize: 20),
               ),
-              // Text('from left to right', style: kTextNormal_Black),
+              const SizedBox(height: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'assets/images/about_us.jpg',
+                  width: double.infinity,
+                ),
+              ),
               const SizedBox(height: 24),
               const ProfileCard(
                 picturePath: 'assets/peoples/HRI.jpg',
@@ -74,7 +73,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 name: 'Reynaldhi Tryana Graha',
                 role: 'Mobile Application Developer',
                 jobdesc:
-                    'Mobile Application & Backend Development Development (Authentication)',
+                    'Mobile Application & Backend Development (Authentication & Authorization)',
               ),
               const SizedBox(height: 24),
               const ProfileCard(
